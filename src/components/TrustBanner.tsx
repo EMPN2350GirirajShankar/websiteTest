@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     fontSize: "12px",
     fontWeight: 500,
     color: "var(--maq-navy)",
-    backgroundColor: "var(--maq-gray-50)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     border: `1px solid ${tokens.colorNeutralStroke2}`,
     padding: "6px 12px",
     borderRadius: "20px",

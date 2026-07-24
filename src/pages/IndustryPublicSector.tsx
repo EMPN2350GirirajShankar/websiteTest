@@ -225,7 +225,7 @@ export function IndustryPublicSector() {
         title="How public sector organizations move faster with MAQ Software"
         cases={publicSectorCases}
         seeAllLabel="See all public sector case studies"
-        seeAllHref="/insights/case-studies"
+        seeAllHref="/insights/case-studies?industry=Public%20sector#insights-content"
       />
     </>
   );

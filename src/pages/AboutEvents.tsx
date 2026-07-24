@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
   sectionAlt: {
     padding: "56px 32px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   sectionHead: {
@@ -33,12 +33,7 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
   },
   sectionTitle: {
-    fontSize: "36px",
-    fontWeight: 700,
-    lineHeight: 1.15,
-    color: "var(--maq-navy)",
     margin: 0,
-    letterSpacing: "-0.02em",
     textAlign: "left",
   },
   upcomingGrid: {
@@ -130,7 +125,7 @@ export function AboutEvents() {
       <section className={s.section}>
         <div className={s.inner}>
           <div className={s.sectionHead}>
-            <h2 className={s.sectionTitle}>Upcoming events</h2>
+            <h2 className={`maq-h2 ${s.sectionTitle}`}>Upcoming events</h2>
           </div>
 
           {upcoming.length === 0 ? (
@@ -166,7 +161,7 @@ export function AboutEvents() {
       <section className={s.sectionAlt}>
         <div className={s.inner}>
           <div className={s.sectionHead}>
-            <h2 className={s.sectionTitle}>Previous events</h2>
+            <h2 className={`maq-h2 ${s.sectionTitle}`}>Previous events</h2>
           </div>
 
           {loading && !hasPreviousEvents && (

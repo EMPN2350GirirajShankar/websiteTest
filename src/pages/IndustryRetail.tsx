@@ -252,7 +252,7 @@ export function IndustryRetail() {
         title="How retailers move faster with MAQ Software"
         cases={retailCases}
         seeAllLabel="See all retail case studies"
-        seeAllHref="/insights/case-studies"
+        seeAllHref="/insights/case-studies?industry=Retail%20%26%20consumer%20goods#insights-content"
       />
       <MarketplaceOffers
         title="Marketplace offers"

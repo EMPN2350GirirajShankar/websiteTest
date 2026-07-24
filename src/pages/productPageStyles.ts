@@ -1,7 +1,7 @@
 import { makeStyles, tokens } from "@fluentui/react-components";
 
 export const useProductPageStyles = makeStyles({
-  hero: { backgroundColor: "var(--maq-off-white)", padding: "48px 32px 56px" },
+  hero: { backgroundColor: "var(--colorNeutralBackground3)", padding: "48px 32px 56px" },
   heroGrid: {
     maxWidth: "var(--maq-container-wide)",
     margin: "0 auto",
@@ -12,20 +12,20 @@ export const useProductPageStyles = makeStyles({
     "@media (max-width: 960px)": { gridTemplateColumns: "1fr" },
   },
   eyebrow: { fontSize: "12px", fontWeight: 700, color: "var(--maq-red)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "12px", display: "block" },
-  h1: { display: "block", fontSize: "40px", lineHeight: 1.15, fontWeight: 700, color: "var(--maq-black)", letterSpacing: "-0.02em", margin: "0 0 16px" },
+  h1: { display: "block", margin: "0 0 16px" },
   heroSub: { display: "block", fontSize: "15px", lineHeight: 1.6, color: "var(--maq-gray-600)", marginBottom: "24px", maxWidth: "640px" },
   btns: { display: "flex", gap: "12px", flexWrap: "wrap" },
   heroImageWrap: { display: "flex", alignItems: "center", justifyContent: "center", padding: "8px" },
   heroImage: { width: "100%", maxWidth: "520px", height: "auto", display: "block", borderRadius: "8px" },
 
   section: { padding: "48px 32px", backgroundColor: "#fff" },
-  sectionAlt: { padding: "48px 32px", backgroundColor: "var(--maq-off-white)" },
+  sectionAlt: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "28px" },
   headLeft: { marginBottom: "20px", textAlign: "center" },
   secEyebrow: { fontSize: "12px", fontWeight: 700, color: "var(--maq-red)", letterSpacing: "0.08em", textTransform: "uppercase", display: "block", marginBottom: "8px" },
-  title: { display: "block", fontSize: "36px", lineHeight: 1.15, fontWeight: 700, color: "var(--maq-navy)", margin: "0 0 6px", letterSpacing: "-0.02em" },
-  titleLg: { display: "block", fontSize: "36px", lineHeight: 1.15, fontWeight: 700, color: "var(--maq-navy)", margin: "0 0 10px", letterSpacing: "-0.02em", textAlign: "left" },
+  title: { display: "block", margin: "0 0 6px" },
+  titleLg: { display: "block", margin: "0 0 10px", textAlign: "left" },
   sub: { display: "block", fontSize: "15px", color: "var(--maq-gray-600)", margin: "0 auto", maxWidth: "720px", textAlign: "center" },
 
   benGrid3: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px", "@media (max-width: 960px)": { gridTemplateColumns: "1fr" } },
@@ -103,12 +103,12 @@ export const useProductPageStyles = makeStyles({
   priceCta: { display: "inline-block", fontSize: "13px", fontWeight: 700, lineHeight: 1.4, color: "var(--maq-red)", textDecoration: "none", marginTop: "auto", paddingTop: "16px" },
 
   supportTable: { width: "100%", borderCollapse: "collapse", background: "#fff", border: `1px solid ${tokens.colorNeutralStroke2}`, borderRadius: "12px", overflow: "hidden" },
-  supportTh: { background: "var(--maq-off-white)", padding: "14px 16px", textAlign: "left", fontSize: "13px", fontWeight: 700, color: "var(--maq-black)", borderBottom: `1px solid ${tokens.colorNeutralStroke2}` },
+  supportTh: { background: "var(--colorNeutralBackground3)", padding: "14px 16px", textAlign: "left", fontSize: "13px", fontWeight: 700, color: "var(--maq-black)", borderBottom: `1px solid ${tokens.colorNeutralStroke2}` },
   supportTd: { padding: "12px 16px", fontSize: "13px", color: "var(--maq-gray-700)", borderBottom: `1px solid ${tokens.colorNeutralStroke2}` },
 
   mktGrid: { display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "16px", "@media (max-width: 960px)": { gridTemplateColumns: "repeat(2, minmax(0, 1fr))" }, "@media (max-width: 640px)": { gridTemplateColumns: "1fr" } },
   mktCard: { background: "#fff", border: `1px solid ${tokens.colorNeutralStroke2}`, borderRadius: "10px", overflow: "hidden", display: "flex", flexDirection: "column", textDecoration: "none", color: "inherit", transition: "all 0.2s", ":hover": { border: "1px solid var(--maq-card-hover-border)", boxShadow: "var(--maq-shadow-lift)", transform: "translateY(-2px)" } },
-  mktImg: { height: "100px", background: "linear-gradient(135deg, var(--maq-red-pale) 0%, var(--maq-off-white) 60%, var(--maq-surface-cream) 100%)", borderBottom: "1px solid var(--maq-border)" },
+  mktImg: { height: "100px", background: "linear-gradient(135deg, var(--maq-red-pale) 0%, var(--colorNeutralBackground3) 60%, var(--maq-surface-cream) 100%)", borderBottom: "1px solid var(--maq-border)" },
   mktBody: { padding: "16px 18px 20px", display: "flex", flexDirection: "column", flex: 1, gap: "8px" },
   mktPill: { alignSelf: "flex-start", fontSize: "10px", fontWeight: 700, color: "var(--maq-red)", background: "var(--maq-red-pale)", textTransform: "uppercase", letterSpacing: "0.06em", padding: "3px 8px", borderRadius: "4px", marginBottom: "10px" },
   mktTitleRow: { display: "flex", alignItems: "flex-start", gap: "8px", marginBottom: "8px" },

@@ -6,7 +6,7 @@ import { SecondaryButton } from "../buttons";
 const useStyles = makeStyles({
   section: {
     padding: "64px 32px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   inner: {
     maxWidth: "var(--maq-container-wide)",
@@ -27,12 +27,7 @@ const useStyles = makeStyles({
   },
   titleLg: {
     display: "block",
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: 0,
-    letterSpacing: "-0.02em",
     textAlign: "left",
   },
   intro: {
@@ -91,7 +86,7 @@ export function PartnershipMarketplace({
       <div className={s.inner}>
         <div className={s.headLeft}>
           {/* eyebrow hidden intentionally */}
-          <h2 className={s.titleLg}>{title}</h2>
+          <h2 className={`maq-h2 ${s.titleLg}`}>{title}</h2>
           {/* {intro && <p className={s.intro}>{intro}</p>} */}
         </div>
 

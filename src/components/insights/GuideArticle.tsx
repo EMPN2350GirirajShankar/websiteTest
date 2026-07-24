@@ -6,7 +6,7 @@ import { PrimaryButton } from "../buttons";
 
 const useStyles = makeStyles({
   hero: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     padding: "48px 32px 32px",
   },
   heroInner: { maxWidth: "960px", margin: "0 auto" },
@@ -35,12 +35,7 @@ const useStyles = makeStyles({
     marginBottom: "12px",
   },
   title: {
-    fontSize: "36px",
-    fontWeight: 700,
-    color: "var(--maq-black)",
-    lineHeight: 1.2,
     margin: "0 0 12px",
-    letterSpacing: "-0.01em",
   },
   intro: {
     fontSize: "16px",
@@ -66,11 +61,7 @@ const useStyles = makeStyles({
     marginBottom: "16px",
   },
   sectionTitle: {
-    fontSize: "20px",
-    fontWeight: 700,
-    color: "var(--maq-black)",
     margin: "0 0 14px",
-    letterSpacing: "-0.005em",
     paddingBottom: "8px",
     borderBottom: `2px solid var(--maq-red-pale)`,
   },
@@ -91,7 +82,7 @@ const useStyles = makeStyles({
     border: `1px solid ${tokens.colorNeutralStroke2}`,
     borderRadius: "12px",
     padding: "20px 24px",
-    background: "var(--maq-off-white)",
+    background: "var(--colorNeutralBackground3)",
     marginTop: "20px",
   },
   refsTitle: {
@@ -163,7 +154,7 @@ const useStyles = makeStyles({
     },
   },
   continueImageWrap: {
-    background: "var(--maq-off-white)",
+    background: "var(--colorNeutralBackground3)",
     overflow: "hidden",
     display: "flex",
     alignItems: "center",
@@ -273,7 +264,7 @@ export function GuideArticle({
             <span>{eyebrow}</span>
           </div>
           {/* <span className={s.eyebrow}>{eyebrow}</span> */}
-          <h1 className={s.title}>{title}</h1>
+          <h1 className={`maq-h1 ${s.title}`}>{title}</h1>
           <p className={s.intro}>{intro}</p>
           {lastUpdated ? <div className={s.meta}>Last updated: {lastUpdated}</div> : null}
         </div>
@@ -283,7 +274,7 @@ export function GuideArticle({
         <div className={s.bodyInner}>
           {sections.map((sec) => (
             <div key={sec.title} className={s.section}>
-              <h2 className={s.sectionTitle}>{sec.title}</h2>
+              <h2 className={`maq-h2 ${s.sectionTitle}`}>{sec.title}</h2>
               {sec.practices.map((p) => (
                 <div key={p.title} className={s.practice}>
                   <div className={s.practiceTitle}>{p.title}</div>

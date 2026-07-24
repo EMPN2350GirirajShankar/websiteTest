@@ -7,7 +7,7 @@ import { StatCard } from "../components/cards/StatCard";
 
 const useStyles = makeStyles({
   hero: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     padding: "64px 32px 48px",
   },
   heroInner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
@@ -21,12 +21,7 @@ const useStyles = makeStyles({
     display: "block",
   },
   h1: {
-    fontSize: "40px",
-    fontWeight: 700,
-    color: "var(--maq-black)",
     margin: "0 0 16px",
-    letterSpacing: "-0.02em",
-    lineHeight: 1.12,
     maxWidth: "820px",
   },
   sub: {
@@ -43,7 +38,7 @@ const useStyles = makeStyles({
     gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
     gap: "20px",
   },
-  cta: { padding: "56px 32px", backgroundColor: "var(--maq-off-white)" },
+  cta: { padding: "56px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
   ctaInner: {
     maxWidth: "1100px",
     margin: "0 auto",
@@ -54,9 +49,6 @@ const useStyles = makeStyles({
     textAlign: "center",
   },
   ctaTitle: {
-    fontSize: "26px",
-    fontWeight: 700,
-    color: "var(--maq-black)",
     margin: "0 0 8px",
   },
   ctaSub: {
@@ -95,7 +87,7 @@ export function ProductsHome() {
       <section className={s.hero}>
         <div className={s.heroInner}>
           {/* <span className={s.eyebrow}>Our products</span> */}
-          <h1 className={s.h1}>
+          <h1 className={`maq-h1 ${s.h1}`}>
             Accelerators that compress months of build into weeks of value
           </h1>
           <p className={s.sub}>
@@ -135,7 +127,7 @@ export function ProductsHome() {
 
       <section className={s.cta}>
         <div className={s.ctaInner}>
-          <h2 className={s.ctaTitle}>Want a guided walkthrough?</h2>
+          <h2 className={`maq-h2 ${s.ctaTitle}`}>Want a guided walkthrough?</h2>
           {/* <p className={s.ctaSub}>
             Pick any product. We will show it running on your data.
           </p> */}

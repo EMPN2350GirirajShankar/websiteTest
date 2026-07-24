@@ -236,7 +236,7 @@ export function IndustryHealthcareLifeSciences() {
         title="How regulated organizations move faster with MAQ Software"
         cases={hlsCases}
         seeAllLabel="See all case studies"
-        seeAllHref="/insights/case-studies"
+        seeAllHref="/insights/case-studies#insights-content"
       />
       {/* <Testimonials quotes={hlsTestimonials} /> */}
     </>

@@ -24,7 +24,7 @@ import { PartnershipMarketplace } from "../components/partnerships/PartnershipMa
 const useStyles = makeStyles({
   marketSection: {
     padding: "48px 32px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   marketInner: {
     maxWidth: "var(--maq-container-wide)",

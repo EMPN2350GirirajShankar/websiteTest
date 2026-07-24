@@ -22,7 +22,7 @@ export function ServiceAgenticAI() {
             style={{
               background: "transparent",
               border: "none",
-              borderRadius: "0",
+              borderRadius: "12px",
               padding: "0",
               boxShadow: "none",
             }}
@@ -32,10 +32,10 @@ export function ServiceAgenticAI() {
               alt="AI Solutions and Agents"
               style={{
                 width: "100%",
-                aspectRatio: "16 / 10",
-                objectFit: "contain",
+                height: "360px",
+    objectFit: "cover",
                 display: "block",
-                borderRadius: "0",
+                borderRadius: "12px",
               }}
             />
           </div>

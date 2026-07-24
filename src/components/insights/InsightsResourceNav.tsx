@@ -16,12 +16,7 @@ const useStyles = makeStyles({
     marginBottom: "6px",
   },
   title: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: 0,
-    letterSpacing: "-0.02em",
     textAlign: "left",
   },
   grid: {
@@ -44,7 +39,7 @@ export function InsightsResourceNav({ active }: InsightsResourceNavProps) {
       <div className={s.inner}>
         <div className={s.head}>
           {/* <span className={s.eyebrow}>Resources</span> */}
-          <h2 className={s.title}>Explore all insights resources</h2>
+          <h2 className={`maq-h2 ${s.title}`}>Explore all insights resources</h2>
         </div>
         <div className={s.grid}>
           {insightsResourceLinks.map((r) => (

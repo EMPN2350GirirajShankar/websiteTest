@@ -219,7 +219,7 @@ export function IndustryTechnology() {
         title="How technology organizations move faster with MAQ Software"
         cases={technologyCases}
         seeAllLabel="See all technology case studies"
-        seeAllHref="/insights/case-studies"
+        seeAllHref="/insights/case-studies?industry=Technology#insights-content"
         uniformCardWidth
       />
     </>

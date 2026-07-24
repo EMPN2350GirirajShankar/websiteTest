@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(sed 's/.*padding: *//')",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(grep -o '\"type\":\"[a-z_]*\"' \"C:\\\\Users\\\\MichaelWentworthJrMA\\\\.claude\\\\projects\\\\c--Users-MichaelWentworthJrMA-Website-MAQSoftwareWebsite-New\\\\01720581-dbb2-4cf9-8dc0-90ac6f8021bc\\\\subagents\\\\workflows\\\\wf_4e478961-644\\\\journal.jsonl\" | sort | uniq -c; echo \"---last events---\"; grep -o '\"type\":\"[a-z_]*\"[^}]*\"agentId\":\"[a-z0-9]*\"' \"C:\\\\Users\\\\MichaelWentworthJrMA\\\\.claude\\\\projects\\\\c--Users-MichaelWentworthJrMA-Website-MAQSoftwareWebsite-New\\\\01720581-dbb2-4cf9-8dc0-90ac6f8021bc\\\\subagents\\\\workflows\\\\wf_4e478961-644\\\\journal.jsonl\" | tail -8)",
+      "Read(//c/Users/MichaelWentworthJrMA/.claude/projects/c--Users-MichaelWentworthJrMA-Website-MAQSoftwareWebsite-New/01720581-dbb2-4cf9-8dc0-90ac6f8021bc/subagents/workflows/wf_4e478961-644/**)"
     ]
   }
 }

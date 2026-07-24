@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   card: {
-    backgroundColor: tokens.colorNeutralBackground1, borderRadius: tokens.borderRadiusXLarge, border: "1px solid var(--maq-border)", padding: tokens.spacingHorizontalXXL,
+    backgroundColor: tokens.colorNeutralBackground1, borderRadius: "12px", border: "1px solid var(--maq-border)", padding: tokens.spacingHorizontalXXL,
     display: "flex", flexDirection: "column", textDecoration: "none", color: "inherit", cursor: "pointer",
     transition: "transform .2s cubic-bezier(.2,.7,.3,1), box-shadow .2s, border-color .2s",
     ":hover": { transform: "translateY(-2px)", boxShadow: "var(--maq-shadow-lift)", border: "1px solid var(--maq-card-hover-border)" },

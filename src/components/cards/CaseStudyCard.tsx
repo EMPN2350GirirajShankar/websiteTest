@@ -80,6 +80,10 @@ const useStyles = makeStyles({
   },
   cta: {
     display: "inline-block",
+    // Pin the CTA to the bottom of the card so it aligns across a row even
+    // when cards differ in height (e.g. one- vs. two-line titles, or cards
+    // without a flex:1 teaser to absorb the slack).
+    marginTop: "auto",
     fontSize: "13.5px",
     fontWeight: 700,
     lineHeight: 1.4,

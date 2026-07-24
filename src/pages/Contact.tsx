@@ -1,19 +1,17 @@
 import { makeStyles } from "@fluentui/react-components";
-import { ArrowRight16Regular } from "@fluentui/react-icons";
-import { PrimaryButton } from "../components/buttons";
-
-const MAIL_TO =
-  "mailto:CustomerSuccess@MAQSoftware.com?subject=Contact%20Us&body=Hello,%20I%20would%20like%20to%20get%20in%20touch%20with%20you.";
+import {
+  ArrowRight16Regular,
+  Location24Regular,
+} from "@fluentui/react-icons";
 
 const useStyles = makeStyles({
   page: {
-    backgroundColor: "var(--maq-gray-50)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   hero: {
-    backgroundColor: "#f7f8fb",
+    backgroundColor: "var(--colorNeutralBackground3)",
     position: "relative",
     overflow: "hidden",
-    borderBottom: "1px solid var(--maq-border)",
   },
   heroInner: {
     // 1504 = 1440 content + 32px gutter each side (border-box), so the inner
@@ -41,11 +39,6 @@ const useStyles = makeStyles({
   },
   title: {
     margin: "0 0 10px",
-    fontSize: "40px",
-    lineHeight: 1.03,
-    letterSpacing: "-0.02em",
-    fontWeight: 700,
-    color: "var(--maq-black)",
   },
   titleAccent: {
     color: "var(--maq-red)",
@@ -78,26 +71,31 @@ const useStyles = makeStyles({
     margin: "0 auto",
   },
   officesTitle: {
-    // 24px below the heading matches SectionHeading's margin in the shared
-    // layout primitive, so the gap above the cards reads the same as elsewhere.
-    margin: "0 0 24px",
-    fontSize: "36px",
-    lineHeight: 1.1,
-    letterSpacing: "-0.02em",
-    fontWeight: 700,
-    color: "var(--maq-black)",
+    margin: "0 0 10px",
     "@media (max-width: 960px)": {
       fontSize: "28px",
+      marginBottom: "12px",
     },
+  },
+  contactLine: {
+    margin: "28px 0 0",
+    fontSize: "15px",
+    lineHeight: 1.6,
+    color: "var(--maq-gray-700)",
+  },
+  contactLink: {
+    color: "var(--maq-red)",
+    fontWeight: 600,
+    textDecoration: "none",
+    ":hover": { textDecoration: "underline" },
   },
   officeGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
-    // 16px matches the card spacing on the service pages (case-study grids and
-    // the capabilities carousel gutter) — keep these in step.
-    gap: "16px",
+    gap: "10px",
     "@media (max-width: 1100px)": {
       gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+      gap: "12px",
     },
     "@media (max-width: 860px)": {
       gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
@@ -111,6 +109,8 @@ const useStyles = makeStyles({
     border: "1px solid var(--maq-border)",
     borderRadius: "10px",
     boxShadow: "0 2px 8px rgba(15, 23, 42, 0.05)",
+    color: "inherit",
+    textDecoration: "none",
     overflow: "hidden",
     display: "flex",
     flexDirection: "column",
@@ -121,12 +121,32 @@ const useStyles = makeStyles({
       boxShadow: "var(--maq-shadow-lift)",
       transform: "translateY(-2px)",
     },
+    ":focus-visible": {
+      outline: "2px solid var(--maq-red)",
+      outlineOffset: "2px",
+    },
   },
   officeMedia: {
-    height: "74px",
+    aspectRatio: "2 / 1",
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
+    position: "relative",
+  },
+  locationPin: {
+    position: "absolute",
+    top: "7px",
+    left: "7px",
+    width: "20px",
+    height: "20px",
+    borderRadius: "50%",
+    backgroundColor: "#fff",
+    color: "var(--maq-red)",
+    border: "1px solid rgba(200, 16, 46, 0.18)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow: "0 2px 5px rgba(15, 23, 42, 0.18)",
   },
   officeBody: {
     display: "flex",
@@ -168,6 +188,17 @@ const useStyles = makeStyles({
     ":hover": {
       color: "var(--maq-red-dark)",
     },
+  },
+  hiddenText: {
+    position: "absolute",
+    width: "1px",
+    height: "1px",
+    padding: 0,
+    margin: "-1px",
+    overflow: "hidden",
+    clip: "rect(0, 0, 0, 0)",
+    whiteSpace: "nowrap",
+    border: 0,
   },
 });
 
@@ -230,52 +261,56 @@ export function Contact() {
         <div className={s.heroInner}>
           <div className={s.heroContent}>
             {/* <p className={s.eyebrow}>Contact Us</p> */}
-            <h1 className={s.title}>
-              Let&apos;s build what&apos;s next, 
-              <span className={s.titleAccent}> together.</span>
+            <h1 className={`maq-h1 ${s.title}`}>
+              Let&apos;s build what&apos;s next,
+              <br />
+              <span className={s.titleAccent}>together.</span>
             </h1>
-            <p className={s.summary}>
-              MAQ Software builds data and AI that lead to better decisions and
-              measurable business outcomes.
-            </p>
-            <PrimaryButton size="large" className={s.cta} href={MAIL_TO}>
-              Contact us
-            </PrimaryButton>
           </div>
         </div>
       </section>
 
       <section className={s.officesSection} aria-labelledby="global-offices-heading">
         <div className={s.officesInner}>
-          <h2 id="global-offices-heading" className={s.officesTitle}>
+          <h2 id="global-offices-heading" className={`maq-h2 ${s.officesTitle}`}>
             Our global offices
           </h2>
           <div className={s.officeGrid}>
             {offices.map((office) => (
-              <article className={s.officeCard} key={office.city}>
+              <a
+                className={s.officeCard}
+                href={office.maps}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={office.city}
+                aria-label={`Get directions to ${office.city}`}
+              >
                 <div
                   className={s.officeMedia}
                   style={{ backgroundImage: `url('${office.image}')` }}
                   aria-hidden="true"
-                />
+                >
+                </div>
 
                 <div className={s.officeBody}>
                   <h3 className={s.officeCity}>{office.city}</h3>
                   <p className={s.officeAddress}>{office.address}</p>
                   {office.phone && <p className={s.officePhone}>{office.phone}</p>}
-                  <a
-                    className={s.directionsLink}
-                    href={office.maps}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <span className={s.directionsLink}>
                     Get directions
                     <ArrowRight16Regular fontSize={12} />
-                  </a>
+                  </span>
                 </div>
-              </article>
+              </a>
             ))}
           </div>
+          <p className={s.contactLine}>
+            Have a question or ready to start a project? Contact us at{" "}
+            <a className={s.contactLink} href="mailto:CustomerSuccess@MAQSoftware.com">
+              CustomerSuccess@MAQSoftware.com
+            </a>
+            .
+          </p>
         </div>
       </section>
     </main>

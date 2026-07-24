@@ -47,15 +47,19 @@ export interface CaseStudyItem {
   title: string;
   href: string;
   tag: string;
-  service: string;
+  // Both facets are optional: a study only appears under a specific chip when it
+  // carries that exact value. Untagged on an axis => it surfaces only under "All"
+  // for that axis. InsightsCaseStudies filters on an equality match per facet.
+  service?: string;
+  industry?: string;
   date: string;
   teaser: string;
   imageUrl: string;
 }
 
-// Chip labels mirror the service nav (HeaderV2 `services`) so a visitor sees the
-// same six service names everywhere. `CaseStudyItem.service` must use these exact
-// strings — InsightsCaseStudies filters on an equality match.
+// Service chip labels mirror the service nav (HeaderV2 `services`) so a visitor
+// sees the same six service names everywhere. `CaseStudyItem.service` must use
+// these exact strings.
 export const caseStudyFilters = [
   "All",
   "Data & AI platforms",
@@ -64,6 +68,20 @@ export const caseStudyFilters = [
   "Business apps & automation",
   "Cloud modernization",
   "Security & governance",
+];
+
+// Industry chip labels mirror the industries nav (HeaderV2 `industries`).
+// `CaseStudyItem.industry` must use these exact strings. Ordered to match the nav;
+// the page only renders the industries that actually have at least one study, so a
+// vertical with no tagged studies (e.g. Healthcare) simply won't show as an option.
+export const caseStudyIndustryFilters = [
+  "All",
+  "Retail & consumer goods",
+  "Financial services",
+  "Technology",
+  "Manufacturing",
+  "Healthcare & life sciences",
+  "Public sector",
 ];
 
 export const caseStudyItems: CaseStudyItem[] = [
@@ -81,6 +99,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/12/modernizing-retail-business.html",
     "tag": "Modernizing retail",
     "service": "Insights & analytics",
+    "industry": "Retail & consumer goods",
     "date": "2025-12",
     "teaser": "Case study: Modernizing retail business intelligence with Microsoft Fabric and Power BI.",
     "imageUrl": "/images/case-studies/external/retail-report-stock-image.webp"
@@ -90,6 +109,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/09/building-scalable-e-commerce-product.html",
     "tag": "Building scalable",
     "service": "Data & AI platforms",
+    "industry": "Retail & consumer goods",
     "date": "2025-09",
     "teaser": "Case study: Building scalable e-commerce product recommendations with Microsoft Fabric SQL.",
     "imageUrl": "/images/case-studies/external/product_recommendations_cover.webp"
@@ -99,6 +119,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/07/transforming-analytics-with-microsoft.html",
     "tag": "Transforming grocery",
     "service": "Data & AI platforms",
+    "industry": "Retail & consumer goods",
     "date": "2025-07",
     "teaser": "Case study: Transforming grocery retail analytics with Microsoft Fabric.",
     "imageUrl": "/images/case-studies/external/Grocery_retailer_report.webp"
@@ -108,6 +129,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/06/improving-retail-sales-reporting-by.html",
     "tag": "Enhancing retail",
     "service": "Insights & analytics",
+    "industry": "Retail & consumer goods",
     "date": "2025-06",
     "teaser": "Case study: Enhancing retail sales reporting by migrating from MicroStrategy to Power BI.",
     "imageUrl": "/images/case-studies/external/Computer-with-report.webp"
@@ -117,6 +139,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/03/transforming-supply-chain-analytics.html",
     "tag": "Transforming supply",
     "service": "Insights & analytics",
+    "industry": "Retail & consumer goods",
     "date": "2025-03",
     "teaser": "Case study: Transforming supply chain analytics with Power BI on Snowflake for a specialty retailer.",
     "imageUrl": "/images/case-studies/external/AdobeStock_305928424.webp"
@@ -126,6 +149,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/03/enhancing-demand-forecasting-and.html",
     "tag": "Enhancing demand",
     "service": "AI solutions & agents",
+    "industry": "Retail & consumer goods",
     "date": "2025-03",
     "teaser": "Case study: Enhancing demand forecasting and planning with AI foundation model on Microsoft Azure.",
     "imageUrl": "/images/case-studies/external/Demand-forecasting-office-supplies.webp"
@@ -135,6 +159,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/03/revolutionizing-demand-forecasting-and.html",
     "tag": "Revolutionizing demand",
     "service": "AI solutions & agents",
+    "industry": "Retail & consumer goods",
     "date": "2025-03",
     "teaser": "Case study: Revolutionizing demand forecasting and planning with AI foundation model on Microsoft Azure.",
     "imageUrl": "/images/case-studies/external/Conveyor-belt.webp"
@@ -144,6 +169,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2024/05/enabling-real-time-visibility-how.html",
     "tag": "Enabling real-time",
     "service": "Data & AI platforms",
+    "industry": "Retail & consumer goods",
     "date": "2024-05",
     "teaser": "Case study: Enabling real-time visibility: How a retail leader transformed Direct Store Delivery with Microsoft Fabric.",
     "imageUrl": "/images/case-studies/external/CS076-banner.webp"
@@ -153,6 +179,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2024/02/empowering-retail-growth-with-optimized.html",
     "tag": "Empowering retail",
     "service": "AI solutions & agents",
+    "industry": "Retail & consumer goods",
     "date": "2024-02",
     "teaser": "Case study: Empowering retail growth with an optimized loyalty program.",
     "imageUrl": "/images/case-studies/external/CS074-banner.webp"
@@ -162,6 +189,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2023/11/microsoft-fabric-powering-real-time.html",
     "tag": "Microsoft Fabric",
     "service": "Data & AI platforms",
+    "industry": "Retail & consumer goods",
     "date": "2023-11",
     "teaser": "Case study: Microsoft Fabric: Powering Real-Time Analytics for Retailers.",
     "imageUrl": "/images/case-studies/external/B025_MSFabric_Banner.webp"
@@ -171,6 +199,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2022/06/real-time-reporting-for-organic.html",
     "tag": "Real-time reporting",
     "service": "Insights & analytics",
+    "industry": "Retail & consumer goods",
     "date": "2022-06",
     "teaser": "Case study: Real-time reporting for an organic supermarket chain.",
     "imageUrl": "/images/case-studies/external/shopper2.webp"
@@ -180,6 +209,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2021/12/machine-learning-sales-forecast.html",
     "tag": "Accurately Forecast",
     "service": "AI solutions & agents",
+    "industry": "Retail & consumer goods",
     "date": "2021-12",
     "teaser": "Case study: Accurately Forecast Customer Sales with Machine Learning (ML).",
     "imageUrl": "/images/case-studies/external/CS002-main.webp"
@@ -189,6 +219,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2020/10/inventory-management-excel-plug-in.html",
     "tag": "Accurately Forecast",
     "service": "AI solutions & agents",
+    "industry": "Technology",
     "date": "2020-10",
     "teaser": "Case study: Accurately Forecast Inventory Needs Using a Custom Plug-in.",
     "imageUrl": "/images/case-studies/external/CS042-mainv3.webp"
@@ -198,6 +229,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2018/11/boosting-black-friday-sales.html",
     "tag": "Boosting Black",
     "service": "AI solutions & agents",
+    "industry": "Retail & consumer goods",
     "date": "2018-11",
     "teaser": "Case study: Boosting Black Friday Sales with AI.",
     "imageUrl": "/images/case-studies/external/black-friday-banner-Copy.webp"
@@ -207,6 +239,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2018/08/case-study-ai-recommendation-system.html",
     "tag": "AI Recommendation",
     "service": "AI solutions & agents",
+    "industry": "Retail & consumer goods",
     "date": "2018-08",
     "teaser": "Case study: AI Recommendation System Streamlines Purchases.",
     "imageUrl": "/images/case-studies/external/recommendation-engine-case-study-main.webp"
@@ -216,6 +249,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2018/07/case-study-retailer-reduces-costs-by.html",
     "tag": "Retailer Reduces",
     "service": "AI solutions & agents",
+    "industry": "Retail & consumer goods",
     "date": "2018-07",
     "teaser": "Case study: Retailer Reduces Costs by Automating Customer Feedback.",
     "imageUrl": "/images/case-studies/external/customer-returns-case-study-main.webp"
@@ -234,6 +268,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2022/06/enhancing-fintech-analytics-to-provide.html",
     "tag": "Enhancing fintech",
     "service": "Data & AI platforms",
+    "industry": "Financial services",
     "date": "2022-06",
     "teaser": "Case study: Enhancing fintech analytics to provide millions of borrowers with better loan options.",
     "imageUrl": "/images/case-studies/external/CS0065-Banner-image.webp"
@@ -252,6 +287,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2024/10/optimizing-product-feature.html",
     "tag": "Automating product",
     "service": "AI solutions & agents",
+    "industry": "Manufacturing",
     "date": "2024-10",
     "teaser": "Case study: Automating product feature categorization with AI for an automotive components manufacturer.",
     "imageUrl": "/images/case-studies/external/CS086-banner-V2.webp"
@@ -270,6 +306,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2024/09/transforming-data-management-in.html",
     "tag": "Transforming data",
     "service": "Data & AI platforms",
+    "industry": "Manufacturing",
     "date": "2024-09",
     "teaser": "Case study: Transforming data management in manufacturing with an AI-driven chatbot solution.",
     "imageUrl": "/images/case-studies/external/CS084-banner.webp"
@@ -288,6 +325,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/11/modernizing-software-development.html",
     "tag": "Modernizing the",
     "service": "AI solutions & agents",
+    "industry": "Technology",
     "date": "2025-11",
     "teaser": "Case study: Modernizing the software development lifecycle with GitHub Copilot.",
     "imageUrl": "/images/case-studies/external/6Dv3pe-JnSg-unsplash.webp"
@@ -342,6 +380,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2024/11/microsoft-fabric-rti.html",
     "tag": "Real-Time Intelligence",
     "service": "Data & AI platforms",
+    "industry": "Technology",
     "date": "2024-11",
     "teaser": "Case study: Real-Time Intelligence in Microsoft Fabric for ISVs.",
     "imageUrl": "/images/case-studies/external/CS089-banner.webp"
@@ -351,6 +390,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2023/02/transforming-customer-support-with.html",
     "tag": "Transforming customer",
     "service": "Insights & analytics",
+    "industry": "Technology",
     "date": "2023-02",
     "teaser": "Case study: Transforming customer support with AIOps-driven Power BI embedding.",
     "imageUrl": "/images/case-studies/external/CS070-banner.webp"
@@ -360,6 +400,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2022/11/adx-implementation-cloud-management-software-provider.html",
     "tag": "ADX implementation",
     "service": "Data & AI platforms",
+    "industry": "Technology",
     "date": "2022-11",
     "teaser": "Case study: ADX implementation for a global Cloud Management Software Provider.",
     "imageUrl": "/images/case-studies/external/CS068-banner.webp"
@@ -369,6 +410,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2020/12/resolve-support-tickets-faster-with.html",
     "tag": "Resolve Support",
     "service": "Data & AI platforms",
+    "industry": "Technology",
     "date": "2020-12",
     "teaser": "Case study: Resolve Support Tickets Faster with Predictive Risk Algorithms.",
     "imageUrl": "/images/case-studies/external/CS028-Main.webp"
@@ -378,6 +420,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2019/11/engineering-insights-wpf-application.html",
     "tag": "Simplify Software",
     "service": "Data & AI platforms",
+    "industry": "Technology",
     "date": "2019-11",
     "teaser": "Case study: Simplify Software Health Checks with a Downloadable Application.",
     "imageUrl": "/images/case-studies/external/WPF-case-study-main.webp"
@@ -387,6 +430,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2019/09/engineering-insights-azure-search-based.html",
     "tag": "Easily Search",
     "service": "Data & AI platforms",
+    "industry": "Technology",
     "date": "2019-09",
     "teaser": "Case study: Easily Search Through Large Data Collections With Azure Architecture.",
     "imageUrl": "/images/case-studies/external/Azure-Search-case-study-main.webp"
@@ -414,6 +458,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2018/07/case-study-software-company-monitors.html",
     "tag": "Software Company",
     "service": "AI solutions & agents",
+    "industry": "Technology",
     "date": "2018-07",
     "teaser": "Case study: Software Company Monitors Global Affairs via Cloud-Based Policy Portal.",
     "imageUrl": "/images/case-studies/external/Global-Policy-case-study-main.webp"
@@ -423,6 +468,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2021/05/chatbot-for-arizona-government.html",
     "tag": "Millions of",
     "service": "AI solutions & agents",
+    "industry": "Public sector",
     "date": "2021-05",
     "teaser": "Case study: Millions of Arizona Citizens Receive Benefits With the Help of an AI-powered Chatbot.",
     "imageUrl": "/images/case-studies/external/Arizona-Chatbot-case-study-main.webp"
@@ -459,6 +505,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/08/delivering-personalization-intelligence.html",
     "tag": "Delivering personalization",
     "service": "Data & AI platforms",
+    "industry": "Retail & consumer goods",
     "date": "2025-08",
     "teaser": "Case study: Delivering personalization intelligence with MLOps and Databricks CI/CD framework.",
     "imageUrl": "/images/case-studies/external/MLOps-Databricks-framework.webp"
@@ -468,6 +515,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/06/enabling-sales-insights-for-global.html",
     "tag": "Enabling sales",
     "service": "Insights & analytics",
+    "industry": "Retail & consumer goods",
     "date": "2025-06",
     "teaser": "Case study: Enabling sales insights for global operations with Power BI and Snowflake.",
     "imageUrl": "/images/case-studies/external/Person-typing-on-report.webp"
@@ -477,6 +525,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/06/improving-sales-insights-with-migration.html",
     "tag": "Improving sales",
     "service": "Insights & analytics",
+    "industry": "Retail & consumer goods",
     "date": "2025-06",
     "teaser": "Case study: Improving sales insights with a migration from SAP BOBJ to Power BI.",
     "imageUrl": "/images/case-studies/external/Convenience-store-counter.webp"
@@ -486,6 +535,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2024/07/harnessing-generative-ai-for-tailored.html",
     "tag": "Harnessing generative",
     "service": "AI solutions & agents",
+    "industry": "Technology",
     "date": "2024-07",
     "teaser": "Case study: Harnessing generative AI for tailored marketing: Personalized content clusters for every account.",
     "imageUrl": "/images/case-studies/external/CS078-banner-V2.webp"
@@ -495,6 +545,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2024/02/improving-lead-management-and-campaign.html",
     "tag": "Improving lead",
     "service": "AI solutions & agents",
+    "industry": "Technology",
     "date": "2024-02",
     "teaser": "Case study: Improving lead management and campaign optimization with Microsoft technologies.",
     "imageUrl": "/images/case-studies/external/CS073-banner-V2.webp"
@@ -504,6 +555,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2018/11/save-time-with-integrated-marketing.html",
     "tag": "Save Time",
     "service": "AI solutions & agents",
+    "industry": "Technology",
     "date": "2018-11",
     "teaser": "Case study: Save Time with an Integrated Marketing Campaign Platform.",
     "imageUrl": "/images/case-studies/external/dynamics-main.webp"
@@ -513,6 +565,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2018/08/case-study-generating-sales-leads-with.html",
     "tag": "Generating Sales",
     "service": "AI solutions & agents",
+    "industry": "Retail & consumer goods",
     "date": "2018-08",
     "teaser": "Case study: Generating Sales Leads with AI.",
     "imageUrl": "/images/case-studies/external/sales-leads-machine-learning-case-study-main.webp"
@@ -522,6 +575,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2018/11/reducing-customer-support-time-with.html",
     "tag": "Reducing Customer",
     "service": "AI solutions & agents",
+    "industry": "Technology",
     "date": "2018-11",
     "teaser": "Case study: Reducing Customer Support Time with Machine Learning.",
     "imageUrl": "/images/case-studies/external/Reducing-Customer-Support-Time-case-study-main.webp"
@@ -540,6 +594,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2020/04/optical-character-recognition-event.html",
     "tag": "Ease Event",
     "service": "Business apps & automation",
+    "industry": "Technology",
     "date": "2020-04",
     "teaser": "Case study: Ease Event Management with Power Apps.",
     "imageUrl": "/images/case-studies/external/CS003-main.webp"
@@ -549,6 +604,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2018/11/events-management-software-tracks.html",
     "tag": "Events Management",
     "service": "Data & AI platforms",
+    "industry": "Technology",
     "date": "2018-11",
     "teaser": "Case study: Events Management Software Tracks Conference Performance.",
     "imageUrl": "/images/case-studies/external/Events-management-case-study-main.webp"
@@ -558,6 +614,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2024/08/strengthening-cybersecurity.html",
     "tag": "Strengthening cybersecurity",
     "service": "Security & governance",
+    "industry": "Technology",
     "date": "2024-08",
     "teaser": "Case study: Strengthening cybersecurity with Managed Identity and RBAC.",
     "imageUrl": "/images/case-studies/external/B035_Cybersecurity_Banner.webp"
@@ -576,6 +633,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2019/07/case-study-reducing-costs-by-automating.html",
     "tag": "Reduce Costs",
     "service": "Security & governance",
+    "industry": "Technology",
     "date": "2019-07",
     "teaser": "Case study: Reduce Costs by Automating Privacy Matters.",
     "imageUrl": "/images/case-studies/external/Automating-Privacy-Matters-case-study-main.webp"
@@ -585,6 +643,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2026/02/transforming-ai-interest-into-adoption.html",
     "tag": "Transforming AI",
     "service": "AI solutions & agents",
+    "industry": "Manufacturing",
     "date": "2026-02",
     "teaser": "Case study: Transforming AI interest into adoption by establishing an AI Center of Excellence.",
     "imageUrl": "/images/case-studies/external/company-managers-stock.webp"
@@ -639,6 +698,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2023/09/harnessing-real-time-data-insights-with.html",
     "tag": "Harnessing real-time",
     "service": "Data & AI platforms",
+    "industry": "Manufacturing",
     "date": "2023-09",
     "teaser": "Case study: Harnessing real-time data insights with a versatile bot application.",
     "imageUrl": "/images/case-studies/external/CS072-banner.webp"
@@ -657,6 +717,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2018/11/master-data-management-mdm-improves.html",
     "tag": "Master Data",
     "service": "Data & AI platforms",
+    "industry": "Retail & consumer goods",
     "date": "2018-11",
     "teaser": "Case study: Master Data Management (MDM) Improves Customer Relationships with Machine Learning.",
     "imageUrl": "/images/case-studies/external/Master-Data-Management-case-study-main.webp"
@@ -675,6 +736,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2026/01/delivering-accurate-business.html",
     "tag": "Delivering accurate",
     "service": "Data & AI platforms",
+    "industry": "Retail & consumer goods",
     "date": "2026-01",
     "teaser": "Case study: Delivering accurate business intelligence insights with a Fabric data agent.",
     "imageUrl": "/images/case-studies/external/Sales-data-agent-on-laptop.webp"
@@ -684,6 +746,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/08/optimizing-data-refresh-by-integrating.html",
     "tag": "Optimizing data",
     "service": "Data & AI platforms",
+    "industry": "Retail & consumer goods",
     "date": "2025-08",
     "teaser": "Case study: Optimizing data refresh by integrating Snowflake iceberg tables with Microsoft Fabric.",
     "imageUrl": "/images/case-studies/external/snowflake-iceberg-cover.webp"
@@ -711,6 +774,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/07/migrating-to-microsoft-fabric-to-unlock.html",
     "tag": "Migrating to",
     "service": "Data & AI platforms",
+    "industry": "Technology",
     "date": "2025-07",
     "teaser": "Case study: Migrating to Microsoft Fabric to Unlock One Source of Truth (OSOT).",
     "imageUrl": "/images/case-studies/external/corporate-buildings.webp"
@@ -720,6 +784,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/03/optimizing-data-management-by.html",
     "tag": "Optimizing data",
     "service": "Data & AI platforms",
+    "industry": "Retail & consumer goods",
     "date": "2025-03",
     "teaser": "Case study: Optimizing data management by integrating Snowflake and Microsoft Fabric.",
     "imageUrl": "/images/case-studies/external/Laptop-data-report.webp"
@@ -729,6 +794,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2024/11/Microsoft-Fabric-Direct-Lake.html",
     "tag": "Enabling self-service",
     "service": "Data & AI platforms",
+    "industry": "Retail & consumer goods",
     "date": "2024-11",
     "teaser": "Case study: Enabling self-service for supply chain analytics with Microsoft Fabric and Direct Lake.",
     "imageUrl": "/images/case-studies/external/CS090-banner.webp"
@@ -738,6 +804,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2024/08/unifying-data-management-with.html",
     "tag": "Unifying data",
     "service": "Data & AI platforms",
+    "industry": "Retail & consumer goods",
     "date": "2024-08",
     "teaser": "Case study: Unifying data management with a centralized framework.",
     "imageUrl": "/images/case-studies/external/CS082-banner.webp"
@@ -801,6 +868,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2022/07/improving-insights-and-reducing-costs.html",
     "tag": "Improving insights",
     "service": "Insights & analytics",
+    "industry": "Retail & consumer goods",
     "date": "2022-07",
     "teaser": "Case study: Improving insights and reducing costs through unified reporting.",
     "imageUrl": "/images/case-studies/external/CS066_banner_2.webp"
@@ -819,6 +887,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2020/09/modernize-data-cloud-migration.html",
     "tag": "Modernize Data",
     "service": "Cloud modernization",
+    "industry": "Technology",
     "date": "2020-09",
     "teaser": "Case study: Modernize Data Systems by Migrating to the Cloud.",
     "imageUrl": "/images/case-studies/external/Data-Migration-case-study-main.webp"
@@ -837,6 +906,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2025/03/accelerate-your-tableau-to-power-bi.html",
     "tag": "Accelerate your",
     "service": "Insights & analytics",
+    "industry": "Retail & consumer goods",
     "date": "2025-03",
     "teaser": "Case study: Accelerate your Tableau to Power BI (Fabric) migration with MigrateFAST.",
     "imageUrl": "/images/case-studies/external/B028_MigrateFAST_Banner.webp"
@@ -846,6 +916,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2024/08/modernizing-reporting-platforms-through.html",
     "tag": "Modernizing reporting",
     "service": "Insights & analytics",
+    "industry": "Retail & consumer goods",
     "date": "2024-08",
     "teaser": "Case study: Modernizing reporting platforms through AI-driven SQL Migration.",
     "imageUrl": "/images/case-studies/external/CS083-banner.webp"
@@ -864,6 +935,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2023/12/building-powerful-foundation-ultimate.html",
     "tag": "Building a",
     "service": "Insights & analytics",
+    "industry": "Retail & consumer goods",
     "date": "2023-12",
     "teaser": "Case study: Building a Powerful Foundation: The Ultimate Guide to Power BI Center of Excellence.",
     "imageUrl": "/images/case-studies/external/B027_CoE_Banner_V4.webp"
@@ -873,6 +945,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2020/06/everything-you-need-to-know-about.html",
     "tag": "Everything You",
     "service": "Insights & analytics",
+    "industry": "Retail & consumer goods",
     "date": "2020-06",
     "teaser": "Case study: Everything You Need to Know About Migrating to Power BI.",
     "imageUrl": "/images/case-studies/external/B010-main.webp"
@@ -927,6 +1000,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2020/10/dynamic-checklist-dynamics-365.html",
     "tag": "Complete Tasks",
     "service": "Business apps & automation",
+    "industry": "Technology",
     "date": "2020-10",
     "teaser": "Case study: Complete Tasks Faster with a Custom Dynamic Checklist in Dynamics 365.",
     "imageUrl": "/images/case-studies/external/CS034-MainRev2.webp"
@@ -936,6 +1010,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2020/10/track-resource-allocation-power-platform.html",
     "tag": "Connect High-Impact",
     "service": "Data & AI platforms",
+    "industry": "Technology",
     "date": "2020-10",
     "teaser": "Case study: Connect High-Impact Service Opportunities with Underutilized Support Team Resources.",
     "imageUrl": "/images/case-studies/external/CS029-main.webp"
@@ -945,6 +1020,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2020/10/automated-powerpoint-deck-creation.html",
     "tag": "Digitize Rhythm",
     "service": "Business apps & automation",
+    "industry": "Technology",
     "date": "2020-10",
     "teaser": "Case study: Digitize Rhythm of Business (ROB) with a Power BI to PowerPoint Tool.",
     "imageUrl": "/images/case-studies/external/CS018-mainV2.webp"
@@ -954,6 +1030,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2020/07/promoting-business-continuity-through.html",
     "tag": "Ensure Business",
     "service": "Data & AI platforms",
+    "industry": "Retail & consumer goods",
     "date": "2020-07",
     "teaser": "Case study: Ensure Business Continuity Through Covid-19 Remote Work.",
     "imageUrl": "/images/case-studies/external/CS006-main.webp"
@@ -972,6 +1049,7 @@ export const caseStudyItems: CaseStudyItem[] = [
     "href": "https://blog.maqsoftware.com/2018/11/integrating-sharepoint-portals.html",
     "tag": "Integrating SharePoint",
     "service": "Business apps & automation",
+    "industry": "Retail & consumer goods",
     "date": "2018-11",
     "teaser": "Case study: Integrating SharePoint Portals.",
     "imageUrl": "/images/case-studies/external/Sharepoint-Portals-case-study-main.webp"

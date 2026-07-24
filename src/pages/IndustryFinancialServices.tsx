@@ -248,7 +248,7 @@ export function IndustryFinancialServices() {
         title="How financial firms move faster with MAQ Software"
         cases={fsCases}
         seeAllLabel="See all financial services case studies"
-        seeAllHref="/insights/case-studies"
+        seeAllHref="/insights/case-studies?industry=Financial%20services#insights-content"
       />
       <MarketplaceOffers
         title="Marketplace offers"

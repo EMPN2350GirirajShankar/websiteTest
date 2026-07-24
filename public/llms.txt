@@ -1,0 +1,72 @@
+# MAQ Software
+
+> MAQ Software is a technology consulting and solutions company specializing in agentic AI, data and analytics, Microsoft Fabric and Power BI, cloud modernization, business applications, security, and workplace transformation.
+
+Use the linked pages as the source of truth for MAQ Software's current services, products, client outcomes, partnerships, and company information. Case studies are published on the MAQ Software blog; the case study index is the complete curated collection.
+
+## Services
+
+- [Agentic AI](https://www.maqsoftware.com/services/agentic-ai): AI agents, machine learning, copilots, and enterprise AI solutions.
+- [Data and analytics](https://www.maqsoftware.com/services/data-and-analytics): Governed data platforms, lakehouses, semantic models, and real-time analytics.
+- [Reporting and business intelligence](https://www.maqsoftware.com/services/reporting-bi): Power BI reporting, embedded analytics, and performance optimization.
+- [Cloud infrastructure and modernization](https://www.maqsoftware.com/services/cloud): Cloud migration, modernization, infrastructure, and operations.
+- [Business applications](https://www.maqsoftware.com/services/business-apps): Dynamics 365, Power Platform, Power Apps, and workflow automation.
+- [Security and compliance](https://www.maqsoftware.com/services/security-compliance): Data governance, identity, access, threat protection, and compliance.
+- [Workplace transformation](https://www.maqsoftware.com/services/workplace-transformation): Microsoft 365, Copilot adoption, collaboration, employee experience, and developer productivity.
+
+## Products
+
+- [Products overview](https://www.maqsoftware.com/products): Index of MAQ Software products and accelerators.
+- [Fabric Admin Agent](https://www.maqsoftware.com/products/fabric-admin-agent): AI-driven monitoring and optimization for Microsoft Fabric capacity.
+- [MigrateFAST](https://www.maqsoftware.com/products/migratefast): Accelerator for migrating legacy data and reporting platforms to Microsoft Fabric and Power BI.
+- [AI-DataLens](https://www.maqsoftware.com/products/ai-datalens): Natural-language access to governed enterprise data and analytics.
+- [EmbedFAST](https://www.maqsoftware.com/products/embedfast): Accelerator for secure, multi-tenant Power BI embedded analytics.
+- [LoadFAST](https://www.maqsoftware.com/products/loadfast): Load testing and capacity-sizing tool for Microsoft Fabric and Power BI.
+- [CertyFAST](https://www.maqsoftware.com/products/certyfast): Automated quality checks, DAX standardization, and documentation for Power BI semantic models.
+
+## Case Studies
+
+- [Case studies index](https://www.maqsoftware.com/insights/case-studies): Complete filterable collection of client outcomes across AI, data, analytics, applications, cloud, and security.
+- [Reshaping retail with Agentic AI solutions](https://blog.maqsoftware.com/2026/02/reshaping-retail-with-agentic-ai.html): Agentic AI and machine learning case study.
+- [Building scalable e-commerce product recommendations with Microsoft Fabric SQL](https://blog.maqsoftware.com/2025/09/building-scalable-e-commerce-product.html): Data and AI platforms case study.
+- [Modernizing retail business intelligence with Microsoft Fabric and Power BI](https://blog.maqsoftware.com/2025/12/modernizing-retail-business.html): Insights and analytics case study.
+- [Ease event management with Power Apps](https://blog.maqsoftware.com/2020/04/optical-character-recognition-event.html): Application modernization case study.
+- [Modernize data systems by migrating to the cloud](https://blog.maqsoftware.com/2020/09/modernize-data-cloud-migration.html): Cloud modernization case study.
+- [Strengthening cybersecurity with Managed Identity and RBAC](https://blog.maqsoftware.com/2024/08/strengthening-cybersecurity.html): Security case study.
+
+## Industries
+
+- [Retail](https://www.maqsoftware.com/industries/retail): Technology solutions and client outcomes for retail.
+- [Financial services](https://www.maqsoftware.com/industries/financial-services): Technology solutions and client outcomes for financial services.
+- [Healthcare and life sciences](https://www.maqsoftware.com/industries/healthcare-life-sciences): Technology solutions and client outcomes for healthcare and life sciences.
+- [Technology](https://www.maqsoftware.com/industries/technology): Technology solutions and client outcomes for software and technology organizations.
+- [Manufacturing](https://www.maqsoftware.com/industries/manufacturing): Technology solutions and client outcomes for manufacturing.
+- [Public sector](https://www.maqsoftware.com/industries/public-sector): Technology solutions and client outcomes for public-sector organizations.
+
+## Partnerships
+
+- [Microsoft](https://www.maqsoftware.com/partnerships/microsoft): MAQ Software's Microsoft partnership and capabilities.
+- [Databricks](https://www.maqsoftware.com/partnerships/databricks): MAQ Software's Databricks partnership and capabilities.
+- [Snowflake](https://www.maqsoftware.com/partnerships/snowflake): MAQ Software's Snowflake partnership and capabilities.
+
+## Insights and Resources
+
+- [Best-practice guides](https://www.maqsoftware.com/insights/best-practice-guides): Implementation playbooks and technical guidance.
+- [Consulting offers](https://www.maqsoftware.com/insights/consulting-offers): MAQ Software consulting engagements available through Microsoft Marketplace.
+- [Power BI custom visual guide](https://www.maqsoftware.com/insights/power-bi-custom-visual-guide): Guidance for selecting and using Power BI custom visuals.
+- [Visual chooser](https://www.maqsoftware.com/insights/visual-chooser): Tool for choosing a Power BI visual by analytical need.
+
+## Company
+
+- [Homepage](https://www.maqsoftware.com/): Overview of MAQ Software's services, products, expertise, and client outcomes.
+- [Who we are](https://www.maqsoftware.com/who-we-are): Company background, values, locations, and recognition.
+- [Sustainability](https://www.maqsoftware.com/sustainability): Environmental and social impact information.
+- [Contact](https://www.maqsoftware.com/contact): Contact MAQ Software about services, solutions, and partnerships.
+
+## Optional
+
+- [Careers](https://www.maqsoftware.com/careers): Open roles and information about working at MAQ Software.
+- [Events](https://www.maqsoftware.com/events): Conferences, webinars, and workshops featuring MAQ Software experts.
+- [Privacy statement](https://www.maqsoftware.com/privacystatement): Website privacy practices.
+- [Terms of service](https://www.maqsoftware.com/terms-of-service): Website terms of service.
+- [Sitemap](https://www.maqsoftware.com/sitemap.xml): Complete index of public website URLs.

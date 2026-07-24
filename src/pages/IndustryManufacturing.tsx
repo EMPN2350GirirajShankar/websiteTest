@@ -231,7 +231,7 @@ export function IndustryManufacturing() {
         title="How manufacturers move faster with MAQ Software"
         cases={manufacturingCases}
         seeAllLabel="See all manufacturing case studies"
-        seeAllHref="/insights/case-studies"
+        seeAllHref="/insights/case-studies?industry=Manufacturing#insights-content"
         uniformCardWidth
       />
       <MarketplaceOffers

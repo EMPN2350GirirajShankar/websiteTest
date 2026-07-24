@@ -31,7 +31,7 @@ import {
 
 const useStyles = makeStyles({
     // Hero
-    hero: { backgroundColor: "var(--maq-off-white)", padding: "48px 32px" },
+    hero: { backgroundColor: "var(--colorNeutralBackground3)", padding: "48px 32px" },
     heroGrid: {
         maxWidth: "var(--maq-container-wide)",
         margin: "0 auto",
@@ -52,11 +52,6 @@ const useStyles = makeStyles({
         textAlign: "center",
     },
     h1: {
-        fontSize: "40px",
-        lineHeight: 1.15,
-        fontWeight: 700,
-        color: "var(--maq-black)",
-        letterSpacing: "-0.02em",
         margin: "0 0 16px",
         textAlign: "center",
     },
@@ -127,7 +122,7 @@ const useStyles = makeStyles({
 
     // Section commons
     section: { padding: "48px 32px", backgroundColor: "#fff" },
-    sectionAlt: { padding: "48px 32px", backgroundColor: "var(--maq-off-white)" },
+    sectionAlt: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
     inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
     head: { marginBottom: "20px", textAlign: "center" },
     secEyebrow: {
@@ -140,12 +135,7 @@ const useStyles = makeStyles({
         marginBottom: "6px",
     },
     titleSm: {
-        fontSize: "36px",
-        lineHeight: 1.15,
-        fontWeight: 700,
-        color: "var(--maq-navy)",
         margin: "0 0 6px",
-        letterSpacing: "-0.02em",
         textAlign: "left",
     },
     secSub: { fontSize: "14px", color: "var(--maq-gray-600)", margin: "0 auto", maxWidth: "780px", textAlign: "center" },
@@ -293,7 +283,7 @@ const useStyles = makeStyles({
     insCover: {
         height: "100px",
         background:
-            "linear-gradient(135deg, var(--maq-red-pale) 0%, var(--maq-off-white) 60%, var(--maq-surface-cream) 100%)",
+            "linear-gradient(135deg, var(--maq-red-pale) 0%, var(--colorNeutralBackground3) 60%, var(--maq-surface-cream) 100%)",
         borderBottom: "1px solid var(--maq-border)",
     },
     insBody: { padding: "20px", display: "flex", flexDirection: "column", gap: "10px", flex: 1 },
@@ -449,7 +439,7 @@ export function ServiceWorkplaceTransformation() {
                         {/* <span className={s.eyebrow}>
                             Workplace transformation &amp; productivity
                         </span> */}
-                        <h1 className={s.h1}>
+                        <h1 className={`maq-h1 ${s.h1}`}>
                             Microsoft 365 and Copilot rollouts that drive real adoption
                         </h1>
                         <p className={s.heroSub}>
@@ -533,7 +523,7 @@ export function ServiceWorkplaceTransformation() {
                 <div className={s.inner}>
                     <div className={s.head}>
                         {/* <span className={s.secEyebrow}>Related case studies</span> */}
-                        <h2 className={s.titleSm}>
+                        <h2 className={`maq-h2 ${s.titleSm}`}>
                             How clients are transforming their digital workplace
                         </h2>
                     </div>
@@ -569,7 +559,7 @@ export function ServiceWorkplaceTransformation() {
                 <div className={s.inner}>
                     <div className={s.head}>
                         {/* <span className={s.secEyebrow}>Insights</span> */}
-                        <h2 className={s.titleSm}>
+                        <h2 className={`maq-h2 ${s.titleSm}`}>
                             Our workplace transformation insights
                         </h2>
                         {/* <p className={s.secSub}>

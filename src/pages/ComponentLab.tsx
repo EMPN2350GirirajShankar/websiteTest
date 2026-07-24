@@ -20,7 +20,7 @@ import { PrimaryButton, SecondaryButton, TextButton } from "../components/button
 /* ------------------------------------------------------------------ */
 
 const useLab = makeStyles({
-  page: { backgroundColor: "var(--maq-off-white)", paddingBottom: "120px" },
+  page: { backgroundColor: "var(--colorNeutralBackground3)", paddingBottom: "120px" },
   hero: {
     padding: "64px 32px 32px",
     maxWidth: "1240px",
@@ -99,7 +99,7 @@ const useLab = makeStyles({
   variantHead: {
     padding: "14px 20px",
     borderBottom: `1px solid ${tokens.colorNeutralStroke2}`,
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
@@ -252,7 +252,7 @@ const useSvcCard = makeStyles({
   },
   // E — icon-row inline (compact, label-style)
   e: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     borderRadius: "12px",
     padding: "20px 22px",
     display: "flex",
@@ -424,7 +424,7 @@ const useProdCard = makeStyles({
   bBody: { padding: "20px 28px 24px", display: "flex", flexDirection: "column", flex: 1 },
   // C — flat editorial (no logo, big name)
   c: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     borderRadius: "12px",
     padding: "28px",
     display: "flex",
@@ -1423,7 +1423,7 @@ const useHero = makeStyles({
     gap: "48px",
     alignItems: "center",
     padding: "48px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     "@media (max-width: 880px)": { gridTemplateColumns: "1fr", padding: "32px" },
   },
   aImg: {
@@ -1443,7 +1443,7 @@ const useHero = makeStyles({
   c: {
     padding: "64px 48px",
     backgroundImage:
-      "radial-gradient(900px 320px at 20% 0%, var(--maq-blue-pale) 0%, transparent 60%), linear-gradient(180deg, #fff, var(--maq-off-white))",
+      "radial-gradient(900px 320px at 20% 0%, var(--maq-blue-pale) 0%, transparent 60%), linear-gradient(180deg, #fff, var(--colorNeutralBackground3))",
     borderRadius: "12px",
   },
   // D — dark
@@ -1593,7 +1593,7 @@ const HeroLab: FC = () => {
 const useCta = makeStyles({
   // A — minimal centered
   a: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     padding: "48px",
     borderRadius: "12px",
     textAlign: "center",

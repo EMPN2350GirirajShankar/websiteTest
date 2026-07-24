@@ -8,9 +8,9 @@ import { bestPracticeFilters, bestPracticeItems } from "../data/insights";
 const INITIAL_VISIBLE = 9;
 
 const useStyles = makeStyles({
-  section: { padding: "56px 32px", backgroundColor: "var(--maq-off-white)" },
+  section: { padding: "56px 32px", backgroundColor: "var(--colorNeutralBackground1)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
-  title: { fontSize: "36px", lineHeight: 1.15, fontWeight: 700, color: "var(--maq-navy)", margin: "0 0 40px", letterSpacing: "-0.02em" },
+  title: { margin: "0 0 40px" },
   grid: {
     marginTop: "44px",
     display: "grid",
@@ -58,7 +58,7 @@ export function InsightsBestPracticeGuides() {
     <>
       <section className={s.section} id="insights-content">
         <div className={s.inner}>
-          <h2 className={s.title}>Best practice guides</h2>
+          <h2 className={`maq-h2 ${s.title}`}>Best practice guides</h2>
           <InsightsFilterBar items={bestPracticeFilters} active={activeFilter} onChange={setActiveFilter} />
           <div className={s.grid}>
             {visibleItems.map((item) => (

@@ -1,9 +1,7 @@
 import { makeStyles } from "@fluentui/react-components";
-import { useContactAction } from "../../lib/contact";
-import { PrimaryButton } from "../buttons";
 
 const useStyles = makeStyles({
-  wrap: { backgroundColor: "var(--maq-off-white)", padding: "48px 32px" },
+  wrap: { backgroundColor: "var(--colorNeutralBackground3)", padding: "0 32px", height: "360px", "@media (max-width: 960px)": { height: "auto", padding: "40px 22px" } },
   grid: {
     maxWidth: "var(--maq-container-wide)",
     margin: "0 auto",
@@ -11,38 +9,17 @@ const useStyles = makeStyles({
     gridTemplateColumns: "1.3fr 1fr",
     gap: "48px",
     alignItems: "center",
-    "@media (max-width: 960px)": { gridTemplateColumns: "1fr" },
+    "@media (max-width: 960px)": { gridTemplateColumns: "1fr", "& > *:last-child": { display: "none" } },
   },
-  eyebrow: {
-    fontSize: "12px",
-    fontWeight: 700,
-    color: "var(--maq-red)",
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-    marginBottom: "12px",
-    display: "block",
-  },
-  h1: {
-    fontSize: "40px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-black)",
-    letterSpacing: "-0.02em",
-    margin: "0 0 16px",
-  },
-  sub: {
-    fontSize: "15px",
-    lineHeight: 1.6,
-    color: "var(--maq-gray-600)",
-    marginBottom: "24px",
-    maxWidth: "640px",
-  },
+  eyebrow: { fontSize: "var(--fs-eyebrow)", fontWeight: 700, color: "var(--maq-red)", letterSpacing: "0.08em", marginBottom: "12px", display: "block" },
+  h1: { margin: "0 0 16px" },
+  sub: { color: "var(--maq-gray-600)", marginBottom: "24px", maxWidth: "640px" },
   btns: { display: "flex", gap: "12px", flexWrap: "wrap" },
 
   visual: {
     background: "transparent",
     border: "none",
-    borderRadius: "0",
+    borderRadius: "12px",
     padding: "0",
     display: "grid",
     gap: "0",
@@ -77,7 +54,7 @@ const useStyles = makeStyles({
     marginTop: "4px",
   },
   kpi: {
-    background: "var(--maq-off-white)",
+    background: "var(--colorNeutralBackground3)",
     borderRadius: "6px",
     padding: "8px",
     textAlign: "center",
@@ -91,35 +68,24 @@ const useStyles = makeStyles({
   perfFill: { height: "100%", background: "var(--maq-red)", borderRadius: "3px" },
   heroImage: {
     width: "100%",
-    aspectRatio: "16 / 10",
+    height: "360px",
+    objectFit: "cover",
     display: "block",
-    borderRadius: "0",
-    objectFit: "contain",
+    borderRadius: "12px",
   },
 });
 
 export function ReportingBIHero() {
   const s = useStyles();
-  const handleContactClick = useContactAction();
   return (
     <section className={s.wrap}>
       <div className={s.grid}>
         <div>
-          {/* <span className={s.eyebrow}>Insights &amp; Analytics</span> */}
-          <h1 className={s.h1}>From legacy BI to real-time Power BI on Microsoft Fabric</h1>
-          <p className={s.sub}>
-            Migrate Tableau, SAP BusinessObjects, Crystal Reports, Qlik, Cognos, and MicroStrategy estates to Power BI on Microsoft Fabric, with semantic models, custom visuals, and real-time reporting your teams actually use.
-          </p>
-          <div className={s.btns}>
-            <PrimaryButton
-              size="large"
-              onClick={() =>
-                handleContactClick("Reporting & BI - MAQ Software")
-              }
-            >
-              Contact us
-            </PrimaryButton>
-          </div>
+          <span className={s.eyebrow}>Services</span>
+          <h1 className={`maq-h1 ${s.h1}`}>Insights & analytics</h1>
+          <p className={`maq-lead ${s.sub}`}>
+           Uncover insights faster, anticipate business needs, and empower teams with self-service analytics, real-time intelligence, and predictive insights that drive better decisions.
+           </p>
         </div>
 
         <div className={s.visual}>

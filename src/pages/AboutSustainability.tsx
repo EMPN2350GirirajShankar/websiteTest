@@ -11,7 +11,7 @@ import {
 const useStyles = makeStyles({
   // ── Hero ──────────────────────────────────────────────────────────────────
   hero: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     // Consistent About-page hero padding (see AboutWhoWeAre for the pattern).
     padding: "40px 32px",
   },
@@ -37,11 +37,6 @@ const useStyles = makeStyles({
   },
   h1: {
     display: "block",
-    fontSize: "40px",
-    fontWeight: 700,
-    lineHeight: 1.15,
-    color: "var(--maq-black)",
-    letterSpacing: "-0.02em",
     margin: "0 0 16px",
   },
   heroSub: {
@@ -109,18 +104,13 @@ const useStyles = makeStyles({
   // ── Achievements ──────────────────────────────────────────────────────────
   achievementsSection: {
     padding: "64px 32px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   achievementsInner: {
     maxWidth: "var(--maq-container-wide)",
     margin: "0 auto",
   },
   sectionHeading: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
-    letterSpacing: "-0.02em",
     margin: "0 0 48px",
     textAlign: "left" as const,
   },
@@ -192,11 +182,6 @@ const useStyles = makeStyles({
     flexDirection: "column",
   },
   leadershipHeading: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
-    letterSpacing: "-0.02em",
     margin: "0 0 24px",
   },
   quoteText: {
@@ -259,7 +244,7 @@ export function AboutSustainability() {
       <section className={s.hero}>
         <div className={s.heroInner}>
           <div>
-            <h1 className={s.h1}>Sustainability in how we build and operate</h1>
+            <h1 className={`maq-h1 ${s.h1}`}>Sustainability in how we build and operate</h1>
             <p className={s.heroSub}>
               Sustainability shapes how MAQ Software operates. MAQ Software works to reduce
               its environmental impact and help clients meet their own sustainability goals,
@@ -277,7 +262,7 @@ export function AboutSustainability() {
       {/* Stats */}
       <section className={s.statsSection}>
         <div className={s.statsInner}>
-          <h2 className={s.sectionHeading}>Our sustainability commitments</h2>
+          <h2 className={`maq-h2 ${s.sectionHeading}`}>Our sustainability commitments</h2>
           <div className={s.statsGrid}>
             <div className={s.statCard}>
               <span className={s.statValue}>Carbon net zero</span>
@@ -309,7 +294,7 @@ export function AboutSustainability() {
       {/* Achievements */}
       <section className={s.achievementsSection}>
         <div className={s.achievementsInner}>
-          <h2 className={s.sectionHeading}>Our achievements</h2>
+          <h2 className={`maq-h2 ${s.sectionHeading}`}>Our achievements</h2>
           <div className={s.achievementsGrid}>
             {achievements.map((a) => (
               <div key={a.title} className={s.achievementCard}>
@@ -333,7 +318,7 @@ export function AboutSustainability() {
             />
           </div>
           <div className={s.leadershipCopy}>
-            <h2 className={s.leadershipHeading}>A message from our leadership</h2>
+            <h2 className={`maq-h2 ${s.leadershipHeading}`}>A message from our leadership</h2>
             <p className={s.quoteText}>
               "Achieving LEED Gold Certification is an important accomplishment. It reflects
               our commitment to sustainability and innovation, aligning with our clients' and
