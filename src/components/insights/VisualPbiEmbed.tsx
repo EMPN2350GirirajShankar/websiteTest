@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   ribbon: {
     display: "flex",
     alignItems: "center",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     borderBottom: `1px solid ${tokens.colorNeutralStroke2}`,
     padding: "10px 18px",
     gap: "16px",
@@ -61,7 +61,7 @@ const useStyles = makeStyles({
     color: "var(--maq-gray-700, #4b5563)",
     padding: "12px 18px",
     borderTop: `1px solid ${tokens.colorNeutralStroke2}`,
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   link: {
     color: "var(--maq-red)",

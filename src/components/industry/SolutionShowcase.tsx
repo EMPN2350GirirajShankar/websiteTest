@@ -9,7 +9,7 @@ import {
 } from "@fluentui/react-icons";
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "var(--maq-off-white)" },
+  section: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "20px" },
   eyebrow: {
@@ -22,12 +22,7 @@ const useStyles = makeStyles({
     marginBottom: "6px",
   },
   title: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: 0,
-    letterSpacing: "-0.02em",
     textAlign: "left",
   },
   panel: {
@@ -46,7 +41,7 @@ const useStyles = makeStyles({
     width: "48px",
     height: "48px",
     borderRadius: "10px",
-    background: "var(--maq-off-white)",
+    background: "var(--colorNeutralBackground3)",
     color: "var(--maq-red)",
     display: "flex",
     alignItems: "center",
@@ -97,7 +92,7 @@ const useStyles = makeStyles({
     width: "36px",
     height: "36px",
     borderRadius: "8px",
-    background: "var(--maq-off-white)",
+    background: "var(--colorNeutralBackground3)",
     color: "var(--maq-red)",
     display: "flex",
     alignItems: "center",
@@ -133,7 +128,7 @@ export function SolutionShowcase({ sectionId, eyebrow = "Agentic AI", title, age
       <div className={s.inner}>
         <div className={s.head}>
           {/* <span className={s.eyebrow}>{eyebrow}</span> */}
-          <h2 className={s.title}>{title}</h2>
+          <h2 className={`maq-h2 ${s.title}`}>{title}</h2>
         </div>
         <div className={s.panel}>
           <div>

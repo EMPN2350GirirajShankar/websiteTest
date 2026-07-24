@@ -17,7 +17,7 @@ import {
 const useStyles = makeStyles({
   // ── Hero ──────────────────────────────────────────────────────────────────
   hero: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     // Consistent About-page hero padding (see AboutWhoWeAre for the pattern).
     padding: "40px 32px",
   },
@@ -32,11 +32,6 @@ const useStyles = makeStyles({
     marginBottom: "12px",
   },
   h1: {
-    fontSize: "40px",
-    fontWeight: 700,
-    lineHeight: 1.15,
-    color: "var(--maq-black)",
-    letterSpacing: "-0.02em",
     margin: "0 0 12px",
   },
   heroSub: {
@@ -51,11 +46,6 @@ const useStyles = makeStyles({
   whySection: { padding: "48px 32px", backgroundColor: "#fff" },
   whyInner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   sectionHeading: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
-    letterSpacing: "-0.02em",
     margin: "0 0 24px",
     textAlign: "left" as const,
   },
@@ -94,7 +84,7 @@ const useStyles = makeStyles({
   // ── Openings section ──────────────────────────────────────────────────────
   openingsSection: {
     padding: "40px 32px 64px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   openingsInner: {
     maxWidth: "var(--maq-container-wide)",
@@ -277,7 +267,7 @@ export function AboutCareers() {
       {/* Hero */}
       <section className={s.hero}>
         <div className={s.heroInner}>
-          <h1 className={s.h1}>Careers</h1>
+          <h1 className={`maq-h1 ${s.h1}`}>Careers</h1>
           <p className={s.heroSub}>
             Build a career on AI, data, and cloud projects for Fortune 500
             customers. Explore open roles across offices in the United States and
@@ -289,7 +279,7 @@ export function AboutCareers() {
       {/* Why MAQ */}
       <section className={s.whySection}>
         <div className={s.whyInner}>
-          <h2 className={s.sectionHeading}>Why build your career at MAQ Software</h2>
+          <h2 className={`maq-h2 ${s.sectionHeading}`}>Why build your career at MAQ Software</h2>
           <div className={s.whyGrid}>
             {careerReasons.map((r) => (
               <div key={r.title} className={s.whyCard}>
@@ -304,7 +294,7 @@ export function AboutCareers() {
       {/* Openings — fetched live from the Blogger feed used by the original site */}
       <section className={s.openingsSection}>
         <div className={s.openingsInner}>
-          <h2 className={s.sectionHeading}>Open positions</h2>
+          <h2 className={`maq-h2 ${s.sectionHeading}`}>Open positions</h2>
 
           <div className={s.jobscoreBanner}>
             <p className={s.jobscoreText}>

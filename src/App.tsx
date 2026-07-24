@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import { makeStyles, tokens } from "@fluentui/react-components";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-// import { Announcement as AnnouncementRibbon } from "./components/Announcement2";
 import { HeaderV2 } from "./components/HeaderV2";
-import { Footer } from "./components/Footer";
 import { FooterV2 } from "./components/FooterV2";
-import { Home } from "./pages/Home";
 import { HomeV3 } from "./pages/HomeV3";
 import { IndustryRetail } from "./pages/IndustryRetail";
 import { IndustryFinancialServices } from "./pages/IndustryFinancialServices";
@@ -29,7 +26,6 @@ import { ServiceReportingBI } from "./pages/ServiceReportingBI";
 import { ServiceBusinessApps } from "./pages/ServiceBusinessApps";
 import { ServiceSecurityCompliance } from "./pages/ServiceSecurityCompliance";
 import { ServiceDataAndAnalytics } from "./pages/ServiceDataAndAnalytics";
-import { ServiceWorkplaceTransformation } from "./pages/ServiceWorkplaceTransformation";
 import { PartnershipSnowflake } from "./pages/PartnershipSnowflake";
 import { PartnershipDatabricks } from "./pages/PartnershipDatabricks";
 import { InsightsCaseStudies } from "./pages/InsightsCaseStudies";
@@ -62,6 +58,7 @@ import { AboutCareers } from "./pages/AboutCareers";
 import { AboutPrivacyStatement } from "./pages/AboutPrivacyStatement";
 import { Contact } from "./pages/Contact";
 import { TermsOfService } from "./pages/TermsOfService";
+import { PowerBIVisualsEULA } from "./pages/PowerBIVisualsEULA";
 import { TechCon365 } from "./pages/TechCon365";
 import { TechCon365Dallas } from "./pages/TechCon365Dallas";
 import { TechCon365Seattle } from "./pages/TechCon365Seattle";
@@ -93,7 +90,6 @@ function SiteFooter() {
 
 export function App() {
   const s = useStyles();
-  const { pathname } = useLocation();
 
   // Warm key route chunks after initial paint so first navigation feels instant.
   useEffect(() => {
@@ -223,30 +219,6 @@ export function App() {
     };
   }, []);
 
-  // Apply a consistent white/gray band rhythm to all content sections.
-  useEffect(() => {
-    const applySectionBanding = () => {
-      const main = document.querySelector("main.site-main");
-      if (!main) return;
-
-      const sections = Array.from(main.querySelectorAll("section"));
-      let bandIndex = 0;
-
-      for (const section of sections) {
-        if (section.hasAttribute("data-no-band-alternate")) {
-          section.removeAttribute("data-band-tone");
-          continue;
-        }
-
-        section.setAttribute("data-band-tone", bandIndex % 2 === 0 ? "white" : "gray");
-        bandIndex += 1;
-      }
-    };
-
-    const rafId = window.requestAnimationFrame(applySectionBanding);
-    return () => window.cancelAnimationFrame(rafId);
-  }, [pathname]);
-
   return (
     <div className={s.root}>
       <ScrollToTop />
@@ -268,7 +240,6 @@ export function App() {
         <Route path="/services/business-apps" element={<ServiceBusinessApps />} />
         <Route path="/services/security-compliance" element={<ServiceSecurityCompliance />} />
         <Route path="/services/data-and-analytics" element={<ServiceDataAndAnalytics />} />
-        <Route path="/services/workplace-transformation" element={<ServiceWorkplaceTransformation />} />
         <Route
           path="/partnerships/microsoft"
           element={<PartnershipMicrosoft />}
@@ -414,6 +385,8 @@ export function App() {
           path="/privacystatement"
           element={<AboutPrivacyStatement />}
         />
+        <Route path="/pbivisualeula" element={<PowerBIVisualsEULA />} />
+        <Route path="/pbivisualseula" element={<PowerBIVisualsEULA />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/events" element={<AboutEvents />} />
         <Route path="/news" element={<Navigate to="/events" replace />} />

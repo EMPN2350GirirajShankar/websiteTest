@@ -7,7 +7,7 @@ import { useContactAction } from "../lib/contact";
 import { PrimaryButton, SecondaryButton } from "./buttons";
 const useStyles = makeStyles({
   wrap: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     padding: "72px 32px",
     position: "relative",
     overflow: "hidden",

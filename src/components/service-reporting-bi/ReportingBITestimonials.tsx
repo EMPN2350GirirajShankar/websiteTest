@@ -1,7 +1,7 @@
 import { makeStyles, tokens } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "var(--maq-off-white)" },
+  section: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "20px" },
   eyebrow: {
@@ -14,12 +14,7 @@ const useStyles = makeStyles({
     marginBottom: "6px",
   },
   title: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: 0,
-    letterSpacing: "-0.02em",
     textAlign: "left",
   },
   grid: {
@@ -81,7 +76,7 @@ export function ReportingBITestimonials() {
       <div className={s.inner}>
         <div className={s.head}>
           {/* <span className={s.eyebrow}>Testimonials</span> */}
-          <h2 className={s.title}>What our clients have to say</h2>
+          <h2 className={`maq-h2 ${s.title}`}>What our clients have to say</h2>
         </div>
         <div className={s.grid}>
           {quotes.map((q, i) => (

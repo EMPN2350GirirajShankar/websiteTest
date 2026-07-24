@@ -17,7 +17,6 @@
 
   /* Surfaces */
   --maq-white: #ffffff;
-  --maq-off-white: #f7f8fa;    /* cool light gray section bg */
   --maq-surface-cream: #f7f8fa;/* alias — replaces former warm sand */
   --maq-surface-soft: #f0f2f5; /* slightly deeper neutral block */
   --maq-surface-ink: #262626;     /* dark surface (capability/product icon tiles) */
@@ -45,13 +44,13 @@
   /* Chrome */
   --maq-gray-50: #f3f4f6;      /* standard gray: section bands + footer (higher contrast vs white than the old #f7f8fa) */
   --maq-gray-100: #eef0f3;
-  --maq-border: #e4e7ec;       /* cool neutral border */
+  --maq-border: #F0F0F0;       /* cool neutral border */
   --maq-border-strong: #cdd2da;
   --maq-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.06);
   --maq-shadow-md: 0 4px 8px rgba(15, 23, 42, 0.05), 0 12px 32px rgba(15, 23, 42, 0.08);
   --maq-shadow-lift: none; /* no hover lift shadow */
   --maq-card-hover-border: var(--maq-border); /* keep border stable on hover for non-clickable cards */
-  --maq-card-hover-border-interactive: #6b7280; /* clickable-card hover outline */
+  --maq-card-hover-border-interactive: #C7C7C7; /* clickable-card hover outline */
 
   /* Layout — content widths. --maq-container is the app standard;
      --maq-container-wide is the wider column used by the V2 homepage
@@ -62,19 +61,19 @@
   --maq-container-wide: 1440px;
 
   /* ─────────────────────────────────────────────────────────────
-     Marketing type ramp — single source of truth. Body anchors at 18px;
-     ~1.25 ratio with a stretched hero. Fluid via clamp() (desktop → mobile
-     targets in comments). Optimized for scanning, not long-form reading.
+     Type scale — single source of truth (size). Fixed rem sizes; the
+     per-tier line-height / weight / letter-spacing live on the canonical
+     .maq-* classes below. Optimized for scanning, not long-form reading.
      ───────────────────────────────────────────────────────────── */
-  --fs-hero:    clamp(2.75rem,   8.0vw, 5rem);      /* 80 → 44  hero headline */
-  --fs-h1:      clamp(2.25rem,   5.5vw, 3.5rem);    /* 56 → 36 */
-  --fs-h2:      clamp(1.875rem,  4.5vw, 3rem);      /* 48 → 30 */
-  --fs-h3:      clamp(1.625rem,  3.4vw, 2.25rem);   /* 36 → 26 */
-  --fs-h4:      clamp(1.375rem,  2.6vw, 1.75rem);   /* 28 → 22 */
-  --fs-lead:    clamp(1.125rem,  2.05vw, 1.375rem); /* 22 → 18  intro / sub-head */
-  --fs-body:    clamp(1rem,      1.65vw, 1.125rem); /* 18 → 16  body default */
-  --fs-small:   clamp(0.875rem,  1.4vw, 0.9375rem); /* 15 → 14 */
-  --fs-eyebrow: clamp(0.8125rem, 1.3vw, 0.875rem);  /* 14 → 13  eyebrow / label */
+  --fs-hero:    4.5rem;    /* 72px  hero headline */
+  --fs-h1:      3.5rem;    /* 56px */
+  --fs-h2:      2.5rem;    /* 40px */
+  --fs-h3:      1.875rem;  /* 30px */
+  --fs-h4:      1.375rem;  /* 22px */
+  --fs-lead:    1.125rem;  /* 18px  intro / sub-head */
+  --fs-body:    1rem;      /* 16px  body default */
+  --fs-small:   0.875rem;  /* 14px */
+  --fs-eyebrow: 1rem;      /* 16px  eyebrow / label */
 
   /* Back-compat aliases — existing components still reference these names;
      each points at the nearest token in the ramp above. */
@@ -87,7 +86,7 @@
   /* Section padding — single source of truth for the vertical rhythm and
      horizontal gutters of full-bleed bands. One value so every section
      breathes identically (overridden smaller on phones below). */
-  --section-pad-y: 96px;
+  --section-pad-y: 56px;
   --section-pad-x: 32px;
 
   /* Aliases — keep legacy component code working */
@@ -131,19 +130,21 @@ h2 { line-height: 1.15; letter-spacing: -0.015em; }
 p  { display: block; line-height: 1.6; margin: 0; }
 
 /* ──────────────────────────────────────────────────────────────
-   Canonical type scale — shared heading classes.
-   Opt-in via className (e.g. <h2 className="maq-h2">) so existing
-   per-page makeStyles sizes are unaffected. These are the app's
-   reference heading sizes; adopt them on new pages for app-wide
-   consistency. Color/weight/spacing live here so they can be tuned
-   in one place. Pair with a layout class for page-specific margins.
+   Canonical type scale — shared classes. Each tier bundles size (token),
+   line-height, weight, and letter-spacing so the whole scale is tuned in
+   one place. Opt-in via className (e.g. <h2 className="maq-h2">). Pair with
+   a layout class for page-specific margins.
    ────────────────────────────────────────────────────────────── */
-.maq-h1 { font-size: var(--fs-h1); font-weight: 600; line-height: 1.05; letter-spacing: -0.02em;  color: var(--maq-heading-color); margin: 0; }
-.maq-h2 { font-size: var(--fs-h2); font-weight: 600; line-height: 1.1;  letter-spacing: -0.015em; color: var(--maq-heading-color); margin: 0; }
-.maq-h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.2;  letter-spacing: -0.01em;  color: var(--maq-heading-color); margin: 0; }
+.maq-hero { font-size: var(--fs-hero); line-height: 1.05; font-weight: 600; letter-spacing: -0.025em; color: var(--maq-heading-color); margin: 0; }
+.maq-h1   { font-size: var(--fs-h1);   line-height: 1.1;  font-weight: 600; letter-spacing: -0.02em;  color: var(--maq-heading-color); margin: 0; }
+.maq-h2   { font-size: var(--fs-h2);   line-height: 1.15; font-weight: 600; letter-spacing: -0.015em; color: var(--maq-heading-color); margin: 0; }
+.maq-h3   { font-size: var(--fs-h3);   line-height: 1.25; font-weight: 600; letter-spacing: -0.005em; color: var(--maq-heading-color); margin: 0; }
+.maq-h4   { font-size: var(--fs-h4);   line-height: 1.35; font-weight: 600; letter-spacing: 0;        color: var(--maq-heading-color); margin: 0; }
+.maq-lead { font-size: var(--fs-lead); line-height: 1.55; font-weight: 400; letter-spacing: 0; }
+.maq-body { font-size: var(--fs-body); line-height: 1.6;  font-weight: 400; letter-spacing: 0; }
+.maq-small{ font-size: var(--fs-small);line-height: 1.5;  font-weight: 400; letter-spacing: 0; }
 /* Eyebrow / kicker label above a heading — sentence case, faint gray. */
-.maq-eyebrow { font-size: var(--fs-eyebrow); font-weight: 500; letter-spacing: 0; color: var(--colorNeutralForeground4); margin: 0 0 12px; }
-/* Responsiveness is handled by the clamp() in the --fs-* tokens. */
+.maq-eyebrow { font-size: var(--fs-eyebrow); line-height: 1.4; font-weight: 500; letter-spacing: 0.08em; color: var(--colorNeutralForeground4); margin: 0 0 12px; }
 
 /* Canonical centered content column. Adopt on new pages for a
    consistent max-width; pages may override --maq-container locally. */
@@ -174,15 +175,9 @@ a {
   border-color: var(--maq-card-hover-border-interactive) !important;
 }
 
-/* Global section banding: white/gray alternation for all routed page sections.
-   The App shell assigns data-band-tone in DOM order after each route render. */
-.site-main section[data-band-tone="white"] {
-  background-color: var(--maq-white) !important;
-}
-
-.site-main section[data-band-tone="gray"] {
-  background-color: var(--maq-gray-50) !important;
-}
+/* Section band color is set explicitly per section (each component's own
+   makeStyles background, or the shared <Section> `tone` prop) — there is no
+   global positional alternation. */
 
 /* Standardize CTA dimensions globally so primary/outline button pairs
    (e.g., Contact Us + Case Studies/Get it now) align consistently. */
@@ -263,7 +258,7 @@ a {
     width: 100%;
     min-width: 320px;
     overflow-x: hidden;
-    background: var(--maq-off-white);
+    background: var(--colorNeutralBackground3);
   }
 
   /* Make hero and main grids full width and remove rounding/shadows */

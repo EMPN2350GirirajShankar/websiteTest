@@ -5,7 +5,7 @@ const useStyles = makeStyles({
   section: {
     minHeight: "60vh",
     padding: "96px 32px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -24,8 +24,6 @@ const useStyles = makeStyles({
   },
   heading: {
     marginBottom: "16px",
-    fontSize: "var(--fs-h1)",
-    fontWeight: 700,
   },
   message: {
     marginBottom: "28px",
@@ -58,7 +56,7 @@ export function NotFound() {
     <section className={s.section} aria-labelledby="not-found-heading">
       <div className={s.inner}>
         <span className={s.code}>404</span>
-        <h1 id="not-found-heading" className={s.heading}>
+        <h1 id="not-found-heading" className={`maq-h1 ${s.heading}`}>
           Page not found
         </h1>
         <p className={s.message}>

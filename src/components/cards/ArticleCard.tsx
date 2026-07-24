@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     objectFit: "cover",
     display: "block",
     background:
-      "linear-gradient(135deg, var(--maq-red-pale) 0%, var(--maq-off-white) 60%, var(--maq-surface-cream) 100%)",
+      "linear-gradient(135deg, var(--maq-red-pale) 0%, var(--colorNeutralBackground3) 60%, var(--maq-surface-cream) 100%)",
     borderBottom: "1px solid var(--maq-border)",
   },
   body: {

@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     color: "var(--maq-black)",
   },
   hero: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     padding: "48px 32px 56px",
     backgroundImage: "url('/logos/wave_dots.svg')",
     backgroundPosition: "bottom left",
@@ -21,9 +21,6 @@ const useStyles = makeStyles({
     margin: "0 auto",
   },
   heading: {
-    fontSize: "40px",
-    fontWeight: 700,
-    lineHeight: 1.1,
     margin: "0 0 16px",
   },
   meta: {
@@ -55,10 +52,7 @@ const useStyles = makeStyles({
     marginBottom: "10px",
   },
   sectionTitle: {
-    fontSize: "30px",
-    fontWeight: 700,
     margin: "0 0 24px",
-    color: "var(--maq-black)",
   },
   body: {
     fontSize: "15px",
@@ -94,7 +88,7 @@ export function AboutPrivacyStatement() {
     <div className={styles.page}>
       <section className={styles.hero}>
         <div className={styles.heroInner}>
-          <h1 className={styles.heading}>Privacy Statement</h1>
+          <h1 className={`maq-h1 ${styles.heading}`}>Privacy Statement</h1>
           <div className={styles.meta}>Last Updated: March 12, 2026</div>
           <p className={styles.intro}>
             MAQ Software (“we”, “us”, or “our”) offers applications, visualizations & services in the AI, data analytics, cloud transformation, and Power BI spaces. We are committed to protecting your personal information. This Privacy Statement explains the personal data we process, how we process it, and for what purpose. Privacy Statement applies to the applications published by MAQ Software via Microsoft Azure Marketplace, Microsoft App Source, other Microsoft Office stores, or any other means. Visualizations refer to custom Power BI visuals & template apps developed and published by MAQ Software either to the Office 365 store or Power BI gallery.
@@ -110,7 +104,7 @@ export function AboutPrivacyStatement() {
       <section className={styles.section}>
         <div className={styles.sectionInner}>
           {/* <span className={styles.eyebrow}>PRIVACY COMMITMENTS</span> */}
-          <h2 className={styles.sectionTitle}>What this privacy statement means for your data</h2>
+          <h2 className={`maq-h2 ${styles.sectionTitle}`}>What this privacy statement means for your data</h2>
           <ul className={styles.list}>
             <li>
               MAQ Software does not collect any personal information, <strong>Customer Data*</strong>, or anything related to your device when you use any of our applications, including visualizations, except for limited service configuration metadata collected by certain applications, as described below.
@@ -126,12 +120,12 @@ export function AboutPrivacyStatement() {
             </li>
           </ul>
 
-          <h2 className={styles.sectionTitle}>Application Service Configuration Data</h2>
+          <h2 className={`maq-h2 ${styles.sectionTitle}`}>Application Service Configuration Data</h2>
           <p className={styles.body}>
             Certain MAQ Software applications may collect and store limited-service configuration metadata, including Microsoft Tenant ID and limited application connection information, solely to enable application functionality, authentication, troubleshooting, and service reliability. This data is stored within MAQ Software’s Microsoft Azure tenant and is not used beyond required for operating the applicable service.
           </p>
 
-          <h2 className={styles.sectionTitle}>Privacy definitions</h2>
+          <h2 className={`maq-h2 ${styles.sectionTitle}`}>Privacy definitions</h2>
           <div className={styles.definition}>
             <div className={styles.defTerm}>Customer Data</div>
             <p className={styles.body}>
@@ -148,7 +142,7 @@ export function AboutPrivacyStatement() {
             We will not disclose Customer Data or Administrator Data ("your information") outside of MAQ Software except as you direct, as described in your agreement(s) or as described in this privacy statement.
           </p>
 
-          <h2 className={styles.sectionTitle}>Changes to this Privacy Statement</h2>
+          <h2 className={`maq-h2 ${styles.sectionTitle}`}>Changes to this Privacy Statement</h2>
           <p className={styles.body}>
             We will occasionally update this privacy statement to reflect customer feedback and changes in our Services. When we post changes to this statement, we will revise the "last updated" date at the top of the statement. We encourage you to periodically review this privacy statement to learn how MAQ Software is protecting your information.
           </p>

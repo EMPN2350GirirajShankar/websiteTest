@@ -14,7 +14,7 @@ const MotionLink = motion.create(Link);
 
 const useStyles = makeStyles({
   card: {
-    backgroundColor: tokens.colorNeutralBackground1, borderRadius: tokens.borderRadiusXLarge, border: "1px solid var(--maq-border)", padding: tokens.spacingHorizontalXXL,
+    backgroundColor: tokens.colorNeutralBackground1, borderRadius: "12px", border: "1px solid var(--maq-border)", padding: tokens.spacingHorizontalXXL,
     display: "flex", alignItems: "center", gap: "16px",
     textDecoration: "none", color: "inherit", cursor: "pointer",
     transition: "border-color .2s ease, box-shadow .2s ease, transform .2s ease",

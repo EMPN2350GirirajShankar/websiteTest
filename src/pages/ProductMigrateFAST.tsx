@@ -48,7 +48,7 @@ export function ProductMigrateFAST() {
         <div className={s.heroGrid}>
           <div>
             {/* <span className={s.eyebrow}>AI-powered Fabric migration accelerator</span> */}
-            <h1 className={s.h1}>MigrateFAST</h1>
+            <h1 className={`maq-h1 ${s.h1}`}>MigrateFAST</h1>
             <p className={s.heroSub}>
               Migrate from Tableau, Cognos, SAP BusinessObjects, Crystal Reports, MicroStrategy, Qlik, Alteryx, and Informatica to Microsoft Fabric with automated environment assessment, dependency analysis, report conversion, DAX generation, and validation. MigrateFAST runs the process end to end, so you cut migration cost and reach value faster.
             </p>
@@ -77,7 +77,7 @@ export function ProductMigrateFAST() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Why MigrateFAST</span> */}
-            <h2 className={s.titleLg}>Benefits</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Benefits</h2>
           </div>
           <div className={s.benGrid3}>
             {benefits.map((b) => (
@@ -94,7 +94,7 @@ export function ProductMigrateFAST() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>How it works</span> */}
-            <h2 className={s.titleLg}>The migration process, in 6 steps</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>The migration process</h2>
           </div>
           <div className={s.stepGrid6}>
             {steps.map((st) => (
@@ -119,7 +119,7 @@ export function ProductMigrateFAST() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Insights</span> */}
-            <h2 className={s.titleLg}>Resources & marketplace</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Resources & marketplace</h2>
           </div>
           <div
             className={s.mktGrid}

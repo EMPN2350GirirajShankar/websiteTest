@@ -49,6 +49,8 @@ export interface Capability {
   name: string;
   description: string;
   icon: ReactNode;
+  /* Partner/brand logo shown above the name in the bare grid variant. */
+  logo?: string;
   /* Retained for call sites that still describe their capabilities this way.
      The carousel renders name + description + icon only. */
   tagline?: string;
@@ -65,6 +67,13 @@ export interface ServiceCapabilitiesProps {
   footerHref?: string;
   /* Label for the carousel region; falls back to the section title. */
   ariaLabel?: string;
+  /* "carousel" (default) rotates cards; "grid" lays them out in a static
+     3-column grid for pages that only have a few capabilities to show. */
+  variant?: "carousel" | "grid";
+  /* Grid variant only: hides the case-studies footer link. */
+  hideFooter?: boolean;
+  /* Grid variant only: drops each card's icon and border (plain-text columns). */
+  bareCards?: boolean;
 }
 
 const useStyles = makeStyles({
@@ -72,13 +81,9 @@ const useStyles = makeStyles({
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
 
   head: { marginBottom: "28px" },
+  // Typography comes from the canonical `.maq-h2` class; only layout here.
   title: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: 0,
-    letterSpacing: "-0.02em",
     textAlign: "left",
   },
 
@@ -117,6 +122,49 @@ const useStyles = makeStyles({
     "@media (max-width: 1080px)": { flex: "0 0 50%" },
     "@media (max-width: 640px)": { flex: "0 0 100%" },
   },
+
+  // Static 3-column grid variant — same 16px rhythm as the carousel slides.
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "16px",
+    "@media (max-width: 1080px)": { gridTemplateColumns: "repeat(2, 1fr)" },
+    "@media (max-width: 640px)": { gridTemplateColumns: "1fr" },
+  },
+
+  // Bare grid: gap collapses to 0 on desktop so the vertical dividers (below)
+  // sit centered between columns; falls back to gap-based spacing when stacked.
+  bareGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: 0,
+    "@media (max-width: 1080px)": { gridTemplateColumns: "repeat(2, 1fr)", gap: "32px" },
+    "@media (max-width: 640px)": { gridTemplateColumns: "1fr", gap: "28px" },
+  },
+  // Plain-text column (bareCards): logo + heading + description, no card chrome.
+  bareItem: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    textAlign: "left",
+    // Hairline dividers between the three columns (desktop 3-up only).
+    "@media (min-width: 1081px)": {
+      ":not(:first-child)": { paddingLeft: "28px", borderLeft: "1px solid var(--maq-border)" },
+      ":not(:last-child)": { paddingRight: "28px" },
+    },
+  },
+  bareLogo: {
+    height: "34px",
+    width: "auto",
+    maxWidth: "160px",
+    objectFit: "contain",
+    objectPosition: "left center",
+    display: "block",
+    marginBottom: "14px",
+    alignSelf: "flex-start",
+  },
+  bareName: { fontSize: "20px", fontWeight: 700, lineHeight: 1.2, margin: 0, color: "var(--maq-black)" },
+  bareDesc: { fontSize: "13.5px", lineHeight: 1.6, margin: 0, color: "var(--maq-gray-700)" },
 
   // Nav (left) + case-studies link (right) on one row under the cards.
   footerRow: {
@@ -228,6 +276,9 @@ export function ServiceCapabilities({
   footerLabel = "See AI solutions & agents case studies",
   footerHref = "/insights/case-studies?filter=AI%20solutions%20%26%20agents#insights-content",
   ariaLabel,
+  variant = "carousel",
+  hideFooter = false,
+  bareCards = false,
 }: ServiceCapabilitiesProps = {}) {
   const s = useStyles();
 
@@ -241,9 +292,41 @@ export function ServiceCapabilities({
     <section className={s.section} id={sectionId}>
       <div className={s.inner}>
         <div className={s.head}>
-          <h2 className={s.title}>{title}</h2>
+          <h2 className={`maq-h2 ${s.title}`}>{title}</h2>
         </div>
 
+        {variant === "grid" ? (
+          <>
+            <div className={bareCards ? s.bareGrid : s.grid}>
+              {capabilities.map((c) =>
+                bareCards ? (
+                  <div key={c.name} className={s.bareItem}>
+                    {c.logo ? (
+                      <img className={s.bareLogo} src={c.logo} alt="" aria-hidden />
+                    ) : null}
+                    <h3 className={s.bareName}>{c.name}</h3>
+                    <p className={s.bareDesc}>{c.description}</p>
+                  </div>
+                ) : (
+                  <FeatureCard
+                    key={c.name}
+                    icon={c.icon}
+                    name={c.name}
+                    description={c.description}
+                  />
+                ),
+              )}
+            </div>
+
+            {!hideFooter && (
+              <div className={s.footerRow}>
+                <Link className={s.footerLink} to={footerHref}>
+                  {footerLabel} <ArrowRight16Regular />
+                </Link>
+              </div>
+            )}
+          </>
+        ) : (
         <Carousel
           className={s.carousel}
           align="start"
@@ -312,6 +395,7 @@ export function ServiceCapabilities({
             </Link>
           </div>
         </Carousel>
+        )}
       </div>
     </section>
   );

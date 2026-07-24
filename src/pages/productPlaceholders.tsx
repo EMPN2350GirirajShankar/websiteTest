@@ -21,7 +21,7 @@ export function ProductCaseStudies({
     <div className={s.inner}>
       <div className={s.headLeft}>
         {/* <span className={s.secEyebrow}>{eyebrow}</span> */}
-        <h2 className={s.titleLg}>{heading}</h2>
+        <h2 className={`maq-h2 ${s.titleLg}`}>{heading}</h2>
       </div>
       <div className={s.caseGrid}>
         {studies.map((c) => (
@@ -84,7 +84,7 @@ export function CaseStudiesPlaceholder({ count = 3, heading = "Case studies", ey
     <div className={s.inner}>
       <div className={s.headLeft}>
         {/* <span className={s.secEyebrow}>{eyebrow}</span> */}
-        <h2 className={s.titleLg}>{heading}</h2>
+        <h2 className={`maq-h2 ${s.titleLg}`}>{heading}</h2>
       </div>
       <div className={s.caseGrid}>
         {Array.from({ length: count }).map((_, i) => (
@@ -104,7 +104,7 @@ export function TestimonialsPlaceholder({ count = 2, heading = "What our clients
     <div className={s.inner}>
       <div className={s.headLeft}>
         {/* <span className={s.secEyebrow}>{eyebrow}</span> */}
-        <h2 className={s.titleLg}>{heading}</h2>
+        <h2 className={`maq-h2 ${s.titleLg}`}>{heading}</h2>
       </div>
       <div className={s.quoteGrid}>
         {Array.from({ length: count }).map((_, i) => (

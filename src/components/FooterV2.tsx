@@ -20,18 +20,7 @@ type FooterCol = { title: string; items: FooterItem[] };
 const useStyles = makeStyles({
   // Full-bleed gray band — distinct from the white page sections above.
   surface: {
-    backgroundColor: "var(--maq-gray-50)",
-    // Top divider so the footer separates from the content above — needed now
-    // that the footer and the gray section bands share the same #f3f4f6, which
-    // otherwise blend together when the last section is a gray band.
-    borderTopWidth: "1px",
-    borderTopStyle: "solid",
-    borderTopColor: "var(--maq-border-strong)",
-    // Pure Fluent neutral grays (match the HomeV2 page), not the cool brand grays.
-    "--maq-black": tokens.colorNeutralForeground1,
-    "--maq-text-soft": tokens.colorNeutralForeground3,
-    "--maq-text-faint": tokens.colorNeutralForeground4,
-    "--maq-border": tokens.colorNeutralStroke2,
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   footer: {
     color: "var(--maq-body-color)",

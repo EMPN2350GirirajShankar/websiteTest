@@ -24,7 +24,7 @@ const useVisualStyles = makeStyles({
   visual: {
     background: "transparent",
     border: "none",
-    borderRadius: "0",
+    borderRadius: "12px",
     padding: "0",
     display: "grid",
     gap: "0",
@@ -33,10 +33,10 @@ const useVisualStyles = makeStyles({
   },
   heroImage: {
     width: "100%",
-    aspectRatio: "16 / 10",
-    display: "block",
-    borderRadius: "0",
+    height: "360px",
     objectFit: "cover",
+    display: "block",
+    borderRadius: "12px",
   },
 });
 
@@ -182,9 +182,9 @@ export function ServiceSecurityCompliance() {
   return (
     <>
       <ServiceHero
-        eyebrow="Security & Governance"
-        heading="Zero Trust security and AI governance, end to end"
-        subhead="ISO 27001, 27701, and 27018 certified delivery. Implement Zero Trust across Microsoft Defender, Sentinel, and Purview, including AI governance with Purview AI Hub, aligned to your regulatory requirements and Microsoft security stack."
+        eyebrow="Services"
+        heading="Security & governance"
+        subhead="Protect your data, enable trusted AI adoption, and strengthen compliance with Zero Trust security, enterprise governance, and continuous protection across your technology ecosystem."
         ctaMailSubject="Security & Compliance - MAQ Software"
         visual={<SecurityVisual />}
       />

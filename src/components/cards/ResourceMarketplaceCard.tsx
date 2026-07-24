@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
   active: {
     border: "1px solid var(--maq-card-hover-border)",
-    background: "var(--maq-gray-50)",
+    background: "var(--colorNeutralBackground3)",
   },
   image: {
     width: "100%",
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     borderRadius: "8px",
     border: "1px solid var(--maq-border)",
     background:
-      "linear-gradient(135deg, var(--maq-red-pale) 0%, var(--maq-off-white) 60%, var(--maq-surface-cream) 100%)",
+      "linear-gradient(135deg, var(--maq-red-pale) 0%, var(--colorNeutralBackground3) 60%, var(--maq-surface-cream) 100%)",
     marginBottom: "4px",
   },
   eyebrow: {

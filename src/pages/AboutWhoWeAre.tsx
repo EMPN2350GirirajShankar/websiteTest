@@ -16,7 +16,7 @@ import { AboutSpecializations } from "../components/about/AboutSpecializations";
 const useStyles = makeStyles({
   // ── Hero ──────────────────────────────────────────────────────────────────
   hero: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     // Consistent About-page hero padding; height scales with the content.
     padding: "40px 32px",
   },
@@ -35,11 +35,6 @@ const useStyles = makeStyles({
   },
   h1: {
     display: "block",
-    fontSize: "40px",
-    fontWeight: 700,
-    lineHeight: 1.15,
-    color: "var(--maq-black)",
-    letterSpacing: "-0.02em",
     margin: "0 0 16px",
   },
   heroSub: {
@@ -57,7 +52,7 @@ const useStyles = makeStyles({
   },
   sectionGray: {
     padding: "48px 32px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   inner: {
     maxWidth: "var(--maq-container-wide)",
@@ -74,11 +69,6 @@ const useStyles = makeStyles({
   },
   h2: {
     display: "block",
-    fontSize: "36px",
-    fontWeight: 700,
-    lineHeight: 1.15,
-    color: "var(--maq-navy)",
-    letterSpacing: "-0.02em",
     margin: "0 0 32px",
     textAlign: "left",
     "@media (max-width: 560px)": {
@@ -330,7 +320,7 @@ export function AboutWhoWeAre() {
       {/* ── Hero ── */}
       <section className={s.hero}>
         <div className={s.heroInner}>
-          <h1 className={s.h1}>Who we are</h1>
+          <h1 className={`maq-h1 ${s.h1}`}>Who we are</h1>
           <p className={s.heroSub}>
             MAQ Software is a Microsoft Fabric Featured Partner that builds
             business intelligence and analytics for enterprise companies. Clients
@@ -345,7 +335,7 @@ export function AboutWhoWeAre() {
       {/* ── Why Choose MAQ Software ── */}
       <section className={s.sectionGray}>
         <div className={s.inner}>
-          <span className={s.h2}>Why choose MAQ Software</span>
+          <span className={`maq-h2 ${s.h2}`}>Why choose MAQ Software</span>
           <div className={s.whyGrid}>
             {whyItems.map((item) => (
               <div key={item.title} className={s.whyCard}>
@@ -364,7 +354,7 @@ export function AboutWhoWeAre() {
       {/* ── Recognitions ── */}
       <section className={s.sectionGray}>
         <div className={s.inner}>
-          <span className={s.h2}>Recognitions</span>
+          <span className={`maq-h2 ${s.h2}`}>Recognitions</span>
           <div className={s.recognitionStack}>
             {recognitions.map((r) => (
               <div key={r.title} className={s.recognitionCard}>
@@ -402,7 +392,7 @@ export function AboutWhoWeAre() {
       {/* ── Certifications ── */}
       <section className={s.sectionWhite}>
         <div className={s.inner}>
-          <span className={s.h2}>Certifications</span>
+          <span className={`maq-h2 ${s.h2}`}>Certifications</span>
           <div className={s.certStack}>
             {certifications.map((c) => (
               <div key={c.title} className={s.certCard}>
