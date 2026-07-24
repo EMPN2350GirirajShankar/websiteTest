@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import { makeStyles, tokens } from "@fluentui/react-components";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-// import { Announcement as AnnouncementRibbon } from "./components/Announcement2";
 import { HeaderV2 } from "./components/HeaderV2";
-import { Footer } from "./components/Footer";
 import { FooterV2 } from "./components/FooterV2";
-import { Home } from "./pages/Home";
 import { HomeV3 } from "./pages/HomeV3";
 import { IndustryRetail } from "./pages/IndustryRetail";
 import { IndustryFinancialServices } from "./pages/IndustryFinancialServices";

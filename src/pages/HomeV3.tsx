@@ -387,7 +387,7 @@ export function HomeV3() {
         <div className={s.heroTop}>
           <motion.div className={s.heroText} variants={heroContainerV} initial="initial" animate="animate">
             <motion.h1 className={`maq-h1 ${s.heroH1}`} variants={heroItemV}>
-              Turn data into decisions faster with AI-powered analytics
+              Turn data into decisions faster with <em className={s.h1em}>AI-powered</em> analytics
             </motion.h1>
             <motion.p className={s.sub} variants={heroItemV}>
               We help enterprises scale AI, modernize data platforms, and accelerate cloud transformation — delivered with speed, quality, and confidence.
@@ -468,7 +468,7 @@ export function HomeV3() {
       <Section>
         <motion.div {...fadeUp}>
           <SectionHeading
-            title="Products"
+            title="Our products"
             className={s.prodHead}
           />
         </motion.div>
@@ -506,7 +506,7 @@ export function HomeV3() {
       {/* INDUSTRIES */}
       <Section>
         <motion.div {...fadeUp}>
-          <SectionHeading title="Industries" align="left" className={s.indHead} />
+          <SectionHeading title="Industries we serve" align="left" className={s.indHead} />
         </motion.div>
         <div className={s.industriesGrid}>
           {INDUSTRIES.map((ind, i) => (
@@ -519,7 +519,7 @@ export function HomeV3() {
       <Section>
         <motion.div {...fadeUp}>
           <SectionHeading
-            title="Insights"
+            title="Our insights"
             className={s.prodHead}
           />
         </motion.div>
