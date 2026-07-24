@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { makeStyles, tokens } from "@fluentui/react-components";
-import { useContactAction } from "../lib/contact";
-import { PrimaryButton } from "../components/buttons";
 import { CaseStudyCard } from "../components/cards/CaseStudyCard";
 import { ServiceCapabilities } from "../components/service/ServiceCapabilities";
 import { ServiceOutcomes } from "../components/service/ServiceOutcomes";
@@ -33,7 +31,7 @@ import {
 
 const useStyles = makeStyles({
     // Hero
-    hero: { backgroundColor: "var(--maq-off-white)", padding: "48px 32px" },
+    hero: { backgroundColor: "var(--colorNeutralBackground3)", padding: "0 32px", height: "360px", "@media (max-width: 960px)": { height: "auto", padding: "40px 22px" } },
     heroGrid: {
         maxWidth: "var(--maq-container-wide)",
         margin: "0 auto",
@@ -41,39 +39,29 @@ const useStyles = makeStyles({
         gridTemplateColumns: "1.3fr 1fr",
         gap: "48px",
         alignItems: "center",
-        "@media (max-width: 960px)": { gridTemplateColumns: "1fr" },
+        "@media (max-width: 960px)": { gridTemplateColumns: "1fr", "& > *:last-child": { display: "none" } },
     },
     eyebrow: {
-        fontSize: "12px",
+        fontSize: "var(--fs-eyebrow)",
         fontWeight: 700,
         color: "var(--maq-red)",
         letterSpacing: "0.08em",
-        textTransform: "uppercase",
         marginBottom: "12px",
         display: "block",
     },
     h1: {
-        fontSize: "40px",
-        lineHeight: 1.15,
-        fontWeight: 700,
-        color: "var(--maq-black)",
-        letterSpacing: "-0.02em",
         margin: "0 0 16px",
     },
-    heroSub: {
-        fontSize: "15px",
-        lineHeight: 1.6,
+    sub: {
         color: "var(--maq-gray-600)",
         marginBottom: "24px",
         maxWidth: "640px",
     },
-    btns: { display: "flex", gap: "12px", flexWrap: "wrap" },
-
     // Hero mosaic
     visual: {
         background: "transparent",
         border: "none",
-        borderRadius: "0",
+        borderRadius: "12px",
         padding: "0",
         display: "grid",
         gap: "0",
@@ -112,15 +100,15 @@ const useStyles = makeStyles({
     },
     heroImage: {
         width: "100%",
-        aspectRatio: "16 / 10",
-        display: "block",
-        borderRadius: "0",
+        height: "360px",
         objectFit: "cover",
+        display: "block",
+        borderRadius: "12px",
     },
 
     // Section commons
     section: { padding: "48px 32px", backgroundColor: "#fff" },
-    sectionAlt: { padding: "48px 32px", backgroundColor: "var(--maq-off-white)" },
+    sectionAlt: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
     inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
     head: { textAlign: "center", marginBottom: "20px" },
     secEyebrow: {
@@ -133,12 +121,7 @@ const useStyles = makeStyles({
         marginBottom: "6px",
     },
     titleSm: {
-        fontSize: "36px",
-        lineHeight: 1.15,
-        fontWeight: 700,
-        color: "var(--maq-navy)",
         margin: "0 0 6px",
-        letterSpacing: "-0.02em",
         textAlign: "left",
     },
     secSub: { fontSize: "14px", color: "var(--maq-gray-600)", margin: "0 auto", maxWidth: "780px", textAlign: "center" },
@@ -212,13 +195,13 @@ const useStyles = makeStyles({
         flex: 1,
     },
     caseRead: {
-      display: "inline-block",
-      fontSize: "13px",
-      fontWeight: 700,
-      lineHeight: 1.4,
-      color: "var(--maq-red)",
-      textDecoration: "none",
-      },
+        display: "inline-block",
+        fontSize: "13px",
+        fontWeight: 700,
+        lineHeight: 1.4,
+        color: "var(--maq-red)",
+        textDecoration: "none",
+    },
     // Insights
     insGrid: {
         display: "grid",
@@ -245,7 +228,7 @@ const useStyles = makeStyles({
     insCover: {
         height: "100px",
         background:
-            "linear-gradient(135deg, var(--maq-red-pale) 0%, var(--maq-off-white) 60%, var(--maq-surface-cream) 100%)",
+            "linear-gradient(135deg, var(--maq-red-pale) 0%, var(--colorNeutralBackground3) 60%, var(--maq-surface-cream) 100%)",
         borderBottom: "1px solid var(--maq-border)",
     },
     insBody: { padding: "20px", display: "flex", flexDirection: "column", gap: "10px", flex: 1 },
@@ -429,7 +412,6 @@ const insights: Insight[] = [
 
 export function ServiceBusinessApps() {
     const s = useStyles();
-    const handleContactClick = useContactAction();
 
     return (
         <>
@@ -437,25 +419,11 @@ export function ServiceBusinessApps() {
             <section className={s.hero}>
                 <div className={s.heroGrid}>
                     <div>
-                        {/* <span className={s.eyebrow}>Business Applications &amp; Automation</span> */}
-                        <h1 className={s.h1}>AI-native business apps on Microsoft Power Platform</h1>
-                        <p className={s.heroSub}>
-                            Build low-code and pro-code apps on Power Apps, Dynamics 365, and
-                            Microsoft 365, paired with Copilot Studio agents and Power Automate
-                            flows that retire manual handoffs and put AI into everyday operations.
+                        <span className={s.eyebrow}>Services</span>
+                        <h1 className={`maq-h1 ${s.h1}`}>Business apps & automation</h1>
+                        <p className={`maq-lead ${s.sub}`}>
+                            Streamline business processes, improve productivity, and embed AI into everyday workflows with intelligent applications and automation that connect teams, data, and decisions.
                         </p>
-                        <div className={s.btns}>
-                            <PrimaryButton
-                                size="large"
-                                onClick={() =>
-                                    handleContactClick(
-                                        "Business Applications & Automation - MAQ Software"
-                                    )
-                                }
-                            >
-                                Contact us
-                            </PrimaryButton>
-                        </div>
                     </div>
 
                     <div className={s.visual}>
@@ -488,7 +456,7 @@ export function ServiceBusinessApps() {
                 <div className={s.inner}>
                     <div className={s.head}>
                         {/* <span className={s.secEyebrow}>Related case studies</span> */}
-                        <h2 className={s.titleSm}>Business apps & automation in production</h2>
+                        <h2 className={`maq-h2 ${s.titleSm}`}>Business apps & automation in production</h2>
                     </div>
                     <div className={s.caseGrid}>
                         {caseStudies.map((c) => (
@@ -522,7 +490,7 @@ export function ServiceBusinessApps() {
                 <div className={s.inner}>
                     <div className={s.head}>
                         {/* <span className={s.secEyebrow}>Insights</span> */}
-                        <h2 className={s.titleSm}>Related insights</h2>
+                        <h2 className={`maq-h2 ${s.titleSm}`}>Related insights</h2>
                         {/* <p className={s.secSub}>
                             See our research that goes into optimizing our business apps and process
                             automation service.
@@ -542,7 +510,7 @@ export function ServiceBusinessApps() {
                 </div>
             </section>
 
-                        {/* TESTIMONIALS — placeholder, hidden until signed quotes are available.
+            {/* TESTIMONIALS — placeholder, hidden until signed quotes are available.
                     When ready, render this section at the page end. */}
         </>
     );

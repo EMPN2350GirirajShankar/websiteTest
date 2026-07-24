@@ -14,7 +14,7 @@ import { PrimaryButton } from "../components/buttons";
 
 const useStyles = makeStyles({
   hero: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     padding: "48px 32px 56px",
   },
   heroInner: {
@@ -46,12 +46,7 @@ const useStyles = makeStyles({
     display: "block",
   },
   h1: {
-    fontSize: "40px",
-    fontWeight: 700,
-    color: "var(--maq-black)",
     margin: "0 0 16px",
-    letterSpacing: "-0.02em",
-    lineHeight: 1.12,
   },
   sub: {
     fontSize: "15px",
@@ -127,7 +122,7 @@ const useStyles = makeStyles({
   impactLabel: { fontSize: "13.5px", color: "var(--maq-gray-700)", lineHeight: 1.5 },
 
   section: { padding: "64px 32px", backgroundColor: "#fff" },
-  sectionAlt: { padding: "64px 32px", backgroundColor: "var(--maq-off-white)" },
+  sectionAlt: { padding: "64px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   eyebrow: {
     fontSize: "12px",
@@ -139,12 +134,7 @@ const useStyles = makeStyles({
     display: "block",
   },
   h2: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: "0 0 28px",
-    letterSpacing: "-0.02em",
   },
   featGrid: {
     display: "grid",
@@ -264,7 +254,7 @@ export function ProductDetail() {
               <ArrowLeft20Regular fontSize={14} /> Back to products
             </Link>
             <span className={s.tagline}>{product.tagline}</span>
-            <h1 className={s.h1}>{product.name}</h1>
+            <h1 className={`maq-h1 ${s.h1}`}>{product.name}</h1>
             <p className={s.sub}>{product.longDesc}</p>
             <div className={s.btns}>
               <PrimaryButton
@@ -310,7 +300,7 @@ export function ProductDetail() {
       <section className={s.section}>
         <div className={s.inner}>
           {/* <span className={s.eyebrow}>What it does</span> */}
-          <h2 className={s.h2}>Key capabilities</h2>
+          <h2 className={`maq-h2 ${s.h2}`}>Key capabilities</h2>
           <div className={s.featGrid}>
             {product.features.map((f) => (
               <div key={f.title} className={s.feat}>
@@ -328,7 +318,7 @@ export function ProductDetail() {
       <section className={s.sectionAlt}>
         <div className={s.inner}>
           {/* <span className={s.eyebrow}>Where teams use it</span> */}
-          <h2 className={s.h2}>Common use cases</h2>
+          <h2 className={`maq-h2 ${s.h2}`}>Common use cases</h2>
           <div className={s.useGrid}>
             {product.useCases.map((u) => (
               <div key={u.industry + u.scenario} className={s.useCard}>
@@ -343,7 +333,7 @@ export function ProductDetail() {
       <section className={s.section}>
         <div className={s.inner}>
           {/* <span className={s.eyebrow}>Built on</span> */}
-          <h2 className={s.h2}>Microsoft-aligned platforms</h2>
+          <h2 className={`maq-h2 ${s.h2}`}>Microsoft-aligned platforms</h2>
           <div className={s.platformsRow}>
             {product.platforms.map((p) => (
               <span key={p} className={s.platformChip}>
@@ -357,7 +347,7 @@ export function ProductDetail() {
       <section className={s.related}>
         <div className={s.inner}>
           {/* <span className={s.eyebrow}>More from MAQ Software</span> */}
-          <h2 className={s.h2}>Related products</h2>
+          <h2 className={`maq-h2 ${s.h2}`}>Related products</h2>
           <div className={s.relatedGrid}>
             {related.map((r) => (
               <Link

@@ -1,47 +1,16 @@
-import { makeStyles, tokens, mergeClasses, ToggleButton } from "@fluentui/react-components";
+import {
+  makeStyles,
+  TabList,
+  Tab,
+  type SelectTabData,
+  type SelectTabEvent,
+} from "@fluentui/react-components";
 
-// Styled to match the home page's `PillTabs` slicer: rounded pills, 40px tall,
-// soft brand-red fill when selected, white with a light stroke when not.
+// A Fluent horizontal TabList used as the insights list filter. The selected
+// Tab draws the brand-red underline indicator; a full-width hairline sits under
+// the row. Values are the filter labels themselves.
 const useStyles = makeStyles({
-  row: { display: "flex", flexWrap: "wrap", gap: tokens.spacingHorizontalS },
-  chip: {
-    height: "40px",
-    paddingInline: tokens.spacingHorizontalXL,
-    borderRadius: tokens.borderRadiusCircular,
-    border: `${tokens.strokeWidthThin} solid ${tokens.colorNeutralStroke2}`,
-    backgroundColor: tokens.colorNeutralBackground1,
-    color: tokens.colorNeutralForeground2,
-    fontSize: tokens.fontSizeBase300,
-    lineHeight: tokens.lineHeightBase300,
-    transitionProperty: "background-color, border-color, color",
-    transitionDuration: tokens.durationFaster,
-    transitionTimingFunction: tokens.curveEasyEase,
-    ":hover": {
-      backgroundColor: tokens.colorNeutralBackground1Hover,
-      border: `${tokens.strokeWidthThin} solid ${tokens.colorNeutralStroke1Hover}`,
-      color: tokens.colorNeutralForeground1,
-    },
-    ":active": {
-      backgroundColor: tokens.colorNeutralBackground1Pressed,
-      border: `${tokens.strokeWidthThin} solid ${tokens.colorNeutralStroke1Pressed}`,
-    },
-  },
-  active: {
-    backgroundColor: "var(--maq-red-pale)",
-    border: `${tokens.strokeWidthThin} solid var(--maq-red-pale)`,
-    color: "var(--maq-red)",
-    fontWeight: tokens.fontWeightSemibold,
-    ":hover": {
-      backgroundColor: "var(--maq-red-pale)",
-      border: `${tokens.strokeWidthThin} solid var(--maq-red-pale)`,
-      color: "var(--maq-red)",
-    },
-    ":active": {
-      backgroundColor: "var(--maq-red-pale)",
-      border: `${tokens.strokeWidthThin} solid var(--maq-red-pale)`,
-      color: "var(--maq-red)",
-    },
-  },
+  tablist: { borderBottom: "1px solid var(--maq-border)" },
 });
 
 interface InsightsFilterBarProps {
@@ -51,27 +20,22 @@ interface InsightsFilterBarProps {
 }
 
 export function InsightsFilterBar({ items, active, onChange }: InsightsFilterBarProps) {
-  const activeIndex = Math.max(0, items.indexOf(active));
   const s = useStyles();
   return (
-    <div className={s.row} role="tablist">
-      {items.map((item) => {
-        const selected = active === item;
-        return (
-          <ToggleButton
-            key={item}
-            role="tab"
-            aria-selected={selected}
-            checked={selected}
-            shape="circular"
-            appearance="subtle"
-            className={mergeClasses(s.chip, selected && s.active)}
-            onClick={() => onChange(item)}
-          >
-            {item}
-          </ToggleButton>
-        );
-      })}
-    </div>
+    <TabList
+      className={s.tablist}
+      size="large"
+      selectedValue={active}
+      onTabSelect={(_: SelectTabEvent, data: SelectTabData) =>
+        onChange(data.value as string)
+      }
+      aria-label="Filter"
+    >
+      {items.map((item) => (
+        <Tab key={item} value={item}>
+          {item}
+        </Tab>
+      ))}
+    </TabList>
   );
 }

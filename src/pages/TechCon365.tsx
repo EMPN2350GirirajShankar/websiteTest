@@ -15,7 +15,7 @@ const APPSOURCE_URL =
 
 const useStyles = makeStyles({
   hero: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     padding: "64px 32px 56px",
     position: "relative",
     overflow: "hidden",
@@ -42,11 +42,6 @@ const useStyles = makeStyles({
     marginBottom: "12px",
   },
   h1: {
-    fontSize: "46px",
-    lineHeight: 1.12,
-    fontWeight: 700,
-    color: "var(--maq-black)",
-    letterSpacing: "-0.02em",
     margin: "0 0 16px",
   },
   emText: {
@@ -86,9 +81,6 @@ const useStyles = makeStyles({
     boxShadow: "var(--maq-shadow-sm)",
   },
   panelTitle: {
-    fontSize: "20px",
-    fontWeight: 700,
-    color: "var(--maq-black)",
     margin: "0 0 18px",
   },
   eventGrid: {
@@ -137,7 +129,7 @@ const useStyles = makeStyles({
   },
   sectionAlt: {
     padding: "56px 32px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   inner: {
     maxWidth: "var(--maq-container-wide)",
@@ -148,11 +140,6 @@ const useStyles = makeStyles({
     marginBottom: "28px",
   },
   title: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
-    letterSpacing: "-0.02em",
     margin: "0 0 10px",
     textAlign: "left",
   },
@@ -408,7 +395,7 @@ export function TechCon365() {
       <section className={s.hero}>
         <div className={s.heroInner}>
           <div>
-            <h1 className={s.h1}>Join <em className={s.emText}> MAQ Software</em> at TechCon 365 at Booth #20–21</h1>
+            <h1 className={`maq-h1 ${s.h1}`}>Join <em className={s.emText}> MAQ Software</em> at TechCon 365 at Booth #20–21</h1>
             <p className={s.sub}>
               Learn how we help organizations modernize
               their data platforms with Microsoft Fabric, Power BI, and
@@ -433,7 +420,7 @@ export function TechCon365() {
           </div>
 
           <aside className={s.heroPanel} aria-label="Featured sessions">
-            <h2 className={s.panelTitle}>Featured sessions</h2>
+            <h2 className={`maq-h2 ${s.panelTitle}`}>Featured sessions</h2>
             <div className={s.eventGrid}>
               <div 
                 className={s.eventRow}
@@ -464,7 +451,7 @@ export function TechCon365() {
         <div className={s.inner}>
           <div className={s.head}>
             {/* <span className={s.eyebrow}>Our featured talks</span> */}
-            <h2 className={s.title}>Sessions from MAQ Software leaders</h2>
+            <h2 className={`maq-h2 ${s.title}`}>Sessions from MAQ Software leaders</h2>
           </div>
           <div className={s.talksGrid}>
             {talks.map((talk) => (
@@ -499,7 +486,7 @@ export function TechCon365() {
         <div className={s.inner}>
           <div className={s.head}>
             {/* <span className={s.eyebrow}>Our key services and offerings</span> */}
-            <h2 className={s.title}>Modernize Microsoft 365, Power Platform, Copilot, and AI</h2>
+            <h2 className={`maq-h2 ${s.title}`}>Modernize Microsoft 365, Power Platform, Copilot, and AI</h2>
           </div>
           <div className={s.grid}>
             {offerings.map((item) => (
@@ -515,7 +502,7 @@ export function TechCon365() {
         <div className={s.inner}>
           <div className={s.head}>
             {/* <span className={s.eyebrow}>For more information</span> */}
-            <h2 className={s.title}>Explore MAQ Software resources</h2>
+            <h2 className={`maq-h2 ${s.title}`}>Explore MAQ Software resources</h2>
           </div>
           <div className={s.resourcesGrid}>
             {resources.map((resource) => (
@@ -537,7 +524,7 @@ export function TechCon365() {
         <div className={s.inner}>
           <div className={s.head}>
             {/* <span className={s.eyebrow}>Our solutions and accelerators</span> */}
-            <h2 className={s.title}>Solutions designed to improve and streamline your operations</h2>
+            <h2 className={`maq-h2 ${s.title}`}>Solutions designed to improve and streamline your operations</h2>
           </div>
           <div className={s.grid}>
             {products.map((product) => (

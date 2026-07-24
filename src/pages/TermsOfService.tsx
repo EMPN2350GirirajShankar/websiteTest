@@ -4,7 +4,7 @@ import { CTA } from "../components/CTA";
 const useStyles = makeStyles({
   // ── Hero ──────────────────────────────────────────────────────────────────
   hero: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     padding: "64px 32px 56px",
     backgroundImage: "url('/logos/wave_dots.svg')",
     backgroundPosition: "bottom left",
@@ -27,11 +27,6 @@ const useStyles = makeStyles({
   },
   h1: {
     display: "block",
-    fontSize: "40px",
-    fontWeight: 700,
-    lineHeight: 1.15,
-    color: "var(--maq-black)",
-    letterSpacing: "-0.02em",
     margin: "0 0 16px",
   },
   updated: {
@@ -56,10 +51,6 @@ const useStyles = makeStyles({
     margin: "0 0 20px",
   },
   h2: {
-    fontSize: "30px",
-    fontWeight: 700,
-    color: "var(--maq-black)",
-    letterSpacing: "-0.01em",
     margin: "40px 0 16px",
   },
   list: {
@@ -83,7 +74,7 @@ export function TermsOfService() {
       <section className={s.hero}>
         <div className={s.heroInner}>
           {/* <span className={s.eyebrow}>Legal</span> */}
-          <h1 className={s.h1}>Terms of Service</h1>
+          <h1 className={`maq-h1 ${s.h1}`}>Terms of Service</h1>
           <span className={s.updated}>Last Updated: May 18, 2020</span>
         </div>
       </section>
@@ -128,7 +119,7 @@ export function TermsOfService() {
             subject to these Terms of Service.
           </p>
 
-          <h2 className={s.h2}>Conduct on the Website</h2>
+          <h2 className={`maq-h2 ${s.h2}`}>Conduct on the Website</h2>
           <p className={s.paragraph}>
             Your use of the Website is subject to all applicable laws and
             regulations, and you are solely responsible for the substance of your
@@ -200,7 +191,7 @@ export function TermsOfService() {
             in investigating suspected criminal violations.
           </p>
 
-          <h2 className={s.h2}>Third-Party Websites</h2>
+          <h2 className={`maq-h2 ${s.h2}`}>Third-Party Websites</h2>
           <p className={s.paragraph}>
             This site may link you to other sites on the Internet or otherwise
             include references to information, documents, software, materials
@@ -220,7 +211,7 @@ export function TermsOfService() {
             express or implied.
           </p>
 
-          <h2 className={s.h2}>Intellectual Property</h2>
+          <h2 className={`maq-h2 ${s.h2}`}>Intellectual Property</h2>
           <p className={s.paragraph}>
             All custom graphics, icons, logos, and service names used on the
             Website are registered trademarks, service marks, and/or artwork held
@@ -230,7 +221,7 @@ export function TermsOfService() {
             and/or the name or trade names of MAQ Software or its Affiliates.
           </p>
 
-          <h2 className={s.h2}>Disclaimer of Warranties</h2>
+          <h2 className={`maq-h2 ${s.h2}`}>Disclaimer of Warranties</h2>
           <p className={s.paragraph}>
             Content available through this Website often represents the opinions
             and judgments of an information provider, site user, or other person
@@ -257,7 +248,7 @@ export function TermsOfService() {
             communications or personalization settings.
           </p>
 
-          <h2 className={s.h2}>International Use</h2>
+          <h2 className={`maq-h2 ${s.h2}`}>International Use</h2>
           <p className={s.paragraph}>
             Although this Website may be accessible worldwide, we make no
             representation that materials on this Website are appropriate or
@@ -270,7 +261,7 @@ export function TermsOfService() {
             prohibited.
           </p>
 
-          <h2 className={s.h2}>Termination</h2>
+          <h2 className={`maq-h2 ${s.h2}`}>Termination</h2>
           <p className={s.paragraph}>
             You agree that we may, at our sole discretion, terminate or suspend
             your access to all or part of the Website with or without notice and
@@ -291,7 +282,7 @@ export function TermsOfService() {
             suspension.
           </p>
 
-          <h2 className={s.h2}>Governing Law</h2>
+          <h2 className={`maq-h2 ${s.h2}`}>Governing Law</h2>
           <p className={s.paragraph}>
             These Terms of Service and any dispute or claim arising out of, or
             related to them, shall be governed by and construed in accordance with
@@ -304,7 +295,7 @@ export function TermsOfService() {
             in the federal courts of the U.S.
           </p>
 
-          <h2 className={s.h2}>Third-Party Apps</h2>
+          <h2 className={`maq-h2 ${s.h2}`}>Third-Party Apps</h2>
           <p className={s.paragraph}>
             You acknowledge that apps on the Website function by accessing one or
             more Third-Party Apps in order to synchronize content found in such

@@ -43,7 +43,7 @@ export function ProductLoadFAST() {
         <div className={s.heroGrid}>
           <div>
             {/* <span className={s.eyebrow}>Automated Power BI load testing accelerator</span> */}
-            <h1 className={s.h1}>LoadFAST</h1>
+            <h1 className={`maq-h1 ${s.h1}`}>LoadFAST</h1>
             <p className={s.heroSub}>
               Automate Power BI load testing, simulating concurrent users, measuring page load time, and flagging slow reports and visuals, so you validate performance and plan Fabric capacity before users feel it.
             </p>
@@ -73,7 +73,7 @@ export function ProductLoadFAST() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Why LoadFAST</span> */}
-            <h2 className={s.titleLg}>Benefits</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Benefits</h2>
           </div>
           <div className={s.featGrid}>
             {benefits.map((b) => (
@@ -93,7 +93,7 @@ export function ProductLoadFAST() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>How it works</span> */}
-            <h2 className={s.titleLg}>How it works in 3 steps</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>How it works in 3 steps</h2>
           </div>
           <div className={s.stepGrid}>
             {steps.map((st) => (
@@ -115,7 +115,7 @@ export function ProductLoadFAST() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Pricing</span> */}
-            <h2 className={s.titleLg}>Pick the plan that fits your scale</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Pick the plan that fits your scale</h2>
           </div>
           <div className={s.priceGrid2}>
             {plans.map((p) => (
@@ -137,7 +137,7 @@ export function ProductLoadFAST() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Insights</span> */}
-            <h2 className={s.titleLg}>Resources & Marketplace</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Resources & Marketplace</h2>
           </div>
           <div className={s.mktGrid}>
             {resources.map((o) => (

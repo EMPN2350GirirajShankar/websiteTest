@@ -2,7 +2,7 @@ import { makeStyles } from "@fluentui/react-components";
 import { FeatureCard } from "../cards/FeatureCard";
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "#fff" },
+  section: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   headLeft: { marginBottom: "20px", textAlign: "center" as const },
   eyebrow: {
@@ -17,12 +17,7 @@ const useStyles = makeStyles({
   },
   titleLg: {
     display: "block",
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: 0,
-    letterSpacing: "-0.02em",
     textAlign: "left" as const,
   },
   list: {
@@ -56,7 +51,7 @@ export function PartnershipOfferings({
       <div className={s.inner}>
         <div className={s.headLeft}>
           {/* eyebrow hidden intentionally */}
-          <h2 className={s.titleLg}>{title}</h2>
+          <h2 className={`maq-h2 ${s.titleLg}`}>{title}</h2>
         </div>
         <div className={s.list}>
           {offerings.map((o) => (

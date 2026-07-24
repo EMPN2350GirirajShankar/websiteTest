@@ -14,7 +14,7 @@ import {
 const INITIAL_VISIBLE = 9;
 
 const useStyles = makeStyles({
-  section: { padding: "56px 32px", backgroundColor: "var(--maq-off-white)" },
+  section: { padding: "56px 32px", backgroundColor: "var(--colorNeutralBackground1)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "left", marginBottom: "44px" },
   title: { fontSize: "36px", lineHeight: 1.15, fontWeight: 700, color: "var(--maq-navy)", margin: "0 0 28px", letterSpacing: "-0.02em", textAlign: "left" },

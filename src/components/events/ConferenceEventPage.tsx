@@ -51,7 +51,7 @@ export interface ConferenceEventPageProps {
 
 const useStyles = makeStyles({
   hero: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     padding: "64px 32px 56px",
     position: "relative",
     overflow: "hidden",
@@ -78,11 +78,6 @@ const useStyles = makeStyles({
     marginBottom: "12px",
   },
   h1: {
-    fontSize: "46px",
-    lineHeight: 1.12,
-    fontWeight: 700,
-    color: "var(--maq-black)",
-    letterSpacing: "-0.02em",
     margin: "0 0 16px",
   },
   sub: {
@@ -118,9 +113,6 @@ const useStyles = makeStyles({
     boxShadow: "var(--maq-shadow-sm)",
   },
   panelTitle: {
-    fontSize: "20px",
-    fontWeight: 700,
-    color: "var(--maq-black)",
     margin: "0 0 18px",
   },
   eventGrid: {
@@ -169,7 +161,7 @@ const useStyles = makeStyles({
   },
   sectionAlt: {
     padding: "56px 32px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   inner: {
     maxWidth: "var(--maq-container-wide)",
@@ -180,11 +172,6 @@ const useStyles = makeStyles({
     marginBottom: "28px",
   },
   title: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
-    letterSpacing: "-0.02em",
     margin: "0 0 10px",
     textAlign: "left",
   },
@@ -340,7 +327,7 @@ export function ConferenceEventPage(props: ConferenceEventPageProps) {
         <div className={s.heroInner}>
           <div>
             {/* <span className={s.eyebrow}>{props.eyebrow}</span> */}
-            <h1 className={s.h1}>{props.title}</h1>
+            <h1 className={`maq-h1 ${s.h1}`}>{props.title}</h1>
             <p className={s.sub}>{props.subtitle}</p>
             <div className={s.promo}>
               <TicketDiagonal24Regular />
@@ -360,7 +347,7 @@ export function ConferenceEventPage(props: ConferenceEventPageProps) {
           </div>
 
           <aside className={s.heroPanel} aria-label="Featured sessions">
-            <h2 className={s.panelTitle}>Featured sessions</h2>
+            <h2 className={`maq-h2 ${s.panelTitle}`}>Featured sessions</h2>
             <div className={s.eventGrid}>
               {props.featuredSessions.map((item) => (
                 <div
@@ -388,7 +375,7 @@ export function ConferenceEventPage(props: ConferenceEventPageProps) {
         <div className={s.inner}>
           <div className={s.head}>
             {/* <span className={s.eyebrow}>Our featured talks</span> */}
-            <h2 className={s.title}>Sessions from MAQ Software leaders</h2>
+            <h2 className={`maq-h2 ${s.title}`}>Sessions from MAQ Software leaders</h2>
           </div>
           <div className={s.talksGrid}>
             {props.talks.map((talk) => (
@@ -423,7 +410,7 @@ export function ConferenceEventPage(props: ConferenceEventPageProps) {
         <div className={s.inner}>
           <div className={s.head}>
             {/* <span className={s.eyebrow}>Our key services and offerings</span> */}
-            <h2 className={s.title}>Modernize Microsoft 365, Power Platform, Copilot, and AI</h2>
+            <h2 className={`maq-h2 ${s.title}`}>Modernize Microsoft 365, Power Platform, Copilot, and AI</h2>
           </div>
           <div className={s.grid}>
             {props.offerings.map((item) => (
@@ -439,7 +426,7 @@ export function ConferenceEventPage(props: ConferenceEventPageProps) {
         <div className={s.inner}>
           <div className={s.head}>
             {/* <span className={s.eyebrow}>For more information</span> */}
-            <h2 className={s.title}>Explore MAQ Software resources</h2>
+            <h2 className={`maq-h2 ${s.title}`}>Explore MAQ Software resources</h2>
           </div>
           <div className={s.resourcesGrid}>
             {props.resources.map((resource) => (
@@ -461,7 +448,7 @@ export function ConferenceEventPage(props: ConferenceEventPageProps) {
         <div className={s.inner}>
           <div className={s.head}>
             {/* <span className={s.eyebrow}>Our solutions and accelerators</span> */}
-            <h2 className={s.title}>Solutions designed to improve and streamline your operations</h2>
+            <h2 className={`maq-h2 ${s.title}`}>Solutions designed to improve and streamline your operations</h2>
           </div>
           <div className={s.grid}>
             {props.solutions.map((solution) => (

@@ -16,12 +16,7 @@ const useStyles = makeStyles({
     marginBottom: "8px",
   },
   title: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: "0 0 6px",
-    letterSpacing: "-0.02em",
     textAlign: "left",
   },
   sub: { fontSize: "14px", color: "var(--maq-gray-600)", margin: "0 auto", textAlign: "center" },
@@ -55,7 +50,7 @@ export function ImpactStats({ eyebrow = "Proven outcomes", title, sub, stats }: 
       <div className={s.inner}>
         <div className={s.head}>
           {/* <span className={s.eyebrow}>{eyebrow}</span> */}
-          <h2 className={s.title}>{title}</h2>
+          <h2 className={`maq-h2 ${s.title}`}>{title}</h2>
           {/* <p className={s.sub}>{sub}</p> */}
         </div>
         <div className={s.grid}>

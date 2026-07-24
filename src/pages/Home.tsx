@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
   reserveSection: {
     minHeight: "520px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     borderTop: "1px solid var(--maq-border)",
     "@media (max-width: 960px)": {
       minHeight: "420px",

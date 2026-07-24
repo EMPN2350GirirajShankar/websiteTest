@@ -3,6 +3,7 @@ import { ArrowLeft16Regular } from "@fluentui/react-icons";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { PrimaryButton, SecondaryButton } from "../components/buttons";
+import { InsightsFilterBar } from "../components/insights/InsightsFilterBar";
 import {
   visualGuideFilters,
   visualGuideItems,
@@ -41,7 +42,7 @@ const useStyles = makeStyles({
     fontSize: "13px",
     fontWeight: 600,
     color: "var(--maq-black)",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     border: `1px solid ${tokens.colorNeutralStroke2}`,
     borderRadius: "999px",
     paddingTop: "6px",
@@ -64,9 +65,6 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
   },
   groupTitle: {
-    fontSize: "20px",
-    fontWeight: 700,
-    color: "var(--maq-black)",
     margin: 0,
   },
   groupHint: {
@@ -190,27 +188,12 @@ export function InsightsVisualChooser() {
             and AppSource link.
           </p> */}
 
-          <div className={s.filterRow}>
-            <div className={s.toc}>
-              {groups.map((g) => (
-                <a key={g.category} href={`#cat-${visualGuideSlug(g.category)}`} className={s.tocItem}>
-                  {g.category}
-                </a>
-              ))}
-            </div>
-            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-              {["All", "Certified"].map((f) => (
-                activeFilter === f ? (
-                  <PrimaryButton key={f} size="small" onClick={() => setActiveFilter(f)}>
-                    {f}
-                  </PrimaryButton>
-                ) : (
-                  <SecondaryButton key={f} size="small" onClick={() => setActiveFilter(f)}>
-                    {f}
-                  </SecondaryButton>
-                )
-              ))}
-            </div>
+          <div style={{ marginBottom: "40px" }}>
+            <InsightsFilterBar
+              items={visualGuideFilters}
+              active={activeFilter}
+              onChange={setActiveFilter}
+            />
           </div>
 
           {groups.map((group) => (
@@ -220,7 +203,7 @@ export function InsightsVisualChooser() {
               id={`cat-${visualGuideSlug(group.category)}`}
             >
               <div className={s.groupHead}>
-                <h2 className={s.groupTitle}>{group.category}</h2>
+                <h2 className={`maq-h2 ${s.groupTitle}`}>{group.category}</h2>
                 {group.hint && <p className={s.groupHint}>{group.hint}</p>}
               </div>
               <div className={s.grid}>

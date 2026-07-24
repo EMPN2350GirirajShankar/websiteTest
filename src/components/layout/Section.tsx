@@ -12,7 +12,8 @@ import type { CSSProperties, ReactNode } from "react";
 
 const useStyles = makeStyles({
   section: { padding: "var(--section-pad-y) var(--section-pad-x)" },
-  gray: { backgroundColor: tokens.colorNeutralBackground2 },
+  // The canonical section band gray (matches the site-wide band token).
+  gray: { backgroundColor: tokens.colorNeutralBackground3 },
   relative: { position: "relative" },
   center: { textAlign: "center" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
@@ -41,7 +42,9 @@ export function Section({
   style,
   children,
 }: {
-  /** `gray` paints the neutral band (Fluent background 2). */
+  /** `gray` paints the neutral band (Fluent background 3); `default` is white
+      (transparent over the white page). Tone is the explicit, per-section
+      source of truth for band color — there is no positional alternation. */
   tone?: SectionTone;
   /** Adds `position: relative` (e.g. for an absolutely-placed divider). */
   relative?: boolean;

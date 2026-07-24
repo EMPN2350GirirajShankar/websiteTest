@@ -12,7 +12,7 @@ import { PartnershipInsights } from "../components/partnerships/PartnershipInsig
 const useStyles = makeStyles({
   overviewSection: {
     padding: "48px 32px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   overviewInner: {
     maxWidth: "var(--maq-container-wide)",
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
   // Marketplace section
   marketSection: {
     padding: "48px 32px",
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   marketInner: {
     maxWidth: "var(--maq-container-wide)",
@@ -58,12 +58,7 @@ const useStyles = makeStyles({
   },
   marketTitle: {
     display: "block",
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: 0,
-    letterSpacing: "-0.02em",
     textAlign: "left" as const,
   },
   panelGrid: {
@@ -293,7 +288,7 @@ export function PartnershipMicrosoft() {
       <section className={s.marketSection} id="microsoft-marketplace">
         <div className={s.marketInner}>
           <div className={s.marketHead}>
-            <h2 className={s.marketTitle}>Marketplace offerings</h2>
+            <h2 className={`maq-h2 ${s.marketTitle}`}>Marketplace offerings</h2>
           </div>
 
           <div className={s.panelGrid}>

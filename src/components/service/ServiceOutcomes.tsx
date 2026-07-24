@@ -46,12 +46,8 @@ export interface ServiceOutcomesProps {
 const useStyles = makeStyles({
   section: { padding: "48px 32px", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
+  // Typography comes from the canonical `.maq-h2` class; only layout here.
   title: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
-    letterSpacing: "-0.02em",
     textAlign: "left",
     margin: "0 0 24px",
   },
@@ -144,7 +140,7 @@ export function ServiceOutcomes({
   return (
     <section className={s.section}>
       <div className={s.inner}>
-        <h2 className={s.title}>{title}</h2>
+        <h2 className={`maq-h2 ${s.title}`}>{title}</h2>
         <div className={s.list}>
           {outcomes.map((o) => (
             <div className={s.row} key={o.title}>

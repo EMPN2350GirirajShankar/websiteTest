@@ -17,7 +17,7 @@ import {
 
 const useStyles = makeStyles({
   hero: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     padding: "48px 32px",
     borderBottom: `1px solid ${tokens.colorNeutralStroke2}`,
   },
@@ -50,11 +50,6 @@ const useStyles = makeStyles({
     display: "block",
   },
   h1: {
-    fontSize: "40px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-black)",
-    letterSpacing: "-0.02em",
     margin: "0 0 16px",
   },
   description: {
@@ -98,9 +93,6 @@ const useStyles = makeStyles({
   section: { padding: "48px 32px", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   sectionTitle: {
-    fontSize: "36px",
-    fontWeight: 700,
-    color: "var(--maq-black)",
     margin: "0 0 16px",
   },
   factGrid: {
@@ -113,7 +105,7 @@ const useStyles = makeStyles({
     border: `1px solid ${tokens.colorNeutralStroke2}`,
     borderRadius: "12px",
     padding: "18px",
-    background: "var(--maq-off-white)",
+    background: "var(--colorNeutralBackground3)",
   },
   factLabel: {
     fontSize: "11px",
@@ -124,7 +116,7 @@ const useStyles = makeStyles({
     marginBottom: "6px",
   },
   factValue: { fontSize: "15px", color: "var(--maq-black)", fontWeight: 600 },
-  related: { padding: "48px 32px", backgroundColor: "var(--maq-off-white)" },
+  related: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
   relatedGrid: {
     marginTop: "18px",
     display: "grid",
@@ -179,7 +171,7 @@ const useStyles = makeStyles({
     "@media (max-width: 880px)": { gridTemplateColumns: "1fr" },
   },
   block: {
-    background: "var(--maq-off-white)",
+    background: "var(--colorNeutralBackground3)",
     border: `1px solid ${tokens.colorNeutralStroke2}`,
     borderRadius: "12px",
     padding: "22px",
@@ -278,7 +270,7 @@ export function InsightsCustomVisualDetail() {
           <div className={s.layout}>
             <div>
               {/* <span className={s.eyebrow}>Power BI custom visual</span> */}
-              <h1 className={s.h1}>{item.name}</h1>
+              <h1 className={`maq-h1 ${s.h1}`}>{item.name}</h1>
               <p className={s.description}>{heroDescription}</p>
               <div className={s.ctas}>
                 <PrimaryButton
@@ -318,7 +310,7 @@ export function InsightsCustomVisualDetail() {
 
       <section className={s.section}>
         <div className={s.inner}>
-          <h2 className={s.sectionTitle}>Visual at a glance</h2>
+          <h2 className={`maq-h2 ${s.sectionTitle}`}>Visual at a glance</h2>
           <div className={s.factGrid}>
             <div className={s.fact}>
               <div className={s.factLabel}>Category</div>
@@ -338,7 +330,7 @@ export function InsightsCustomVisualDetail() {
 
           {content && (
             <>
-              <h2 className={s.sectionTitle} style={{ marginTop: 36 }}>
+              <h2 className={`maq-h2 ${s.sectionTitle}`} style={{ marginTop: 36 }}>
                 About {item.name}
               </h2>
               <p className={s.longText}>{content.description}</p>
@@ -384,7 +376,7 @@ export function InsightsCustomVisualDetail() {
 
               {pbiReportUrl && (
                 <div style={{ marginTop: 36 }}>
-                  <h2 className={s.sectionTitle}>Feature walkthrough</h2>
+                  <h2 className={`maq-h2 ${s.sectionTitle}`}>Feature walkthrough</h2>
                   <VisualPbiEmbed productName={item.name} reportUrl={pbiReportUrl} />
                 </div>
               )}
@@ -416,7 +408,7 @@ export function InsightsCustomVisualDetail() {
       {related.length > 0 && (
         <section className={s.related}>
           <div className={s.inner}>
-            <h2 className={s.sectionTitle}>Related visuals</h2>
+            <h2 className={`maq-h2 ${s.sectionTitle}`}>Related visuals</h2>
             <div className={s.relatedGrid}>
               {related.map((other) => (
                 <Link

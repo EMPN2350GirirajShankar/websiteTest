@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     display: "flex", flexDirection: "column", height: "100%", overflow: "hidden",
     backgroundColor: tokens.colorNeutralBackground1,
     border: "1px solid var(--maq-border)",
-    borderRadius: tokens.borderRadiusXLarge,
+    borderRadius: "12px",
     textDecoration: "none", color: "inherit", cursor: "pointer",
     transition: "border-color .2s ease, box-shadow .2s ease, transform .2s ease",
     ":hover": { border: "1px solid var(--maq-card-hover-border)", boxShadow: "var(--maq-shadow-lift)", transform: "translateY(-2px)" },

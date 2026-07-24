@@ -48,7 +48,7 @@ export function ProductEmbedFAST() {
         <div className={s.heroGrid}>
           <div>
             {/* <span className={s.eyebrow}>Automated Power BI embedding accelerator</span> */}
-            <h1 className={s.h1}>EmbedFAST</h1>
+            <h1 className={`maq-h1 ${s.h1}`}>EmbedFAST</h1>
             <p className={s.heroSub}>
               Embed Power BI in your applications without the usual integration work, per-user licensing, and heavy development. EmbedFAST adds role-based access, unlimited tenant and workspace onboarding, and configurable features, so your team ships analytics with minimal development effort.
             </p>
@@ -78,7 +78,7 @@ export function ProductEmbedFAST() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Why EmbedFAST</span> */}
-            <h2 className={s.titleLg}>Benefits</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Benefits</h2>
           </div>
           <div className={s.featGrid}>
             {benefits.map((b) => (
@@ -104,7 +104,7 @@ export function ProductEmbedFAST() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Pricing</span> */}
-            <h2 className={s.titleLg}>Choose the plan that fits your team</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Choose the plan that fits your team</h2>
           </div>
           <div className={s.priceGrid}>
             {plans.map((p) => (
@@ -126,7 +126,7 @@ export function ProductEmbedFAST() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Support plans</span> */}
-            <h2 className={s.titleLg}>Choose your support tier</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Choose your support tier</h2>
           </div>
           <div style={{ overflowX: "auto" }}>
             <table className={s.supportTable}>
@@ -157,7 +157,7 @@ export function ProductEmbedFAST() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Insights</span> */}
-            <h2 className={s.titleLg}>Resources & Marketplace</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Resources & Marketplace</h2>
           </div>
           <div className={s.mktGrid}>
             {resources.map((o) => (

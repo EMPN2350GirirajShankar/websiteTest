@@ -19,7 +19,7 @@ import {
 // ---------------------------------------------------------------------------
 const useStyles = makeStyles({
   // Hero --------------------------------------------------------------------
-  hero: { backgroundColor: "var(--maq-off-white)", padding: "48px 32px 56px" },
+  hero: { backgroundColor: "var(--colorNeutralBackground3)", padding: "48px 32px 56px" },
   heroGrid: {
     maxWidth: "var(--maq-container-wide)",
     margin: "0 auto",
@@ -40,11 +40,6 @@ const useStyles = makeStyles({
   },
   h1: {
     display: "block",
-    fontSize: "40px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-black)",
-    letterSpacing: "-0.02em",
     margin: "0 0 16px",
   },
   heroSub: {
@@ -72,7 +67,7 @@ const useStyles = makeStyles({
 
   // Section commons --------------------------------------------------------
   section: { padding: "48px 32px", backgroundColor: "#fff" },
-  sectionAlt: { padding: "48px 32px", backgroundColor: "var(--maq-off-white)" },
+  sectionAlt: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "28px" },
   headLeft: { marginBottom: "20px", textAlign: "center" },
@@ -96,12 +91,7 @@ const useStyles = makeStyles({
   },
   titleLg: {
     display: "block",
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: "0 0 10px",
-    letterSpacing: "-0.02em",
     textAlign: "left",
   },
   sub: { display: "block", fontSize: "14px", color: "var(--maq-gray-600)", margin: "0 auto", maxWidth: "720px", textAlign: "center" },
@@ -300,7 +290,7 @@ const useStyles = makeStyles({
   mktImg: {
     height: "100px",
     background:
-      "linear-gradient(135deg, var(--maq-red-pale) 0%, var(--maq-off-white) 60%, var(--maq-surface-cream) 100%)",
+      "linear-gradient(135deg, var(--maq-red-pale) 0%, var(--colorNeutralBackground3) 60%, var(--maq-surface-cream) 100%)",
     borderBottom: "1px solid var(--maq-border)",
   },
   mktBody: { padding: "16px 18px 20px", display: "flex", flexDirection: "column", flex: 1, gap: "8px" },
@@ -478,8 +468,8 @@ export function ProductFabricAdminAgent() {
         <div className={s.heroGrid}>
           <div>
             {/* <span className={s.eyebrow}>Fabric Workload</span> */}
-            <h1 className={s.h1}>
-              Automated capacity management for Microsoft Fabric
+            <h1 className={`maq-h1 ${s.h1}`}>
+              Fabric Admin Agent
             </h1>
             <p className={s.heroSub}>
             Manage Microsoft Fabric capacity before problems reach users, without adding to your platform team. Fabric Admin Agent detects anomalies, predicts demand, and recommends actions that prevent throttling, hold performance, and lower cost. Platform teams run it self-service to get more from Fabric with less operational overhead.
@@ -520,7 +510,7 @@ export function ProductFabricAdminAgent() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Why Fabric Admin Agent</span> */}
-            <h2 className={s.titleLg}>Benefits</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Benefits</h2>
           </div>
           <div className={s.featGrid}>
             {benefits.map((b) => (
@@ -542,7 +532,7 @@ export function ProductFabricAdminAgent() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Proven outcomes</span> */}
-            <h2 className={s.titleLg}>Impact for Microsoft Fabric platform owners</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Impact for Microsoft Fabric platform owners</h2>
             {/* <p className={s.sub}>
               Numbers from MAQ Software Fabric Admin Agent deployments across
               enterprise tenants.
@@ -564,7 +554,7 @@ export function ProductFabricAdminAgent() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Fabric case studies</span> */}
-            <h2 className={s.titleLg}>How platform teams ship Fabric faster with MAQ Software</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>How platform teams ship Fabric faster with MAQ Software</h2>
           </div>
           <div className={s.caseGrid}>
             {cases.map((c) => (
@@ -599,7 +589,7 @@ export function ProductFabricAdminAgent() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Insights</span> */}
-            <h2 className={s.titleLg}>Resources & Marketplace</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Resources & Marketplace</h2>
             {/* <p className={s.sub}>
               Get the agent from Microsoft AppSource, browse Azure Marketplace
               marketplace offers, and explore deeper guidance from MAQ Software.
@@ -668,7 +658,7 @@ export function ProductFabricAdminAgent() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             <span className={s.secEyebrow}>Testimonials</span>
-            <h2 className={s.titleLg}>What our clients have to say</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>What our clients have to say</h2>
           </div>
           <div className={s.quoteGrid}>
             {quotes.map((q, i) => (

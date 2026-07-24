@@ -5,7 +5,7 @@ import { useContactAction } from "../../lib/contact";
 import { PrimaryButton } from "../buttons";
 
 const useStyles = makeStyles({
-  wrap: { backgroundColor: "var(--maq-off-white)", padding: "48px 32px 56px" },
+  wrap: { backgroundColor: "var(--colorNeutralBackground3)", padding: "48px 32px 56px" },
   grid: {
     maxWidth: "var(--maq-container-wide)",
     margin: "0 auto",
@@ -17,11 +17,6 @@ const useStyles = makeStyles({
   },
   h1: {
     display: "block",
-    fontSize: "40px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-black)",
-    letterSpacing: "-0.02em",
     margin: "0 0 16px",
   },
   sub: {
@@ -72,7 +67,7 @@ export function PartnershipHero({
     <section className={s.wrap}>
       <div className={s.grid}>
         <div>
-          <h1 className={s.h1}>{h1}</h1>
+          <h1 className={`maq-h1 ${s.h1}`}>{h1}</h1>
           <p className={s.sub}>{subhead}</p>
           <div className={s.btns}>
             <PrimaryButton

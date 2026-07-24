@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { CaseStudyCard } from "../cards/CaseStudyCard";
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "var(--maq-off-white)" },
+  section: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "24px" },
   eyebrow: {
@@ -16,13 +16,9 @@ const useStyles = makeStyles({
     display: "block",
     marginBottom: "6px",
   },
+  // Typography comes from the canonical `.maq-h2` class; only layout here.
   title: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: 0,
-    letterSpacing: "-0.02em",
     textAlign: "left",
   },
   grid: {
@@ -96,7 +92,7 @@ export function ServiceCaseStudiesData({
       <div className={s.inner}>
         <div className={s.head}>
           {/* <span className={s.eyebrow}>Related case studies</span> */}
-          <h2 className={s.title}>Data & AI platforms in production</h2>
+          <h2 className={`maq-h2 ${s.title}`}>Data & AI platforms in production</h2>
         </div>
         <div className={s.grid}>
           {studies.map((c) => (

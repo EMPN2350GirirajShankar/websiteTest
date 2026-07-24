@@ -16,12 +16,7 @@ const useStyles = makeStyles({
     marginBottom: "6px",
   },
   title: {
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: "0 0 6px",
-    letterSpacing: "-0.02em",
     textAlign: "left",
   },
   sub: { fontSize: "14px", color: "var(--maq-gray-600)", margin: "0 auto", textAlign: "center" },
@@ -61,7 +56,7 @@ export function ServiceCloudInsights() {
       <div className={s.inner}>
         <div className={s.head}>
           {/* <span className={s.eyebrow}>Insights</span> */}
-          <h2 className={s.title}>Related insights</h2>
+          <h2 className={`maq-h2 ${s.title}`}>Related insights</h2>
           {/* <p className={s.sub}>
             See our research that goes into refining our cloud modernization service.
           </p> */}

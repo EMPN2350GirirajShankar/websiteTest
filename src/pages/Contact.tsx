@@ -3,20 +3,15 @@ import {
   ArrowRight16Regular,
   Location24Regular,
 } from "@fluentui/react-icons";
-import { PrimaryButton } from "../components/buttons";
-
-const MAIL_TO =
-  "mailto:CustomerSuccess@MAQSoftware.com?subject=Contact%20Us&body=Hello,%20I%20would%20like%20to%20get%20in%20touch%20with%20you.";
 
 const useStyles = makeStyles({
   page: {
-    backgroundColor: "var(--maq-gray-50)",
+    backgroundColor: "var(--colorNeutralBackground3)",
   },
   hero: {
-    backgroundColor: "#f7f8fb",
+    backgroundColor: "var(--colorNeutralBackground3)",
     position: "relative",
     overflow: "hidden",
-    borderBottom: "1px solid var(--maq-border)",
   },
   heroInner: {
     // 1504 = 1440 content + 32px gutter each side (border-box), so the inner
@@ -44,11 +39,6 @@ const useStyles = makeStyles({
   },
   title: {
     margin: "0 0 10px",
-    fontSize: "40px",
-    lineHeight: 1.03,
-    letterSpacing: "-0.02em",
-    fontWeight: 700,
-    color: "var(--maq-black)",
   },
   titleAccent: {
     color: "var(--maq-red)",
@@ -82,15 +72,22 @@ const useStyles = makeStyles({
   },
   officesTitle: {
     margin: "0 0 10px",
-    fontSize: "36px",
-    lineHeight: 1.1,
-    letterSpacing: "-0.02em",
-    fontWeight: 700,
-    color: "var(--maq-black)",
     "@media (max-width: 960px)": {
       fontSize: "28px",
       marginBottom: "12px",
     },
+  },
+  contactLine: {
+    margin: "28px 0 0",
+    fontSize: "15px",
+    lineHeight: 1.6,
+    color: "var(--maq-gray-700)",
+  },
+  contactLink: {
+    color: "var(--maq-red)",
+    fontWeight: 600,
+    textDecoration: "none",
+    ":hover": { textDecoration: "underline" },
   },
   officeGrid: {
     display: "grid",
@@ -264,25 +261,18 @@ export function Contact() {
         <div className={s.heroInner}>
           <div className={s.heroContent}>
             {/* <p className={s.eyebrow}>Contact Us</p> */}
-            <h1 className={s.title}>
+            <h1 className={`maq-h1 ${s.title}`}>
               Let&apos;s build what&apos;s next,
               <br />
               <span className={s.titleAccent}>together.</span>
             </h1>
-            <p className={s.summary}>
-              MAQ Software builds data and AI that lead to better decisions and
-              measurable business outcomes.
-            </p>
-            <PrimaryButton size="large" className={s.cta} href={MAIL_TO}>
-              Contact us
-            </PrimaryButton>
           </div>
         </div>
       </section>
 
       <section className={s.officesSection} aria-labelledby="global-offices-heading">
         <div className={s.officesInner}>
-          <h2 id="global-offices-heading" className={s.officesTitle}>
+          <h2 id="global-offices-heading" className={`maq-h2 ${s.officesTitle}`}>
             Our global offices
           </h2>
           <div className={s.officeGrid}>
@@ -314,6 +304,13 @@ export function Contact() {
               </a>
             ))}
           </div>
+          <p className={s.contactLine}>
+            Have a question or ready to start a project? Contact us at{" "}
+            <a className={s.contactLink} href="mailto:CustomerSuccess@MAQSoftware.com">
+              CustomerSuccess@MAQSoftware.com
+            </a>
+            .
+          </p>
         </div>
       </section>
     </main>

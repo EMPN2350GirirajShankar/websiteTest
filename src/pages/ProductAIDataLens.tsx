@@ -38,7 +38,7 @@ export function ProductAIDataLens() {
         <div className={s.heroGrid}>
           <div>
             {/* <span className={s.eyebrow}>Intelligent data interaction</span> */}
-            <h1 className={s.h1}>AI-DataLens</h1>
+            <h1 className={`maq-h1 ${s.h1}`}>AI-DataLens</h1>
             <p className={s.heroSub}>
              Ask questions of enterprise datasets in plain language and get instant answers, no technical skills required. AI-DataLens keeps row-level security, governance, and audit compliance intact on every query.
             </p>
@@ -69,7 +69,7 @@ export function ProductAIDataLens() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Why AI-DataLens</span> */}
-            <h2 className={s.titleLg}>Benefits</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Benefits</h2>
           </div>
           <div className={s.benGrid3}>
             {benefits.map((b) => (
@@ -86,7 +86,7 @@ export function ProductAIDataLens() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Capabilities</span> */}
-            <h2 className={s.titleLg}>Key features</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Key features</h2>
           </div>
           <div className={s.featGrid}>
             {features.map((f) => (
@@ -112,7 +112,7 @@ export function ProductAIDataLens() {
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Insights</span> */}
-            <h2 className={s.titleLg}>Resources & Marketplace</h2>
+            <h2 className={`maq-h2 ${s.titleLg}`}>Resources & Marketplace</h2>
           </div>
           <div className={s.mktGrid}>
             {resources.map((o) => (

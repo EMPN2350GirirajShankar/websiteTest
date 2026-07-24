@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     display: "grid", gridTemplateColumns: "1fr 1.1fr", alignItems: "stretch",
     backgroundColor: tokens.colorNeutralBackground1,
     border: "1px solid var(--maq-border)",
-    borderRadius: tokens.borderRadiusXLarge,
+    borderRadius: "12px",
     overflow: "hidden",
     textDecoration: "none", color: "inherit",
     transition: "border-color .2s ease, box-shadow .2s ease, transform .2s ease",

@@ -1,6 +1,13 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
-import { makeStyles, tokens } from "@fluentui/react-components";
+import {
+  makeStyles,
+  tokens,
+  TabList,
+  Tab,
+  type SelectTabData,
+  type SelectTabEvent,
+} from "@fluentui/react-components";
 import {
   TopSpeed24Regular,
   ArrowSwap24Regular,
@@ -13,7 +20,6 @@ import { useNavigate } from "react-router-dom";
 import { PrimaryButton, SecondaryButton } from "../components/buttonsV2";
 import { Section, SectionHeading, CardGrid } from "../components/layout";
 import { IconCard, SplitCard, PosterCard } from "../components/cardsV2";
-import { PillTabs } from "../components/PillTabs";
 import { INDUSTRIES } from "../data/homeIndustries";
 import { caseStudyItems } from "../data/insights";
 import { motion, AnimatePresence } from "framer-motion";
@@ -35,42 +41,42 @@ const BUILD: BuildArea[] = [
   {
     tab: "Data & AI",
     title: "Data & AI platforms",
-    desc: "Scale your business with one governed data foundation across Microsoft Fabric, Azure Databricks, and Snowflake, ready for AI workloads.",
+    desc: "Scale your business with a governed data foundation using Microsoft Fabric, Azure Databricks, and Snowflake to power AI-ready workloads.",
     to: "/services/data-and-analytics",
     img: "/images/Service%20cards/Platforms.png"
   },
   {
     tab: "AI Agents",
     title: "AI solutions & agents",
-    desc: "Automate decisions and reduce manual work with Copilots and agents on Microsoft Foundry, Azure OpenAI, and Copilot Studio, grounded in your data and governed for compliance.",
+    desc: "Automate decisions and reduce manual work with AI agents and copilots built with Microsoft Foundry, Copilot Studio, and Azure OpenAI, grounded in your data and governed for compliance.",
     to: "/services/agentic-ai",
     img: "/images/Service%20cards/Conversational AI.png"
   },
   {
     tab: "Insights",
     title: "Insights & analytics",
-    desc: "Uncover insights on demand and prevent issues before they hit, with dashboards, self-service, and predictive analytics on Power BI, Microsoft Fabric Real-Time Intelligence, and Databricks SQL.",
+    desc: "Uncover insights on demand and prevent issues before they happen with dashboards, self-service analytics, and predictive insights using Power BI, Microsoft Fabric Real-Time Intelligence, and Databricks SQL.",
     to: "/services/reporting-bi",
     img: "/images/Service%20cards/Visualization.png"
   },
   {
     tab: "Business Apps",
     title: "Business apps & automation",
-    desc: "Streamline approvals, reports, and handoffs on Microsoft Power Platform, Dynamics 365, Power Apps, and Power Automate, with Copilots embedded where they matter.",
+    desc: "Streamline approvals, reports, and handoffs with Microsoft Power Platform, Dynamics 365, Power Apps, and Power Automate, while embedding copilots into workflows.",
     to: "/services/business-apps",
     img: "/images/Service%20cards/Apps.png"
   },
   {
     tab: "Cloud",
     title: "Cloud modernization",
-    desc: "Lower cloud costs, ship faster, and scale on demand with Microsoft Azure, with run costs typically 30-40% lower after deployment.",
+    desc: "Reduce costs, accelerate delivery, and scale on demand with Microsoft Azure, laying the foundation for AI-powered applications, automation, and experiences.",
     to: "/services/cloud",
     img: "/images/Service%20cards/Cloud.png"
   },
   {
     tab: "Security",
     title: "Security & governance",
-    desc: "Get audit-ready from day one with Zero Trust security on Microsoft Defender, Entra, Purview, and Unity Catalog, aligned to ISO 27001, 27701, and 27018.",
+    desc: "Get audit-ready from day one with Zero Trust security using Microsoft Defender, Entra, Purview, and Unity Catalog, aligned to ISO 27001, ISO 27701, and ISO 27018.",
     to: "/services/security-compliance",
     img: "/images/Service%20cards/Security.png"
   },
@@ -116,8 +122,8 @@ const CASES = caseStudyItems.slice(0, 3);
 interface ResourceItem { title: string; desc: string; to: string; img: string }
 const RESOURCES: ResourceItem[] = [
   { title: "Power BI custom visuals", desc: "Plug custom Power BI visuals directly into your reports.", to: "/insights/power-bi-custom-visual-guide", img: "/images/power-bi-visuals.png" },
-  { title: "Best practice guides", desc: "Learn patterns, pitfalls, and platform decisions from MAQ Software engineers who've shipped at enterprise scale.", to: "/insights/best-practice-guides", img: "/images/best-practice-guides.png" },
-  { title: "Events", desc: "Meet our team at conferences and technical sessions on data platforms and AI.", to: "/events", img: "/images/webinar.png" },
+  { title: "Best practice guides", desc: "Learn patterns, pitfalls, and platform decisions from MAQ Software engineers.", to: "/insights/best-practice-guides", img: "/images/best-practice-guides.png" },
+  { title: "Events", desc: "Connect with our team and join our technical sessions at events near you.", to: "/events", img: "/images/webinar.png" },
 ];
 
 // "Industries we serve" data + icons are shared across the home explorations
@@ -192,8 +198,6 @@ const useStyles = makeStyles({
     "--maq-border": tokens.colorNeutralStroke2,
     "--maq-text-soft": tokens.colorNeutralForeground3,
     "--maq-text-faint": tokens.colorNeutralForeground4,
-    // Section headings sit one step below h2 on the ramp (--fs-h3, fluid clamp).
-    "& .maq-h2": { fontSize: "var(--fs-h3)", fontWeight: 600, letterSpacing: "-0.01em" },
   },
   wrap: { maxWidth: HOME_MAXW, margin: "0 auto" },
 
@@ -326,6 +330,9 @@ const useStyles = makeStyles({
 
   // Section-head spacing for the Products / Resources headings.
   prodHead: { marginBottom: "40px", "& p": { fontSize: "var(--fs-body-lg)" } },
+  // Products tab list — full-width hairline under the tabs; the selected Tab
+  // draws the brand-red underline indicator.
+  prodTabs: { marginBottom: "32px", borderBottom: "1px solid var(--maq-border)" },
   // Consistent card gaps across the Resources / What-we-deliver grids.
   cardGap: { gap: "24px" },
   prodGrid: { gridAutoRows: "1fr", gap: "24px" },
@@ -351,7 +358,7 @@ const useStyles = makeStyles({
     "@media (max-width: 880px)": { gridTemplateColumns: "1fr", gap: "28px" },
   },
   featImg: {
-    position: "relative", width: "100%", aspectRatio: "16 / 9", borderRadius: "20px", overflow: "hidden",
+    position: "relative", width: "100%", aspectRatio: "16 / 9", borderRadius: "16px", overflow: "hidden",
     backgroundColor: "#F7F7F7", display: "flex", alignItems: "center", justifyContent: "center",
   },
   featImgEl: { display: "block", width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" },
@@ -377,46 +384,46 @@ export function HomeV3() {
     <div className={s.page}>
       {/* HERO */}
       <header className={s.hero}>
-          <div className={s.heroTop}>
-            <motion.div className={s.heroText} variants={heroContainerV} initial="initial" animate="animate">
-              <motion.h1 className={`maq-h1 ${s.heroH1}`} variants={heroItemV}>
-                Turn data into decisions faster with AI-powered analytics
-              </motion.h1>
-              <motion.p className={s.sub} variants={heroItemV}>
-                We help enterprises scale AI, modernize data platforms, and accelerate cloud transformation — delivered with speed, quality, and confidence.
-              </motion.p>
-              <motion.div className={s.heroCta} variants={heroItemV}>
-                <PrimaryButton size="large" onClick={() => navigate("/insights/case-studies")}>
-                  See our work
-                </PrimaryButton>
-                <SecondaryButton size="large" onClick={() => handleContactClick()}>
-                  Contact us
-                </SecondaryButton>
-              </motion.div>
+        <div className={s.heroTop}>
+          <motion.div className={s.heroText} variants={heroContainerV} initial="initial" animate="animate">
+            <motion.h1 className={`maq-h1 ${s.heroH1}`} variants={heroItemV}>
+              Turn data into decisions faster with AI-powered analytics
+            </motion.h1>
+            <motion.p className={s.sub} variants={heroItemV}>
+              We help enterprises scale AI, modernize data platforms, and accelerate cloud transformation — delivered with speed, quality, and confidence.
+            </motion.p>
+            <motion.div className={s.heroCta} variants={heroItemV}>
+              <PrimaryButton size="large" onClick={() => navigate("/insights/case-studies")}>
+                See our work
+              </PrimaryButton>
+              <SecondaryButton size="large" onClick={() => handleContactClick()}>
+                Contact us
+              </SecondaryButton>
             </motion.div>
-            <motion.div className={s.heroImageCol} initial={{ opacity: 0, x: 44, scale: 0.96 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ duration: 0.8, ease: EASE, delay: 0.35 }}>
-              <picture>
-                <source srcSet="/images/home-banner.avif" type="image/avif" />
-                <source srcSet="/images/home-banner.webp" type="image/webp" />
-                <img
-                  className={`${s.heroArt} ${s.heroArtMobile}`}
-                  src="/images/home-banner.png"
-                  alt=""
-                  aria-hidden
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                />
-              </picture>
-            </motion.div>
-          </div>
+          </motion.div>
+          <motion.div className={s.heroImageCol} initial={{ opacity: 0, x: 44, scale: 0.96 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ duration: 0.8, ease: EASE, delay: 0.35 }}>
+            <picture>
+              <source srcSet="/images/home-banner.avif" type="image/avif" />
+              <source srcSet="/images/home-banner.webp" type="image/webp" />
+              <img
+                className={`${s.heroArt} ${s.heroArtMobile}`}
+                src="/images/home-banner.png"
+                alt=""
+                aria-hidden
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+              />
+            </picture>
+          </motion.div>
+        </div>
       </header>
 
       {/* WHAT WE DELIVER — product-style card grid (capabilities content) */}
-      <Section style={{ paddingTop: 80 }}>
+      <Section>
         <motion.div {...fadeUp}>
           <SectionHeading
-            title="What you can accomplish"
+            title="Services"
             className={s.prodHead}
           />
         </motion.div>
@@ -446,7 +453,7 @@ export function HomeV3() {
             onClick={() => window.open(CASES[0].href, "_blank", "noopener,noreferrer")}
           />
           <div className={s.featText}>
-            <h2 className={s.featTitle}>{CASES[0].title}</h2>
+            <h2 className={s.featTitle}>Reshaping retail with agentic AI solutions</h2>
             <p className={s.featSub}>How a global retailer moved from manual workflows to agentic AI, automating decisions across merchandising, pricing, operations, and customer engagement in real time.</p>
             <div className={s.featCta}>
               <SecondaryButton onClick={() => window.open(CASES[0].href, "_blank", "noopener,noreferrer")}>
@@ -466,12 +473,21 @@ export function HomeV3() {
           />
         </motion.div>
         <motion.div {...fadeUp}>
-          <PillTabs
-            items={PRODUCTS.map((p) => p.name)}
-            activeIndex={activeProd}
-            onSelect={setActiveProd}
-            ariaLabel="Products"
-          />
+          <TabList
+            className={s.prodTabs}
+            size="large"
+            selectedValue={activeProd}
+            onTabSelect={(_: SelectTabEvent, data: SelectTabData) =>
+              setActiveProd(data.value as number)
+            }
+            aria-label="Products"
+          >
+            {PRODUCTS.map((p, i) => (
+              <Tab key={p.name} value={i}>
+                {p.name}
+              </Tab>
+            ))}
+          </TabList>
           <AnimatePresence mode="wait">
             <motion.div key={activeProd} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.32, ease: EASE }}>
               <SplitCard
@@ -488,7 +504,7 @@ export function HomeV3() {
       </Section>
 
       {/* INDUSTRIES */}
-      <Section tone="gray">
+      <Section>
         <motion.div {...fadeUp}>
           <SectionHeading title="Industries" align="left" className={s.indHead} />
         </motion.div>

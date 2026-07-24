@@ -16,12 +16,7 @@ const useStyles = makeStyles({
   },
   title: {
     display: "block",
-    fontSize: "36px",
-    lineHeight: 1.15,
-    fontWeight: 700,
-    color: "var(--maq-navy)",
     margin: "0 0 6px",
-    letterSpacing: "-0.02em",
     textAlign: "left",
   },
   grid: {
@@ -54,7 +49,7 @@ export function PartnershipHighlights({
       <div className={s.inner}>
         <div className={s.head}>
           {/* eyebrow hidden intentionally */}
-          <h2 className={s.title}>{title}</h2>
+          <h2 className={`maq-h2 ${s.title}`}>{title}</h2>
         </div>
         <div className={s.grid}>
           {stats.map((h) => (

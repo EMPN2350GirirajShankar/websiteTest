@@ -2,7 +2,7 @@ import { makeStyles } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
   hero: {
-    backgroundColor: "var(--maq-off-white)",
+    backgroundColor: "var(--colorNeutralBackground3)",
     padding: "64px 32px 56px",
     backgroundImage: "url('/logos/wave_dots.svg')",
     backgroundPosition: "bottom left",
@@ -15,19 +15,9 @@ const useStyles = makeStyles({
   },
   h1: {
     margin: "0 0 12px",
-    fontSize: "40px",
-    lineHeight: 1.15,
-    letterSpacing: "-0.02em",
-    color: "var(--maq-black)",
-    fontWeight: 700,
   },
   h2: {
     margin: "0 0 8px",
-    fontSize: "28px",
-    lineHeight: 1.2,
-    letterSpacing: "-0.01em",
-    color: "var(--maq-black)",
-    fontWeight: 700,
   },
   meta: {
     fontSize: "14px",
@@ -43,11 +33,6 @@ const useStyles = makeStyles({
   },
   sectionTitle: {
     margin: "0 0 18px",
-    fontSize: "30px",
-    lineHeight: 1.2,
-    letterSpacing: "-0.01em",
-    color: "var(--maq-black)",
-    fontWeight: 700,
   },
   list: {
     margin: "0 0 22px",
@@ -97,8 +82,8 @@ export function ProductCertyFASTInstallationGuide() {
     <>
       <section className={s.hero}>
         <div className={s.heroInner}>
-          <h1 className={s.h1}>Easy Step-by-Step Installation and Usage Guide</h1>
-          <h2 className={s.h2}>CertyFAST by MAQ Software</h2>
+          <h1 className={`maq-h1 ${s.h1}`}>Easy Step-by-Step Installation and Usage Guide</h1>
+          <h2 className={`maq-h2 ${s.h2}`}>CertyFAST by MAQ Software</h2>
           <div className={s.meta}>5 minutes to read | Posted: 27th May 2024</div>
           <img className={s.media} src="/images/external/certyfast/CertyFastBlogHeadingImage.png" alt="" loading="lazy" />
         </div>
@@ -106,7 +91,7 @@ export function ProductCertyFASTInstallationGuide() {
 
       <section className={s.section}>
         <div className={s.inner}>
-          <h2 className={s.sectionTitle}>Installation Steps</h2>
+          <h2 className={`maq-h2 ${s.sectionTitle}`}>Installation Steps</h2>
           <ol className={s.list}>
             <li className={s.listItem}>
               Step 1: <a className={s.link} href="https://github.com/maqsoftware/CertyFAST" target="_blank" rel="noreferrer">Click here</a> to download the latest version of the tool from Github.
@@ -117,7 +102,7 @@ export function ProductCertyFASTInstallationGuide() {
           </ol>
           <img className={s.media} src="/images/external/certyfast/CertyFASTSetup.png" alt="" loading="lazy" />
 
-          <h2 className={s.sectionTitle}>Exploring the capabilities of CertyFAST</h2>
+          <h2 className={`maq-h2 ${s.sectionTitle}`}>Exploring the capabilities of CertyFAST</h2>
           <ol className={s.list}>
             <li className={s.listItem}>Home Page: Select your semantic model and report.</li>
             <img className={s.media} src="/images/external/certyfast/CertifyHomePage.png" alt="" loading="lazy" />
