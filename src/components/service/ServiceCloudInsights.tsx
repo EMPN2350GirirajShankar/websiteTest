@@ -3,7 +3,7 @@ import { CaseStudyCard } from "../cards/CaseStudyCard";
 import { getServiceInsightImage } from "../../data/serviceInsightImages";
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "#fff" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "24px" },
   eyebrow: {

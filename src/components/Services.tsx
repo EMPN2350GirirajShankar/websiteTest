@@ -14,7 +14,7 @@ import { FeatureCard } from "./cards/FeatureCard";
 import { textStyles } from "../textStyles";
 
 const useStyles = makeStyles({
-  section: { padding: "32px 32px", backgroundColor: tokens.colorNeutralBackground1 },
+  section: { padding: "32px var(--section-pad-x)", backgroundColor: tokens.colorNeutralBackground1 },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "20px" },
   eyebrow: {

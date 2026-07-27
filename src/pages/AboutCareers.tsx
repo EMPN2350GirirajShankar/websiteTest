@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   hero: {
     backgroundColor: "var(--colorNeutralBackground3)",
     // Consistent About-page hero padding (see AboutWhoWeAre for the pattern).
-    padding: "40px 32px",
+    padding: "40px var(--section-pad-x)",
   },
   heroInner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   eyebrow: {
@@ -43,7 +43,7 @@ const useStyles = makeStyles({
   },
 
   // ── Why MAQ ───────────────────────────────────────────────────────────────
-  whySection: { padding: "48px 32px", backgroundColor: "#fff" },
+  whySection: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
   whyInner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   sectionHeading: {
     margin: "0 0 24px",
@@ -83,7 +83,7 @@ const useStyles = makeStyles({
 
   // ── Openings section ──────────────────────────────────────────────────────
   openingsSection: {
-    padding: "40px 32px 64px",
+    padding: "40px var(--section-pad-x) 64px",
     backgroundColor: "var(--colorNeutralBackground3)",
   },
   openingsInner: {

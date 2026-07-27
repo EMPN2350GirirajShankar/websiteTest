@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   makeStyles,
   tokens,
@@ -15,6 +15,7 @@ import {
   Window24Regular,
   Pulse24Regular,
   CheckmarkCircle24Regular,
+  ChevronLeft20Regular,
   ChevronRight20Regular,
 } from "@fluentui/react-icons";
 import { Link, useNavigate } from "react-router-dom";
@@ -140,6 +141,7 @@ const HOME_MAXW = "var(--maq-container-wide)";
    fadeUp: scroll-reveal applied to each section (animates once on enter).
    hero*: staggered mount animation for the hero on first paint. */
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const MotionLink = motion.create(Link);
 const fadeUp = {
   initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
@@ -215,9 +217,12 @@ const useStyles = makeStyles({
     display: "flex", flexDirection: "column", justifyContent: "center",
     // Left and right edges both align to the centered container gutter.
     paddingTop: "8px", paddingBottom: "8px",
-    paddingLeft: "max(32px, calc((100vw - var(--maq-container-wide)) / 2))",
-    paddingRight: "max(32px, calc((100vw - var(--maq-container-wide)) / 2))",
-    [bp.lg]: { minHeight: "0", paddingTop: "48px", paddingBottom: "48px", paddingLeft: "32px", paddingRight: "32px" }, [bp.md]: { paddingTop: "40px", paddingBottom: "40px", paddingLeft: "22px", paddingRight: "22px" }, [bp.sm]: { paddingTop: "32px", paddingBottom: "32px" },
+    // Horizontal gutter tracks --section-pad-x (32px → 22px at ≤720px) so the
+    // hero's left/right margins match every other section at every width; the
+    // max() keeps content aligned to the centered container on wide screens.
+    paddingLeft: "max(var(--section-pad-x), calc((100vw - var(--maq-container-wide)) / 2))",
+    paddingRight: "max(var(--section-pad-x), calc((100vw - var(--maq-container-wide)) / 2))",
+    [bp.lg]: { minHeight: "0", paddingTop: "48px", paddingBottom: "48px" }, [bp.md]: { paddingTop: "40px", paddingBottom: "40px" }, [bp.sm]: { paddingTop: "32px", paddingBottom: "32px" },
   },
   heroArt: {
     display: "block", width: "100%", height: "auto", objectFit: "contain",
@@ -400,6 +405,11 @@ const useStyles = makeStyles({
   productShelf: {
     display: "flex",
     gap: "16px",
+    // Equal-height cards: the shelf has no fixed height, so PosterCard's
+    // height:100% can't resolve — force the card links to auto height (this
+    // child selector outranks the card's atomic class) and let stretch equalize.
+    alignItems: "stretch",
+    "& > a": { height: "auto" },
     overflowX: "auto",
     scrollSnapType: "x mandatory",
     // Full-bleed: break out of the section gutter so cards scroll edge-to-edge
@@ -419,6 +429,27 @@ const useStyles = makeStyles({
   productShelfCard: {
     flex: "0 0 min(62vw, 330px)",
     scrollSnapAlign: "start",
+  },
+  shelfNav: {
+    display: "flex",
+    gap: "8px",
+    justifyContent: "flex-start",
+    marginTop: "16px",
+  },
+  shelfNavBtn: {
+    width: "40px",
+    height: "40px",
+    borderRadius: "50%",
+    border: "1px solid var(--maq-border)",
+    backgroundColor: tokens.colorNeutralBackground1,
+    color: tokens.colorNeutralForeground1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    transition: "border-color .15s ease, color .15s ease, opacity .15s ease",
+    ":not(:disabled):hover": { border: "1px solid var(--maq-card-hover-border)", color: "var(--maq-red)" },
+    ":disabled": { opacity: 0.35, cursor: "default" },
   },
 
   // Horizontal "Our insights" cards (phones): text left, taller image right.
@@ -468,6 +499,36 @@ export function HomeV3() {
   // Below the lg breakpoint the image/description card grids get overwhelming,
   // so Services + Industries collapse to a compact, tappable title list.
   const isCompact = useMediaQuery(mq.lg);
+
+  // "Our products" shelf: arrow controls for users without touch or a horizontal
+  // wheel. Buttons scroll one card at a time and disable at each end; the nav is
+  // hidden if the shelf doesn't overflow.
+  const shelfRef = useRef<HTMLDivElement>(null);
+  const [shelfEdges, setShelfEdges] = useState({ atStart: true, atEnd: false, overflow: true });
+  const readShelfEdges = () => {
+    const el = shelfRef.current;
+    if (!el) return;
+    setShelfEdges({
+      atStart: el.scrollLeft <= 1,
+      atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 1,
+      overflow: el.scrollWidth > el.clientWidth + 1,
+    });
+  };
+  const scrollShelf = (dir: number) => {
+    const el = shelfRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("a");
+    const step = card ? card.offsetWidth + 16 : el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+  useEffect(() => {
+    if (!isCompact) return;
+    readShelfEdges();
+    window.addEventListener("resize", readShelfEdges);
+    return () => window.removeEventListener("resize", readShelfEdges);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCompact]);
+
   const compactList = (items: { title: string; to: string; icon?: ReactNode }[]) => {
     // Split down-then-across (col 1 = first half) so DOM/reading order stays 1..n
     // and each column carries its own top divider. Two columns where it fits,
@@ -481,14 +542,14 @@ export function HomeV3() {
             key={gi}
             className={`${s.compactColumn}${gi === 0 ? ` ${s.compactColumnFirst}` : ""}`}
           >
-            {group.map((it) => (
-              <Link key={it.to} to={it.to} className={s.compactRow}>
+            {group.map((it, li) => (
+              <MotionLink key={it.to} to={it.to} className={s.compactRow} {...onScroll(gi === 0 ? li : half + li)}>
                 <span className={s.compactRowMain}>
                   {it.icon ? <span className={s.compactIcon} aria-hidden>{it.icon}</span> : null}
                   <span>{it.title}</span>
                 </span>
                 <ChevronRight20Regular className={s.compactArrow} />
-              </Link>
+              </MotionLink>
             ))}
           </div>
         ))}
@@ -593,20 +654,44 @@ export function HomeV3() {
           />
         </motion.div>
         {isCompact ? (
-          <div className={s.productShelf}>
-            {PRODUCTS.map((p) => (
-              <PosterCard
-                key={p.name}
-                className={s.productShelfCard}
-                to={p.to}
-                img={p.img}
-                imgFit="cover"
-                aspectRatio="16 / 9"
-                title={p.name}
-                desc={p.short}
-              />
-            ))}
-          </div>
+          <motion.div {...fadeUp}>
+            <div className={s.productShelf} ref={shelfRef} onScroll={readShelfEdges}>
+              {PRODUCTS.map((p) => (
+                <PosterCard
+                  key={p.name}
+                  className={s.productShelfCard}
+                  to={p.to}
+                  img={p.img}
+                  imgFit="cover"
+                  aspectRatio="16 / 9"
+                  title={p.name}
+                  desc={p.short}
+                />
+              ))}
+            </div>
+            {shelfEdges.overflow ? (
+              <div className={s.shelfNav}>
+                <button
+                  type="button"
+                  className={s.shelfNavBtn}
+                  aria-label="Previous products"
+                  onClick={() => scrollShelf(-1)}
+                  disabled={shelfEdges.atStart}
+                >
+                  <ChevronLeft20Regular />
+                </button>
+                <button
+                  type="button"
+                  className={s.shelfNavBtn}
+                  aria-label="Next products"
+                  onClick={() => scrollShelf(1)}
+                  disabled={shelfEdges.atEnd}
+                >
+                  <ChevronRight20Regular />
+                </button>
+              </div>
+            ) : null}
+          </motion.div>
         ) : (
           <motion.div {...fadeUp}>
             <TabList
@@ -666,8 +751,8 @@ export function HomeV3() {
         </motion.div>
         {isCompact ? (
           <div className={s.insightStack}>
-            {RESOURCES.map((r) => (
-              <Link key={r.to} to={r.to} className={s.insightRow}>
+            {RESOURCES.map((r, i) => (
+              <MotionLink key={r.to} to={r.to} className={s.insightRow} {...onScroll(i)}>
                 <div className={s.insightText}>
                   <h3 className={s.insightTitle}>{r.title}</h3>
                   <p className={s.insightDesc}>{r.desc}</p>
@@ -675,7 +760,7 @@ export function HomeV3() {
                 <div className={s.insightImgWrap} aria-hidden>
                   <img src={r.img} alt="" className={`${s.insightImg} zoom-img`} loading="lazy" decoding="async" />
                 </div>
-              </Link>
+              </MotionLink>
             ))}
           </div>
         ) : (

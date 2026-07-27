@@ -1,146 +1,17 @@
-import { makeStyles } from "@fluentui/react-components";
 import {
   PeopleCommunity24Regular,
   BookInformation24Regular,
   DataPie24Regular,
   ShieldCheckmark24Regular,
-  BuildingGovernment24Regular,
 } from "@fluentui/react-icons";
 // import { TrustBanner } from "../components/TrustBanner";
 
 import { IndustryHeroV2 } from "../components/industry/IndustryHeroV2";
-import { ImpactStats } from "../components/industry/ImpactStats";
-import { SolutionShowcase } from "../components/industry/SolutionShowcase";
-import { IndustryCaseStudies } from "../components/industry/IndustryCaseStudies";
-import { MarketplaceOffers } from "../components/industry/MarketplaceOffers";
-const useVisualStyles = makeStyles({
-  tile: {
-    background: "#fff",
-    border: "1px solid var(--maq-border)",
-    borderRadius: "10px",
-    padding: "14px 16px",
-  },
-  tileTitle: {
-    fontSize: "11px",
-    textTransform: "uppercase",
-    letterSpacing: "0.08em",
-    color: "var(--maq-gray-500)",
-    marginBottom: "10px",
-    display: "flex",
-    alignItems: "center",
-    gap: "6px",
-  },
-  channelRow: { display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" },
-  channelLabel: { fontSize: "11px", width: "70px", color: "var(--maq-gray-500)" },
-  channelTrack: { flex: 1, height: "8px", background: "var(--maq-gray-100)", borderRadius: "4px" },
-  channelFill: { height: "100%", borderRadius: "4px" },
-  programGrid: { display: "flex", flexDirection: "column", gap: "6px" },
-  programRow: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "8px",
-  },
-  programLabel: { fontSize: "11px", color: "var(--maq-gray-600)", flex: 1 },
-  scoreBox: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-    gap: "4px",
-  },
-  scoreValue: {
-    fontSize: "28px",
-    fontWeight: 700,
-    color: "var(--maq-red)",
-    lineHeight: 1,
-  },
-  scoreLabel: { fontSize: "10px", color: "var(--maq-gray-500)", textAlign: "center" },
-});
-
-const channels = [
-  { label: "Web",        pct: "78%", red: true  },
-  { label: "Mobile",     pct: "65%", red: false },
-  { label: "Voice",      pct: "52%", red: false },
-  { label: "In-person",  pct: "28%", red: false },
-];
-
-const programRows = [
-  { label: "Benefits intake",     status: "ontrack" },
-  { label: "Eligibility review",  status: "atrisk" },
-  { label: "Disbursement",        status: "ontrack" },
-  { label: "Audit & oversight",   status: "complete" },
-];
-
-function PublicSectorHeroVisual() {
-  const v = useVisualStyles();
-  return (
-    <>
-      <div className={v.tile}>
-        <div className={v.tileTitle}>
-          <BuildingGovernment24Regular /> Citizen requests today
-        </div>
-        {channels.map(({ label, pct, red }) => (
-          <div key={label} className={v.channelRow}>
-            <span className={v.channelLabel}>{label}</span>
-            <div className={v.channelTrack}>
-              <div
-                className={v.channelFill}
-                style={{ width: pct, background: red ? "var(--maq-red)" : "var(--maq-gray-500)" }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className={v.tile}>
-        <span className={v.tileTitle}>Program performance</span>
-        <div className={v.programGrid}>
-          {programRows.map(({ label, status }) => (
-            <div key={label} className={v.programRow}>
-              <span className={v.programLabel}>{label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className={v.tile}>
-        <span className={v.tileTitle}>Citizens served via AI agents</span>
-        <div className={v.scoreBox}>
-          <span className={v.scoreValue}>Millions+</span>
-          <span className={v.scoreLabel}>via state-deployed AI chatbot</span>
-        </div>
-      </div>
-    </>
-  );
-}
+import { AccordionShowcase } from "../components/industry/AccordionShowcase";
+import { IndustryImpactCards } from "../components/industry/IndustryImpactCards";
+import type { ImpactCaseStudy } from "../components/industry/IndustryImpactCards";
 
 // --- Public Sector content data ---
-const publicSectorStats = [
-  {
-    metric: "Millions+",
-    label: "Citizens reaching state benefits through an AI chatbot for the Arizona government",
-    sourceLabel: "Arizona citizen chatbot case study",
-    sourceHref: "https://blog.maqsoftware.com/2021/05/chatbot-for-arizona-government.html",
-  },
-  {
-    metric: "Secure-by-design",
-    label: "Reference Copilot patterns for environments with audit, RBAC, and sensitive-data requirements",
-    sourceLabel: "Secure Copilot case study",
-    sourceHref: "https://blog.maqsoftware.com/2024/08/building-secure-copilot-addressing-key.html",
-  },
-  {
-    metric: "Grounded",
-    label: "Citation-backed answers over policy, regulation, and benefits content for caseworkers and analysts",
-    sourceLabel: "AI Copilot information retrieval case study",
-    sourceHref: "https://blog.maqsoftware.com/2024/07/streamlining-information-retrieval-with.html",
-  },
-  {
-    metric: "CoE-led",
-    label: "Structured AI adoption playbook for moving public-sector pilots into production safely",
-    sourceLabel: "AI Center of Excellence case study",
-    sourceHref: "https://blog.maqsoftware.com/2026/02/transforming-ai-interest-into-adoption.html",
-  },
-];
-
 const publicSectorAgents = [
   {
     name: "Citizen Services Copilot",
@@ -172,27 +43,34 @@ const publicSectorAgents = [
   },
 ];
 
-const publicSectorCases = [
+const publicSectorImpactCards: ImpactCaseStudy[] = [
   {
-    tag: "Government chatbot",
     title: "Millions of Arizona Citizens Receive Benefits With the Help of an AI-powered Chatbot",
     teaser:
-      "State government chatbot helping millions of citizens reach the benefits and services they qualify for — the reference deployment for public-sector citizen-facing AI.",
+      "State government chatbot helping millions of citizens reach the benefits and services they qualify for, the reference deployment for public-sector citizen-facing AI.",
+    imageUrl: "/images/case-studies/external/Arizona-Chatbot-case-study-main.webp",
     href: "https://blog.maqsoftware.com/2021/05/chatbot-for-arizona-government.html",
   },
   {
-    tag: "Secure Copilot",
     title: "Building a secure Copilot: Addressing key security challenges",
     teaser:
-      "Reference design for shipping enterprise Copilots safely — directly applicable to federal, state, and local agency environments with audit and sensitive-data requirements.",
+      "Reference design for shipping enterprise Copilots safely, directly applicable to federal, state, and local agency environments with audit and sensitive-data requirements.",
+    imageUrl: "/images/case-studies/external/B034_CopilotSecurity_Banner.webp",
     href: "https://blog.maqsoftware.com/2024/08/building-secure-copilot-addressing-key.html",
   },
   {
-    tag: "Information retrieval",
     title: "Streamlining information retrieval with AI Copilots",
     teaser:
-      "Citation-backed enterprise search Copilots that ground answers in your proprietary content — a proven pattern for policy, regulation, and benefits retrieval in public-sector contexts.",
+      "Citation-backed enterprise search Copilots that ground answers in your proprietary content, a proven pattern for policy, regulation, and benefits retrieval in public-sector contexts.",
+    imageUrl: "/images/case-studies/external/cs-streamlining-info-retrieval.jpg",
     href: "https://blog.maqsoftware.com/2024/07/streamlining-information-retrieval-with.html",
+  },
+  {
+    title: "Transforming AI interest into adoption by establishing an AI Center of Excellence",
+    teaser:
+      "A structured AI adoption playbook for moving public-sector pilots into production safely.",
+    imageUrl: "/images/case-studies/external/cs-transforming-ai-adoption.jpg",
+    href: "https://blog.maqsoftware.com/2026/02/transforming-ai-interest-into-adoption.html",
   },
 ];
 
@@ -205,25 +83,18 @@ export function IndustryPublicSector() {
         subhead="Use AI to serve citizens faster, modernize aging systems, and keep sensitive data secure."
       />
 
-      <ImpactStats
-        eyebrow="Proven outcomes"
-        title="Real impact for public sector leaders"
-        sub="Outcomes from MAQ Software's dedicated public-sector engagement and gov-adjacent secure-Copilot and AI-CoE patterns applied to regulated agency environments."
-        stats={publicSectorStats}
-      />
-      <SolutionShowcase
+      <AccordionShowcase
         sectionId="public-sector-solutions"
-        eyebrow="Agentic AI"
         title="Bring AI to the mission"
-        agents={publicSectorAgents}
-        industryLabel="Public sector"
+        items={publicSectorAgents.map((a) => ({
+          icon: a.icon,
+          title: a.name,
+          desc: a.description,
+        }))}
       />
-      <IndustryCaseStudies
-        eyebrow="Public sector case studies"
-        title="How public sector organizations move faster with MAQ Software"
-        cases={publicSectorCases}
-        seeAllLabel="See all public sector case studies"
-        seeAllHref="/insights/case-studies?industry=Public%20sector#insights-content"
+      <IndustryImpactCards
+        title="Real impact for public sector leaders"
+        cards={publicSectorImpactCards}
       />
     </>
   );

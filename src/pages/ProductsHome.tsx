@@ -8,7 +8,7 @@ import { StatCard } from "../components/cards/StatCard";
 const useStyles = makeStyles({
   hero: {
     backgroundColor: "var(--colorNeutralBackground3)",
-    padding: "64px 32px 48px",
+    padding: "64px var(--section-pad-x) 48px",
   },
   heroInner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   eyebrow: {
@@ -31,14 +31,14 @@ const useStyles = makeStyles({
     maxWidth: "720px",
     lineHeight: 1.6,
   },
-  list: { padding: "64px 32px", backgroundColor: "#fff" },
+  list: { padding: "64px var(--section-pad-x)", backgroundColor: "#fff" },
   listInner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
     gap: "20px",
   },
-  cta: { padding: "56px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
+  cta: { padding: "56px var(--section-pad-x)", backgroundColor: "var(--colorNeutralBackground3)" },
   ctaInner: {
     maxWidth: "1100px",
     margin: "0 auto",
@@ -58,7 +58,7 @@ const useStyles = makeStyles({
   },
 
   stats: {
-    padding: "32px",
+    padding: "32px var(--section-pad-x)",
     backgroundColor: "#fff",
     borderTop: "1px solid var(--maq-border)",
     borderBottom: "1px solid var(--maq-border)",

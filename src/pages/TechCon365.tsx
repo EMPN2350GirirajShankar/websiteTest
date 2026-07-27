@@ -16,7 +16,7 @@ const APPSOURCE_URL =
 const useStyles = makeStyles({
   hero: {
     backgroundColor: "var(--colorNeutralBackground3)",
-    padding: "64px 32px 56px",
+    padding: "64px var(--section-pad-x) 56px",
     position: "relative",
     overflow: "hidden",
   },
@@ -124,11 +124,11 @@ const useStyles = makeStyles({
     lineHeight: 1.5,
   },
   section: {
-    padding: "56px 32px",
+    padding: "56px var(--section-pad-x)",
     backgroundColor: "#fff",
   },
   sectionAlt: {
-    padding: "56px 32px",
+    padding: "56px var(--section-pad-x)",
     backgroundColor: "var(--colorNeutralBackground3)",
   },
   inner: {

@@ -15,7 +15,7 @@ import { PrimaryButton } from "../components/buttons";
 const useStyles = makeStyles({
   hero: {
     backgroundColor: "var(--colorNeutralBackground3)",
-    padding: "48px 32px 56px",
+    padding: "48px var(--section-pad-x) 56px",
   },
   heroInner: {
     maxWidth: "var(--maq-container-wide)",
@@ -91,7 +91,7 @@ const useStyles = makeStyles({
   visualName: { fontSize: "15px", fontWeight: 700, color: "var(--maq-black)" },
   visualSub: { fontSize: "12px", color: "var(--maq-red)", textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600 },
 
-  impact: { padding: "40px 32px", backgroundColor: "#fff", borderBottom: "1px solid var(--maq-border)" },
+  impact: { padding: "40px var(--section-pad-x)", backgroundColor: "#fff", borderBottom: "1px solid var(--maq-border)" },
   impactInner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   impactGrid: {
     display: "grid",
@@ -121,8 +121,8 @@ const useStyles = makeStyles({
   },
   impactLabel: { fontSize: "13.5px", color: "var(--maq-gray-700)", lineHeight: 1.5 },
 
-  section: { padding: "64px 32px", backgroundColor: "#fff" },
-  sectionAlt: { padding: "64px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
+  section: { padding: "64px var(--section-pad-x)", backgroundColor: "#fff" },
+  sectionAlt: { padding: "64px var(--section-pad-x)", backgroundColor: "var(--colorNeutralBackground3)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   eyebrow: {
     fontSize: "12px",
@@ -195,7 +195,7 @@ const useStyles = makeStyles({
     fontWeight: 500,
   },
 
-  related: { padding: "56px 32px", backgroundColor: "#fff" },
+  related: { padding: "56px var(--section-pad-x)", backgroundColor: "#fff" },
   relatedGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(3, 1fr)",
@@ -315,7 +315,7 @@ export function ProductDetail() {
         </div>
       </section>
 
-      <section className={s.sectionAlt}>
+      <section className={s.section}>
         <div className={s.inner}>
           {/* <span className={s.eyebrow}>Where teams use it</span> */}
           <h2 className={`maq-h2 ${s.h2}`}>Common use cases</h2>

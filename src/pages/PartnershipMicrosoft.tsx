@@ -11,8 +11,8 @@ import { PartnershipInsights } from "../components/partnerships/PartnershipInsig
 // ---------------------------------------------------------------------------
 const useStyles = makeStyles({
   overviewSection: {
-    padding: "48px 32px",
-    backgroundColor: "var(--colorNeutralBackground3)",
+    padding: "48px var(--section-pad-x)",
+    backgroundColor: "#fff",
   },
   overviewInner: {
     maxWidth: "var(--maq-container-wide)",
@@ -21,10 +21,6 @@ const useStyles = makeStyles({
     gridTemplateColumns: "1fr",
     gap: "48px",
     alignItems: "center",
-    "@media (max-width: 960px)": {
-      gridTemplateColumns: "1fr",
-      textAlign: "center",
-    },
   },
   overviewText: {
     fontSize: "15px",
@@ -35,8 +31,8 @@ const useStyles = makeStyles({
 
   // Marketplace section
   marketSection: {
-    padding: "48px 32px",
-    backgroundColor: "var(--colorNeutralBackground3)",
+    padding: "48px var(--section-pad-x)",
+    backgroundColor: "#fff",
   },
   marketInner: {
     maxWidth: "var(--maq-container-wide)",

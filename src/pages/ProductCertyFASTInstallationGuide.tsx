@@ -3,7 +3,7 @@ import { makeStyles } from "@fluentui/react-components";
 const useStyles = makeStyles({
   hero: {
     backgroundColor: "var(--colorNeutralBackground3)",
-    padding: "64px 32px 56px",
+    padding: "64px var(--section-pad-x) 56px",
     backgroundImage: "url('/logos/wave_dots.svg')",
     backgroundPosition: "bottom left",
     backgroundRepeat: "no-repeat",
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
   section: {
     backgroundColor: "#fff",
-    padding: "48px 32px 80px",
+    padding: "48px var(--section-pad-x) 80px",
   },
   inner: {
     maxWidth: "900px",

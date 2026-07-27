@@ -166,10 +166,12 @@ const useStyles = makeStyles({
     top: "12px",
     width: "44px",
     height: "44px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     background: "transparent",
     border: "none",
     color: "var(--maq-ink)",
-    fontSize: "20px",
     cursor: "pointer",
   },
   mobileNavList: {
@@ -609,7 +611,9 @@ export function HeaderV2() {
           {open && (
             <>
               <button className={s.closeBtn} aria-label="Close navigation" onClick={closeMenu}>
-                ×
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path d="M5 5l14 14M19 5L5 19" stroke="#333" strokeWidth="2" strokeLinecap="round" />
+                </svg>
               </button>
               <div className={s.mobileBrand}>
                 <Link to="/" onClick={closeMenu} className={s.brand} aria-label="MAQ Software homepage">

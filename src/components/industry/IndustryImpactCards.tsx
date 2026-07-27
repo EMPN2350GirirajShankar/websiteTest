@@ -11,15 +11,15 @@ export interface ImpactCaseStudy {
 }
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "#fff" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   title: { margin: "0 0 40px" },
+  // auto-fit + collapsing empty tracks means any count (2-4) fills the full
+  // section width — 2 cards span the row as two wide cards, 4 as four.
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
     gap: "16px",
-    "@media (max-width: 1080px)": { gridTemplateColumns: "repeat(2, minmax(0, 1fr))" },
-    "@media (max-width: 560px)": { gridTemplateColumns: "1fr" },
   },
 });
 

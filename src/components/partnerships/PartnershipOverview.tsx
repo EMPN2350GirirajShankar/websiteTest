@@ -1,7 +1,7 @@
 import { makeStyles } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
   grid: {
     maxWidth: "var(--maq-container-wide)",
     margin: "0 auto",

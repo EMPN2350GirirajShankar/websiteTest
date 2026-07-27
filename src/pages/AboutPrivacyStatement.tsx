@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   },
   hero: {
     backgroundColor: "var(--colorNeutralBackground3)",
-    padding: "48px 32px 56px",
+    padding: "48px var(--section-pad-x) 56px",
     backgroundImage: "url('/logos/wave_dots.svg')",
     backgroundPosition: "bottom left",
     backgroundRepeat: "no-repeat",
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     color: "var(--maq-gray-700)",
   },
   section: {
-    padding: "56px 32px 80px",
+    padding: "56px var(--section-pad-x) 80px",
   },
   sectionInner: {
     maxWidth: "820px",

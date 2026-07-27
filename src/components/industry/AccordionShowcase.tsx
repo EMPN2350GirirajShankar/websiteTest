@@ -16,7 +16,7 @@ export interface AccordionShowcaseItem {
 }
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "#fff" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   title: { margin: "0 0 40px" },
   body: {
@@ -101,8 +101,9 @@ export function AccordionShowcase({
   sectionId?: string;
   title?: string;
   items: AccordionShowcaseItem[];
-  image: string;
-  imageAlt: string;
+  /** Optional supporting image on the right; without it the accordion spans full width. */
+  image?: string;
+  imageAlt?: string;
 }) {
   const s = useStyles();
   const [active, setActive] = useState(0);
@@ -111,7 +112,7 @@ export function AccordionShowcase({
     <section className={s.section} id={sectionId}>
       <div className={s.inner}>
         <h2 className={`maq-h2 ${s.title}`}>{title}</h2>
-        <div className={s.body}>
+        <div className={image ? s.body : undefined}>
           <div className={s.list}>
             {items.map((it, i) => {
               const open = i === active;
@@ -142,15 +143,17 @@ export function AccordionShowcase({
             })}
           </div>
 
-          <div className={s.imageWrap}>
-            <img
-              className={s.image}
-              src={image}
-              alt={imageAlt}
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+          {image ? (
+            <div className={s.imageWrap}>
+              <img
+                className={s.image}
+                src={image}
+                alt={imageAlt ?? ""}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ) : null}
         </div>
       </div>
     </section>

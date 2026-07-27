@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   footer: {
     backgroundColor: "var(--maq-gray-600)",
     color: "#fff",
-    padding: "56px 32px 24px",
+    padding: "56px var(--section-pad-x) 24px",
   },
   inner: { maxWidth: "1240px", margin: "0 auto" },
   top: {

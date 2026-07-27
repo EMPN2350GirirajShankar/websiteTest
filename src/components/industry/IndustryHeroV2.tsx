@@ -15,15 +15,15 @@ export interface IndustryHeroV2Props {
 const useStyles = makeStyles({
   wrap: {
     backgroundColor: "var(--colorNeutralBackground3)",
-    padding: "0 32px",
+    padding: "0 var(--section-pad-x)",
     height: "360px",
-    "@media (max-width: 960px)": { height: "auto", padding: "40px 22px" },
+    "@media (max-width: 960px)": { height: "auto", padding: "40px var(--section-pad-x)" },
   },
   // Text-only variant: no fixed height, so the band hugs the copy.
   wrapText: {
     backgroundColor: "var(--colorNeutralBackground3)",
-    padding: "56px 32px",
-    "@media (max-width: 960px)": { padding: "44px 22px" },
+    padding: "56px var(--section-pad-x)",
+    "@media (max-width: 960px)": { padding: "44px var(--section-pad-x)" },
   },
   grid: {
     maxWidth: "var(--maq-container-wide)",

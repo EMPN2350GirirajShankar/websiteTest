@@ -61,15 +61,17 @@
   --maq-container-wide: 1440px;
 
   /* ─────────────────────────────────────────────────────────────
-     Type scale — single source of truth (size). Fixed rem sizes; the
-     per-tier line-height / weight / letter-spacing live on the canonical
-     .maq-* classes below. Optimized for scanning, not long-form reading.
+     Type scale — single source of truth (size). Headings scale fluidly with
+     clamp() between ~375px and ~1240px viewports (min = mobile, max = desktop),
+     so there are no hard size jumps at breakpoints; body/lead/small stay fixed.
+     Per-tier line-height / weight / letter-spacing live on the canonical
+     .maq-* classes below.
      ───────────────────────────────────────────────────────────── */
-  --fs-hero:    4.5rem;    /* 72px  hero headline */
-  --fs-h1:      3.5rem;    /* 56px */
-  --fs-h2:      2.5rem;    /* 40px */
-  --fs-h3:      1.875rem;  /* 30px */
-  --fs-h4:      1.375rem;  /* 22px */
+  --fs-hero:    clamp(2.5rem,   1.63rem + 3.70vw, 4.5rem);   /* 40 → 72px  hero headline */
+  --fs-h1:      clamp(2.125rem, 1.53rem + 2.54vw, 3.5rem);   /* 34 → 56px */
+  --fs-h2:      clamp(1.75rem,  1.42rem + 1.39vw, 2.5rem);   /* 28 → 40px */
+  --fs-h3:      clamp(1.5rem,   1.34rem + 0.69vw, 1.875rem); /* 24 → 30px */
+  --fs-h4:      clamp(1.25rem,  1.20rem + 0.23vw, 1.375rem); /* 20 → 22px */
   --fs-lead:    1.125rem;  /* 18px  intro / sub-head */
   --fs-body:    1rem;      /* 16px  body default */
   --fs-small:   0.875rem;  /* 14px */
