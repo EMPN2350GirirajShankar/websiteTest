@@ -7,7 +7,7 @@ import {
 } from "@fluentui/react-icons";
 // import { TrustBanner } from "../components/TrustBanner";
 
-import { IndustryHero } from "../components/industry/IndustryHero";
+import { IndustryHeroV2 } from "../components/industry/IndustryHeroV2";
 import { ImpactStats } from "../components/industry/ImpactStats";
 import { SolutionShowcase } from "../components/industry/SolutionShowcase";
 import { IndustryCaseStudies } from "../components/industry/IndustryCaseStudies";
@@ -205,12 +205,10 @@ const manufacturingTestimonials = [
 export function IndustryManufacturing() {
   return (
     <>
-      <IndustryHero
-        eyebrow="Manufacturing"
-        h1="AI agents for plant operations, supply chain, and procurement"
-        subhead="Supply chain disruptions and manual vendor receipt processing cost manufacturers time and margin they can't afford to lose. Industrial organizations deploy AI agents that monitor inventory in real time and automate goods receipt from delivery to ERP entry, all on a governed data foundation. MAQ Software builds and runs those agents on Microsoft Fabric, Snowflake, and Databricks, connecting plant operations, supply chain, and procurement on one platform. As a Top 25 Global Microsoft Partner and Microsoft Fabric Featured Partner, MAQ Software takes you from AI pilots to enterprise-scale production, with governance, security, and measurable ROI built in."
-        mailSubject="Manufacturing - MAQ Software"
-        visual={<ManufacturingHeroVisual />}
+      <IndustryHeroV2
+        eyebrow="Industries"
+        h1="Manufacturing"
+        subhead="Use AI to track inventory in real time, automate manual paperwork, and connect plant operations, supply chain, and procurement on one platform."
       />
 
       <ImpactStats

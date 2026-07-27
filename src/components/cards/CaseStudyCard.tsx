@@ -1,4 +1,5 @@
 import { makeStyles } from "@fluentui/react-components";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { isInternalPath } from "../../lib/links";
 
@@ -125,10 +126,13 @@ export function CaseStudyCard({
   eager = false,
 }: CaseStudyCardProps) {
   const s = useStyles();
+  // If the image fails to load (a 404 or broken path), hide it so the card
+  // degrades gracefully instead of showing a broken-image icon.
+  const [imgFailed, setImgFailed] = useState(false);
   const cardClassName = `${s.card} ${s.clickable}${className ? ` ${className}` : ""}`;
   const content = (
     <>
-      {imageUrl ? (
+      {imageUrl && !imgFailed ? (
         <img
           className={s.image}
           src={imageUrl}
@@ -138,6 +142,7 @@ export function CaseStudyCard({
           decoding="async"
           width={1200}
           height={675}
+          onError={() => setImgFailed(true)}
         />
       ) : null}
       {tag ? (

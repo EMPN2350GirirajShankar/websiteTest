@@ -1,10 +1,10 @@
-import { makeStyles, tokens } from "@fluentui/react-components";
+import { makeStyles } from "@fluentui/react-components";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   card: {
     fontFamily: "Roboto, system-ui",
-    border: `1px solid ${tokens.colorNeutralStroke2}`,
+    border: "1px solid var(--maq-border)",
     borderRadius: "12px",
     padding: "18px",
     background: "#fff",

@@ -9,7 +9,7 @@ import {
 } from "@fluentui/react-icons";
 // import { TrustBanner } from "../components/TrustBanner";
 
-import { IndustryHero } from "../components/industry/IndustryHero";
+import { IndustryHeroV2 } from "../components/industry/IndustryHeroV2";
 import { ImpactStats } from "../components/industry/ImpactStats";
 import { SolutionShowcase } from "../components/industry/SolutionShowcase";
 import { IndustryCaseStudies } from "../components/industry/IndustryCaseStudies";
@@ -193,12 +193,10 @@ const technologyCases = [
 export function IndustryTechnology() {
   return (
     <>
-      <IndustryHero
-        eyebrow="Technology & Software"
-        h1="Build, test, and ship software faster with AI"
-        subhead="ISVs, cloud-native teams, and enterprise software organizations embed AI across the SDLC, from agentic code review to embedded analytics. MAQ Software builds it, so engineering teams spend less time on rework and more on new features."
-        mailSubject="Technology - MAQ Software"
-        visual={<TechnologyHeroVisual />}
+      <IndustryHeroV2
+        eyebrow="Industries"
+        h1="Technology"
+        subhead="Use AI across the software development lifecycle, from code review to embedded analytics, so your teams spend less time on rework and more on building new features."
       />
 
       <ImpactStats

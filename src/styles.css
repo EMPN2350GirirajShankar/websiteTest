@@ -189,9 +189,10 @@ a {
 }
 
 /* Mobile header overrides (hooks for Header.tsx) */
-/* Include 940px so tablet/small-laptop widths get the mobile header/hamburger */
-@media (max-width: 940px) {
-  .site-header { padding: 0 12px; }
+/* Switch to the mobile header/hamburger below 1125px — the point where the full
+   desktop nav (6 menus + logo + CTA) no longer fits and the logo starts to shrink. */
+@media (max-width: 1124px) {
+  .site-header { padding: 0 var(--section-pad-x); }
   .site-header .site-nav-links { display: none !important; }
   .site-header .nav-toggle { display: inline-flex !important; }
   .site-header .header-right { display: none !important; }
@@ -209,8 +210,8 @@ a {
     color: #fff;
     z-index: 1200;
     padding-top: 24px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: var(--section-pad-x);
+    padding-right: var(--section-pad-x);
     overflow-y: auto;
     /* Ensure full-viewport coverage on very small devices */
     /* Use 100% instead of 100vw to avoid horizontal overflow when scrollbars appear */
@@ -243,7 +244,7 @@ a {
 /* Fallback: apply key mobile header/layout rules when JS toggles `body.is-mobile`.
   This ensures the SPA updates immediately in environments where media queries
   may not re-evaluate promptly (device toolbar toggles, some emulators). */
-.is-mobile .site-header { padding: 0 12px; }
+.is-mobile .site-header { padding: 0 var(--section-pad-x); }
 .is-mobile .site-header .site-nav-links { display: none !important; }
 .is-mobile .site-header .nav-toggle { display: inline-flex !important; }
 .is-mobile .site-header .header-right { display: none !important; }
@@ -252,72 +253,9 @@ a {
 .is-mobile .mobile-overlay { display: none; }
 .is-mobile .mobile-overlay.open { display: block; }
 
-/* Extra small devices: ensure full-bleed layouts and remove card-like framing */
-@media (max-width: 420px) {
-  html, body, #root {
-    width: 100%;
-    min-width: 320px;
-    overflow-x: hidden;
-    background: var(--colorNeutralBackground3);
-  }
-
-  /* Make hero and main grids full width and remove rounding/shadows */
-  .wrap, .grid, .visual, main, .site-root, .site-content {
-    max-width: 100% !important;
-    width: 100% !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-  }
-
-  /* Reduce header padding so hamburger fits */
-  .site-header { padding: 0 16px !important; }
-  .site-header .brand { font-size: 18px !important; }
-}
-
-/* Aggressive resets for very small devices to avoid any boxed/card layout */
-@media (max-width: 420px) {
-  /* Reset common container elements that may create centered cards */
-  header, section, main, footer, .wrap, .grid, .visual, .site-root, .site-content, .page, .hero, .shell {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    background-clip: border-box !important;
-    background: transparent !important;
-  }
-
-  /* Restore footer visuals on extra-small devices so it remains visible */
-  footer {
-    background: var(--maq-gray-600) !important;
-    color: #fff !important;
-    padding: 32px 16px !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    width: 100% !important;
-  }
-  footer > div {
-    max-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  footer a, footer a:visited { color: rgba(255,255,255,0.9) !important; }
-
-  /* Ensure header is full-bleed and sits on top */
-  .site-header {
-    position: sticky !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    background: var(--maq-white) !important;
-  }
-
-  /* Make sure hero text is readable and not clipped */
-  h1 { font-size: 2.5rem !important; line-height: 1.08 !important; }
-}
+/* Two legacy `@media (max-width: 420px)` "aggressive reset" blocks were removed
+   here: they forced every section to a transparent background + 16px gutters,
+   which wiped section band colors (e.g. the hero gray) and shifted margins below
+   420px. Small-screen horizontal scroll is still guarded by the
+   `@media (max-width: 768px)` rule above; responsiveness is otherwise handled by
+   component styles + the breakpoint scale (src/lib/breakpoints.ts). */

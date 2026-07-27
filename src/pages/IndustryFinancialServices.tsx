@@ -14,7 +14,7 @@ import {
 } from "@fluentui/react-icons";
 // import { TrustBanner } from "../components/TrustBanner";
 
-import { IndustryHero } from "../components/industry/IndustryHero";
+import { IndustryHeroV2 } from "../components/industry/IndustryHeroV2";
 import { ImpactStats } from "../components/industry/ImpactStats";
 import { SolutionShowcase } from "../components/industry/SolutionShowcase";
 import { IndustryCaseStudies } from "../components/industry/IndustryCaseStudies";
@@ -222,12 +222,10 @@ const fsTestimonials = [
 export function IndustryFinancialServices() {
   return (
     <>
-      <IndustryHero
-        eyebrow="Financial Services"
-        h1="AI agents for banking, insurance, and capital markets"
-        subhead="Growing datasets, tightening regulation, and rising fraud need more than incremental fixes. Banks, insurers, and capital markets firms deploy AI agents that underwrite credit, close the books, monitor transactions, and keep compliance audit-ready, all on a governed data foundation. MAQ Software builds and runs those agents on Microsoft Fabric, Snowflake, and Databricks, so your institution acts on decisions in hours, not days. As a Top 25 Global Microsoft Partner and Microsoft Fabric Featured Partner, MAQ Software brings the platform expertise and production-grade delivery your finance teams need."
-        mailSubject="Financial Services - MAQ Software"
-        visual={<FinancialHeroVisual />}
+      <IndustryHeroV2
+        eyebrow="Industries"
+        h1="Financial services"
+        subhead="Use AI to make faster credit decisions, catch fraud sooner, and keep compliance audit-ready."
       />
 
       <ImpactStats

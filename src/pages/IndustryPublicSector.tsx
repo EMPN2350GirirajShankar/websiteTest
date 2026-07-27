@@ -8,7 +8,7 @@ import {
 } from "@fluentui/react-icons";
 // import { TrustBanner } from "../components/TrustBanner";
 
-import { IndustryHero } from "../components/industry/IndustryHero";
+import { IndustryHeroV2 } from "../components/industry/IndustryHeroV2";
 import { ImpactStats } from "../components/industry/ImpactStats";
 import { SolutionShowcase } from "../components/industry/SolutionShowcase";
 import { IndustryCaseStudies } from "../components/industry/IndustryCaseStudies";
@@ -199,12 +199,10 @@ const publicSectorCases = [
 export function IndustryPublicSector() {
   return (
     <>
-      <IndustryHero
-        eyebrow="Public Sector"
-        h1="AI for citizen services and mission outcomes"
-        subhead="Federal, state, and local agencies face pressure to deliver faster citizen services, modernize aging systems, and protect sensitive data, all under audit-grade accountability. Public-sector organizations embed AI across the mission stack, from citizen-facing chatbots and policy-knowledge Copilots to program analytics on Microsoft Fabric, with secure-by-design patterns aligned to FedRAMP, CJIS, and agency compliance frameworks. MAQ Software builds it, turning fragmented government data into faster decisions and better outcomes for the citizens you serve."
-        mailSubject="Public Sector - MAQ Software"
-        visual={<PublicSectorHeroVisual />}
+      <IndustryHeroV2
+        eyebrow="Industries"
+        h1="Public sector"
+        subhead="Use AI to serve citizens faster, modernize aging systems, and keep sensitive data secure."
       />
 
       <ImpactStats

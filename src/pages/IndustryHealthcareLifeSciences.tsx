@@ -7,7 +7,7 @@ import {
 } from "@fluentui/react-icons";
 // import { TrustBanner } from "../components/TrustBanner";
 
-import { IndustryHero } from "../components/industry/IndustryHero";
+import { IndustryHeroV2 } from "../components/industry/IndustryHeroV2";
 import { ImpactStats } from "../components/industry/ImpactStats";
 import { SolutionShowcase } from "../components/industry/SolutionShowcase";
 import { IndustryCaseStudies } from "../components/industry/IndustryCaseStudies";
@@ -211,12 +211,10 @@ const hlsTestimonials = [
 export function IndustryHealthcareLifeSciences() {
   return (
     <>
-      <IndustryHero
-        eyebrow="Healthcare & Life Sciences"
-        h1="AI for care, compliance, and discovery across the health enterprise"
-        subhead="Healthcare and life sciences organizations face pressure to improve outcomes, speed research, and modernize fragmented data estates, all while meeting HIPAA, 21 CFR Part 11, and other regulatory commitments. Providers, payers, and life sciences firms embed AI across the care continuum and the research lifecycle, from grounded clinical Copilots and care-coordination agents to population-health analytics and trial-data unification. MAQ Software builds it on Microsoft Fabric, Databricks, and Snowflake, turning sensitive health data into safer decisions and faster discovery."
-        mailSubject="Healthcare & Life Sciences - MAQ Software"
-        visual={<HealthcareHeroVisual />}
+      <IndustryHeroV2
+        eyebrow="Industries"
+        h1="Healthcare & life sciences"
+        subhead="Use AI to improve patient care, accelerate research, and turn sensitive health data into safer, faster decisions."
       />
 
       <ImpactStats
