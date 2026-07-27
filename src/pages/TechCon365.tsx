@@ -1,6 +1,7 @@
 import { makeStyles, tokens } from "@fluentui/react-components";import {
   ArrowRight20Regular,
   Brain24Regular,
+  Mail24Regular,
   TicketDiagonal24Regular,
 } from "@fluentui/react-icons";
 import type { ReactNode } from "react";
@@ -8,7 +9,6 @@ import { Link } from "react-router-dom";
 import { useContactAction } from "../lib/contact";
 import { PrimaryButton, SecondaryButton, TextButton } from "../components/buttons";
 
-const REGISTER_URL = "https://techcon365.com/Chicago/tickets";
 const BROCHURE_URL = "/resources/MAQ%20Software%20Brochure.pdf";
 const APPSOURCE_URL =
   "https://appsource.microsoft.com/en-us/marketplace/partner-dir/3778db04-784a-4ef7-9eaa-7a9b67cf9e35/overview";
@@ -395,26 +395,24 @@ export function TechCon365() {
       <section className={s.hero}>
         <div className={s.heroInner}>
           <div>
-            <h1 className={`maq-h1 ${s.h1}`}>Join <em className={s.emText}> MAQ Software</em> at TechCon 365 at Booth #20–21</h1>
+            <h1 className={`maq-h1 ${s.h1}`}>Thank you for visiting <em className={s.emText}> MAQ Software</em> at TechCon 365</h1>
             <p className={s.sub}>
-              Learn how we help organizations modernize
+              It was great to connect at Booth #20–21. Explore how we help organizations modernize
               their data platforms with Microsoft Fabric, Power BI, and
               AI-powered analytics - and connect productivity to insights with
               Power Platform and Copilot.
             </p>
             <div className={s.promo}>
               <TicketDiagonal24Regular />
-              Use code "MAQ15" when registering to get 15% off your conference pass.
+              TechCon 365 Chicago has wrapped up — revisit our featured sessions below.
             </div>
             <div className={s.btns}>
               <PrimaryButton
-                href={REGISTER_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={() => handleContactClick("TechCon 365 Chicago 2026 follow-up")}
                 size="large"
-                iconBefore={<TicketDiagonal24Regular />}
+                iconBefore={<Mail24Regular />}
               >
-                Register now
+                Contact our team
               </PrimaryButton>
             </div>
           </div>
