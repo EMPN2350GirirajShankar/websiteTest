@@ -1,7 +1,7 @@
 import { matchPath } from "react-router-dom";
 import { getProduct } from "../data/products";
 import { findVisualGuideItem } from "../data/insights";
-import { getBlogPost, getEvent } from "./content";
+import { getCaseStudy, getEvent, getGuide } from "./content";
 
 const BRAND = "MAQ Software";
 const SUFFIX = ` - ${BRAND}`;
@@ -103,9 +103,11 @@ const ROUTE_TITLES: Array<[string, TitleResolver]> = [
   ["/events/fabcon-2027", "FabCon 2027"],
 
   // CMS-managed content (Markdown under /content)
-  ["/blog", "Blog"],
-  ["/blog/:slug", (p) => getBlogPost(p.slug)?.title ?? "Blog"],
-  ["/events/all", "All events"],
+  [
+    "/insights/case-studies/:slug",
+    (p) => getCaseStudy(p.slug)?.title ?? "Case studies",
+  ],
+  ["/insights/guides/:slug", (p) => getGuide(p.slug)?.title ?? "Best practice guides"],
   ["/events/:slug", (p) => getEvent(p.slug)?.title ?? "Events"],
 ];
 

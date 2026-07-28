@@ -1,8 +1,8 @@
 ---
 title: fabcon
 slug: fabcon
-startDate: yyyy-08-Th
-endDate: yyyy-08-Fr
+startDate: 2026-08-27
+endDate: 2026-08-28
 eventType: Conference
 location: Seattle
 registrationUrl: Google.com
@@ -10,7 +10,7 @@ summary: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consect
 image: https://picsum.photos/id/5/1920/1280.webp
 imageAlt: Lorem ipsum
 tags:
-  - event
+  - Microsoft Fabric
 draft: false
 ---
 

@@ -207,7 +207,7 @@ function JobAccordionItem({ job }: { job: JobOpening }) {
       </button>
       {open && (
         <div className={s.jobBody}>
-          {/* Sanitized Blogger content HTML from src/data/careers.ts. */}
+          {/* Sanitized Blogger HTML, or CMS Markdown rendered at build time. */}
           <div dangerouslySetInnerHTML={{ __html: job.contentHtml }} />
           <div className={s.jobActions}>
             {job.applyUrl && (
@@ -220,13 +220,16 @@ function JobAccordionItem({ job }: { job: JobOpening }) {
                 Apply on JobScore
               </PrimaryButton>
             )}
-            <TextButton
-              href={job.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View full posting
-            </TextButton>
+            {/* CMS openings have no external posting to link out to. */}
+            {job.href && (
+              <TextButton
+                href={job.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View full posting
+              </TextButton>
+            )}
           </div>
         </div>
       )}

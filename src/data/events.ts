@@ -1,4 +1,5 @@
 import { fetchNews, type NewsArticle } from "./news";
+import { getEvents } from "../lib/content";
 
 export interface UpcomingEvent {
   id: string;
@@ -22,7 +23,7 @@ export interface EventCard {
   tag: string;
 }
 
-export const upcomingEvents: UpcomingEvent[] = [
+const staticUpcomingEvents: UpcomingEvent[] = [
   {
     id: "techcon365-2026",
     title: "TechCon 365 Chicago",
@@ -67,6 +68,24 @@ export const upcomingEvents: UpcomingEvent[] = [
     href: "/events/fabcon2027",
     ctaLabel: "View event details",
   },
+];
+
+// Events authored in the CMS join the same list the /events page already groups
+// into Upcoming / Past, so publishing one is enough to make its card appear.
+// `endDate` is optional in the CMS but required here: a single-day event ends
+// the day it starts.
+export const upcomingEvents: UpcomingEvent[] = [
+  ...getEvents().map((event) => ({
+    id: event.slug,
+    title: event.title,
+    summary: event.summary,
+    startDate: event.startDate,
+    endDate: event.endDate || event.startDate,
+    location: event.location,
+    href: `/events/${event.slug}`,
+    ctaLabel: "View event details",
+  })),
+  ...staticUpcomingEvents,
 ];
 
 function toMidnight(dateIso: string): Date {

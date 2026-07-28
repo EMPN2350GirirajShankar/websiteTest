@@ -10,6 +10,7 @@
 // automatically on /careers — no code change or deploy needed.
 
 import { sanitizeExternalHtml } from "../lib/sanitizeHtml";
+import { getJobs } from "../lib/content";
 
 export interface JobOpening {
   id: string;
@@ -20,8 +21,8 @@ export interface JobOpening {
   excerpt: string;
   /** Direct JobScore apply URL (https://jsco.re/XXXX) if present in the post. */
   applyUrl: string | null;
-  /** Public Blogger post URL. */
-  href: string;
+  /** Public Blogger post URL. Absent for CMS-authored openings. */
+  href?: string;
   /** ISO publish date. */
   date: string;
 }
@@ -140,7 +141,41 @@ function mapEntry(entry: BloggerEntry): JobOpening {
 }
 
 // ── Public API ─────────────────────────────────────────────────────────────
+
+/** Turns a CMS opening into the same shape the accordion already renders. */
+function fromCms(job: ReturnType<typeof getJobs>[number]): JobOpening {
+  return {
+    id: `cms-${job.slug}`,
+    title: job.location ? `${job.title} — ${job.location}` : job.title,
+    contentHtml: job.html,
+    excerpt: job.excerpt,
+    applyUrl: job.applyUrl ?? null,
+    date: job.date,
+  };
+}
+
+/**
+ * Openings for a region. The CMS is the source of truth for new roles and its
+ * postings are listed first; the legacy Blogger feed is still read so the
+ * existing openings keep showing until they have been migrated. Drop the
+ * `fetchOpenings` half of this function once that migration is done.
+ */
 export async function fetchOpenings(region: CareersRegion): Promise<JobOpening[]> {
+  const cmsJobs = getJobs(region).map(fromCms);
+
+  let bloggerJobs: JobOpening[] = [];
+  try {
+    bloggerJobs = await fetchBloggerOpenings(region);
+  } catch (error) {
+    // A dead legacy feed must not hide roles published in the CMS.
+    if (cmsJobs.length === 0) throw error;
+    console.warn("Careers: Blogger feed unavailable, showing CMS openings only.", error);
+  }
+
+  return [...cmsJobs, ...bloggerJobs];
+}
+
+async function fetchBloggerOpenings(region: CareersRegion): Promise<JobOpening[]> {
   const label = encodeURIComponent(REGION_LABEL[region]);
   const url =
     `https://www.blogger.com/feeds/${CAREERS_BLOG_ID}/posts/default/-/${label}` +

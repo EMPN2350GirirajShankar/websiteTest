@@ -1,3 +1,5 @@
+import { getCaseStudies, getGuides } from "../lib/content";
+
 export interface InsightsResourceLink {
   key:
     | "case-studies"
@@ -84,7 +86,9 @@ export const caseStudyIndustryFilters = [
   "Public sector",
 ];
 
-export const caseStudyItems: CaseStudyItem[] = [
+// Hand-maintained studies that still point at blog.maqsoftware.com. New studies
+// are authored in the CMS instead; `caseStudyItems` below merges both sources.
+const staticCaseStudyItems: CaseStudyItem[] = [
   {
     "title": "Reshaping retail with Agentic AI solutions",
     "href": "https://blog.maqsoftware.com/2026/02/reshaping-retail-with-agentic-ai.html",
@@ -1568,6 +1572,23 @@ export const visualGuideItems: VisualGuideItem[] = [
   }
 ];
 
+// Studies written in the CMS are newest-first, so they lead the grid. They keep
+// the same shape as the static ones, which is why InsightsCaseStudies needs no
+// changes: filters, counts, and pagination all just see a longer array.
+export const caseStudyItems: CaseStudyItem[] = [
+  ...getCaseStudies().map((study) => ({
+    title: study.title,
+    href: `/insights/case-studies/${study.slug}`,
+    tag: study.tag,
+    service: study.service,
+    industry: study.industry,
+    date: study.date,
+    teaser: study.excerpt,
+    imageUrl: study.image ?? "",
+  })),
+  ...staticCaseStudyItems,
+];
+
 export interface BestPracticeItem {
   title: string;
   href: string;
@@ -1588,7 +1609,9 @@ export const bestPracticeFilters = [
   "Power Apps",
 ];
 
-export const bestPracticeItems: BestPracticeItem[] = [
+// Hand-built guide pages under /insights/*. New guides are authored in the CMS;
+// `bestPracticeItems` below merges both sources.
+const staticBestPracticeItems: BestPracticeItem[] = [
   {
     "title": "Maximize developer productivity with GitHub Copilot",
     "href": "/insights/github-copilot-best-practices",
@@ -1701,4 +1724,17 @@ export const bestPracticeItems: BestPracticeItem[] = [
     "teaser": "Best practice guide: This guide covers the 7 best practices you need to secure dataverse.",
     "imageUrl": "/images/case-studies/external/dataverse-best-practices.webp"
   }
+];
+
+// CMS-authored guides lead the grid, newest first. Same shape as the static
+// entries, so InsightsBestPracticeGuides needs no changes.
+export const bestPracticeItems: BestPracticeItem[] = [
+  ...getGuides().map((guide) => ({
+    title: guide.title,
+    href: `/insights/guides/${guide.slug}`,
+    topic: guide.topic,
+    teaser: guide.excerpt,
+    imageUrl: guide.image ?? "",
+  })),
+  ...staticBestPracticeItems,
 ];

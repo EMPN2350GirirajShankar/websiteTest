@@ -1,22 +1,49 @@
-import { posts as rawPosts, events as rawEvents, type RawContentEntry } from "virtual:site-content";
+import {
+  caseStudies as rawCaseStudies,
+  guides as rawGuides,
+  events as rawEvents,
+  jobs as rawJobs,
+  type RawContentEntry,
+} from "virtual:site-content";
 
 /**
  * Read model for the Git-based CMS (Sveltia). Markdown files under /content are
  * parsed at build time by plugins/vite-plugin-content.ts; this module turns the
  * raw frontmatter into typed, sorted, draft-free collections for the UI.
+ *
+ * These collections are merged into the existing hand-maintained listings by
+ * src/data/insights.ts, src/data/events.ts, and src/data/careers.ts, so a new
+ * entry published from the CMS shows up as a card in its section with no code
+ * change.
  */
 
-export interface BlogPost {
+export interface CaseStudy {
   slug: string;
   title: string;
+  /** YYYY-MM, matching the format the hand-written case studies use. */
   date: string;
-  author: string;
-  category: string;
-  tags: string[];
+  /** Short label shown on the card chip. */
+  tag: string;
+  /** Must match a label in `caseStudyFilters` to be filterable by service. */
+  service?: string;
+  /** Must match a label in `caseStudyIndustryFilters`. */
+  industry?: string;
   excerpt: string;
   image?: string;
   imageAlt?: string;
-  featured: boolean;
+  readingTimeMinutes: number;
+  html: string;
+}
+
+export interface Guide {
+  slug: string;
+  title: string;
+  date: string;
+  /** Must match a label in `bestPracticeFilters` to be filterable by topic. */
+  topic: string;
+  excerpt: string;
+  image?: string;
+  imageAlt?: string;
   readingTimeMinutes: number;
   html: string;
 }
@@ -36,6 +63,19 @@ export interface SiteEvent {
   html: string;
 }
 
+export type JobRegion = "us" | "india";
+
+export interface JobPosting {
+  slug: string;
+  title: string;
+  region: JobRegion;
+  location?: string;
+  applyUrl?: string;
+  excerpt: string;
+  date: string;
+  html: string;
+}
+
 function str(entry: RawContentEntry, key: string, fallback = ""): string {
   const value = entry[key];
   return typeof value === "string" && value.trim() ? value.trim() : fallback;
@@ -46,26 +86,54 @@ function optionalStr(entry: RawContentEntry, key: string): string | undefined {
   return value || undefined;
 }
 
-const blogPosts: BlogPost[] = rawPosts
-  .filter((entry) => !entry.draft)
+/** Strips HTML tags so a Markdown body can stand in for a missing excerpt. */
+function textExcerpt(html: string, max = 200): string {
+  const text = html
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (text.length <= max) return text;
+  return text.slice(0, max).replace(/\s+\S*$/, "") + "…";
+}
+
+const published = (entry: RawContentEntry) => !entry.draft;
+
+const caseStudyList: CaseStudy[] = rawCaseStudies
+  .filter(published)
+  .map((entry) => ({
+    slug: entry.slug,
+    title: entry.title,
+    // The hand-written entries use YYYY-MM and the card prints the raw string,
+    // so trim the day to keep the two sources visually consistent.
+    date: entry.date.slice(0, 7),
+    tag: str(entry, "tag", "Case study"),
+    service: optionalStr(entry, "service"),
+    industry: optionalStr(entry, "industry"),
+    excerpt: str(entry, "excerpt") || textExcerpt(entry.html),
+    image: optionalStr(entry, "image"),
+    imageAlt: optionalStr(entry, "imageAlt"),
+    readingTimeMinutes: entry.readingTimeMinutes,
+    html: entry.html,
+  }))
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+const guideList: Guide[] = rawGuides
+  .filter(published)
   .map((entry) => ({
     slug: entry.slug,
     title: entry.title,
     date: entry.date,
-    author: str(entry, "author", "MAQ Software"),
-    category: str(entry, "category", "Insights"),
-    tags: entry.tags,
-    excerpt: str(entry, "excerpt"),
+    topic: str(entry, "topic", "Power BI"),
+    excerpt: str(entry, "excerpt") || textExcerpt(entry.html),
     image: optionalStr(entry, "image"),
     imageAlt: optionalStr(entry, "imageAlt"),
-    featured: entry.featured,
     readingTimeMinutes: entry.readingTimeMinutes,
     html: entry.html,
   }))
   .sort((a, b) => b.date.localeCompare(a.date));
 
 const siteEvents: SiteEvent[] = rawEvents
-  .filter((entry) => !entry.draft)
+  .filter(published)
   .map((entry) => ({
     slug: entry.slug,
     title: entry.title,
@@ -74,7 +142,7 @@ const siteEvents: SiteEvent[] = rawEvents
     eventType: str(entry, "eventType", "Event"),
     location: str(entry, "location"),
     registrationUrl: optionalStr(entry, "registrationUrl"),
-    summary: str(entry, "summary"),
+    summary: str(entry, "summary") || textExcerpt(entry.html),
     image: optionalStr(entry, "image"),
     imageAlt: optionalStr(entry, "imageAlt"),
     tags: entry.tags,
@@ -82,28 +150,38 @@ const siteEvents: SiteEvent[] = rawEvents
   }))
   .sort((a, b) => b.startDate.localeCompare(a.startDate));
 
-export function getBlogPosts(): BlogPost[] {
-  return blogPosts;
+const jobList: JobPosting[] = rawJobs
+  .filter(published)
+  .map((entry) => ({
+    slug: entry.slug,
+    title: entry.title,
+    region: str(entry, "region") === "india" ? ("india" as const) : ("us" as const),
+    location: optionalStr(entry, "location"),
+    applyUrl: optionalStr(entry, "applyUrl"),
+    excerpt: str(entry, "excerpt") || textExcerpt(entry.html),
+    date: entry.date,
+    html: entry.html,
+  }))
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+export function getCaseStudies(): CaseStudy[] {
+  return caseStudyList;
 }
 
-export function getBlogPost(slug: string | undefined): BlogPost | undefined {
-  return slug ? blogPosts.find((post) => post.slug === slug) : undefined;
+export function getCaseStudy(slug: string | undefined): CaseStudy | undefined {
+  return slug ? caseStudyList.find((item) => item.slug === slug) : undefined;
 }
 
-export function getBlogCategories(): string[] {
-  return ["All", ...Array.from(new Set(blogPosts.map((post) => post.category))).sort()];
+export function getGuides(): Guide[] {
+  return guideList;
 }
 
-export function getRelatedPosts(post: BlogPost, limit = 3): BlogPost[] {
-  return blogPosts
-    .filter((candidate) => candidate.slug !== post.slug)
-    .sort((a, b) => {
-      const score = (item: BlogPost) =>
-        (item.category === post.category ? 2 : 0) +
-        item.tags.filter((tag) => post.tags.includes(tag)).length;
-      return score(b) - score(a);
-    })
-    .slice(0, limit);
+export function getGuide(slug: string | undefined): Guide | undefined {
+  return slug ? guideList.find((item) => item.slug === slug) : undefined;
+}
+
+export function getJobs(region: JobRegion): JobPosting[] {
+  return jobList.filter((job) => job.region === region);
 }
 
 export function getEvents(): SiteEvent[] {
@@ -112,19 +190,6 @@ export function getEvents(): SiteEvent[] {
 
 export function getEvent(slug: string | undefined): SiteEvent | undefined {
   return slug ? siteEvents.find((event) => event.slug === slug) : undefined;
-}
-
-/** Splits events around today's date, with upcoming ones in chronological order. */
-export function getEventsByTiming(): { upcoming: SiteEvent[]; past: SiteEvent[] } {
-  const today = new Date().toISOString().slice(0, 10);
-  const isUpcoming = (event: SiteEvent) => (event.endDate || event.startDate) >= today;
-
-  return {
-    upcoming: siteEvents
-      .filter(isUpcoming)
-      .sort((a, b) => a.startDate.localeCompare(b.startDate)),
-    past: siteEvents.filter((event) => !isUpcoming(event)),
-  };
 }
 
 export function formatDate(value: string): string {

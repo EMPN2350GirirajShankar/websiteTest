@@ -7,9 +7,14 @@ import type { Plugin } from "vite";
 const VIRTUAL_ID = "virtual:site-content";
 const RESOLVED_VIRTUAL_ID = "\0" + VIRTUAL_ID;
 
+// Export name -> folder under /content. Each key becomes a named export of the
+// virtual module, so adding a collection here and in public/admin/config.yml is
+// all it takes to surface a new content type.
 const COLLECTIONS = {
-  posts: "blog",
+  caseStudies: "case-studies",
+  guides: "guides",
   events: "events",
+  jobs: "careers",
 } as const;
 
 export interface ContentPluginOptions {

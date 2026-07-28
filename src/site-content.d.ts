@@ -17,6 +17,8 @@ declare module "virtual:site-content" {
     [key: string]: unknown;
   }
 
-  export const posts: RawContentEntry[];
+  export const caseStudies: RawContentEntry[];
+  export const guides: RawContentEntry[];
   export const events: RawContentEntry[];
+  export const jobs: RawContentEntry[];
 }

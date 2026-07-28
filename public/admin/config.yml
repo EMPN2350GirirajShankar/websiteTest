@@ -27,7 +27,11 @@ backend:
 media_folder: /public/images/uploads
 public_folder: /images/uploads
 
-site_url: https://www.maqsoftware.com
+# Base URL for the CMS "View on live site" / preview links. Must match the repo
+# in `backend` above: this is the testing fork, deployed to GitHub Pages under
+# the /websiteTest/ project path. Switch to https://www.maqsoftware.com at the
+# same time as `backend.repo`.
+site_url: https://empn2350girirajshankar.github.io/websiteTest
 # Root-relative, so it must include the Vite `base` from vite.config.ts.
 logo_url: /websiteTest/favicon.png
 
@@ -37,56 +41,138 @@ slug:
   sanitize_replacement: "-"
 
 collections:
-  # ---------------------------------------------------------------- Blog ----
-  - name: blog
-    label: Blog posts
-    label_singular: Blog post
-    description: Articles published at /blog. Saving commits a Markdown file; deleting removes it.
-    folder: /content/blog
+  # -------------------------------------------------------- Case studies ----
+  # Cards appear on /insights/case-studies alongside the older studies that
+  # still live in src/data/insights.ts. The Service and Industry values below
+  # MUST match `caseStudyFilters` / `caseStudyIndustryFilters` in that file,
+  # otherwise the study is only reachable under the "All" chips.
+  - name: caseStudies
+    label: Case studies
+    label_singular: Case study
+    description: Client outcomes published at /insights/case-studies.
+    folder: /content/case-studies
     extension: md
     format: yaml-frontmatter
     create: true
     delete: true
     slug: "{{fields.slug}}"
     path: "{{slug}}"
-    preview_path: blog/{{fields.slug}}
-    summary: "{{title}} — {{date | date('yyyy-MM-dd')}}"
+    preview_path: insights/case-studies/{{fields.slug}}
+    summary: "{{title}} — {{date | date('YYYY-MM-DD')}}"
     sortable_fields:
       fields: [date, title]
       default:
         field: date
         direction: descending
     view_groups:
-      - label: Category
-        field: category
+      - label: Service
+        field: service
+      - label: Industry
+        field: industry
     fields:
       - { label: Title, name: title, widget: string }
       - label: URL slug
         name: slug
         widget: string
-        hint: Lowercase words separated by hyphens. Becomes /blog/<slug> and the file name.
+        hint: Lowercase words separated by hyphens. Becomes /insights/case-studies/<slug> and the file name.
         pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers and hyphens only"]
-      - { label: Publish date, name: date, widget: datetime, format: "yyyy-MM-dd", time_format: false }
-      - { label: Author, name: author, widget: string, default: MAQ Software }
-      - label: Category
-        name: category
+      - { label: Publish date, name: date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+      - label: Card label
+        name: tag
+        widget: string
+        default: Case study
+        hint: Short phrase shown on the card chip, e.g. "Reshaping retail".
+      - label: Service
+        name: service
         widget: select
-        default: Insights
+        required: false
+        hint: Which service filter this study appears under.
         options:
-          - Insights
-          - Case study
-          - Best practices
-          - Product
-          - Company news
-          - Partnerships
-      - { label: Tags, name: tags, widget: list, required: false, default: [] }
+          - Data & AI platforms
+          - AI solutions & agents
+          - Insights & analytics
+          - Business apps & automation
+          - Cloud modernization
+          - Security & governance
+      - label: Industry
+        name: industry
+        widget: select
+        required: false
+        hint: Which industry filter this study appears under.
+        options:
+          - Retail & consumer goods
+          - Financial services
+          - Technology
+          - Manufacturing
+          - Healthcare & life sciences
+          - Public sector
       - label: Summary
         name: excerpt
         widget: text
-        hint: One or two sentences shown on cards and in search results.
-      - { label: Cover image, name: image, widget: image, required: false }
-      - { label: Cover image alt text, name: imageAlt, widget: string, required: false }
-      - { label: Feature on the blog landing page, name: featured, widget: boolean, default: false }
+        required: false
+        hint: One or two sentences shown on the card. Falls back to the start of the body.
+      - { label: Card image, name: image, widget: image, required: false }
+      - { label: Card image alt text, name: imageAlt, widget: string, required: false }
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+        hint: Drafts stay in the repository but are never rendered on the site.
+      - { label: Body, name: body, widget: richtext }
+
+  # ------------------------------------------------ Best practice guides ----
+  # Cards appear on /insights/best-practice-guides. Topic MUST match a label in
+  # `bestPracticeFilters` in src/data/insights.ts to be filterable.
+  - name: guides
+    label: Best practice guides
+    label_singular: Best practice guide
+    description: Implementation playbooks published at /insights/best-practice-guides.
+    folder: /content/guides
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    slug: "{{fields.slug}}"
+    path: "{{slug}}"
+    preview_path: insights/guides/{{fields.slug}}
+    summary: "{{title}} — {{date | date('YYYY-MM-DD')}}"
+    sortable_fields:
+      fields: [date, title]
+      default:
+        field: date
+        direction: descending
+    view_groups:
+      - label: Topic
+        field: topic
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: URL slug
+        name: slug
+        widget: string
+        hint: Lowercase words separated by hyphens. Becomes /insights/guides/<slug> and the file name.
+        pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers and hyphens only"]
+      - { label: Publish date, name: date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+      - label: Topic
+        name: topic
+        widget: select
+        default: Power BI
+        hint: Which topic filter this guide appears under.
+        options:
+          - Copilot
+          - Power BI
+          - Databricks
+          - Snowflake
+          - Azure
+          - Security
+          - Dynamics 365
+          - Power Apps
+      - label: Summary
+        name: excerpt
+        widget: text
+        required: false
+        hint: One or two sentences shown on the card. Falls back to the start of the body.
+      - { label: Card image, name: image, widget: image, required: false }
+      - { label: Card image alt text, name: imageAlt, widget: string, required: false }
       - label: Draft
         name: draft
         widget: boolean
@@ -95,6 +181,8 @@ collections:
       - { label: Body, name: body, widget: richtext }
 
   # -------------------------------------------------------------- Events ----
+  # Cards appear on /events, grouped into Upcoming / Past by date, alongside the
+  # hand-built event pages in src/data/events.ts.
   - name: events
     label: Events
     label_singular: Event
@@ -107,7 +195,7 @@ collections:
     slug: "{{fields.slug}}"
     path: "{{slug}}"
     preview_path: events/{{fields.slug}}
-    summary: "{{title}} — {{startDate | date('yyyy-MM-dd')}}"
+    summary: "{{title}} — {{startDate | date('YYYY-MM-DD')}}"
     sortable_fields:
       fields: [startDate, title]
       default:
@@ -120,8 +208,8 @@ collections:
         widget: string
         hint: Lowercase words separated by hyphens. Becomes /events/<slug> and the file name.
         pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers and hyphens only"]
-      - { label: Start date, name: startDate, widget: datetime, format: "yyyy-MM-dd", time_format: false }
-      - { label: End date, name: endDate, widget: datetime, format: "yyyy-MM-dd", time_format: false, required: false }
+      - { label: Start date, name: startDate, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+      - { label: End date, name: endDate, widget: datetime, format: "YYYY-MM-DD", time_format: false, required: false }
       - label: Event type
         name: eventType
         widget: select
@@ -132,6 +220,85 @@ collections:
       - { label: Summary, name: summary, widget: text }
       - { label: Hero image, name: image, widget: image, required: false }
       - { label: Hero image alt text, name: imageAlt, widget: string, required: false }
-      - { label: Tags, name: tags, widget: list, required: false, default: [] }
+      - label: Tags
+        name: tags
+        widget: select
+        multiple: true
+        required: false
+        default: []
+        hint: Technologies covered. Shown as chips on the event page; pick as many as apply.
+        options:
+          - Microsoft Fabric
+          - Power BI
+          - Copilot
+          - Databricks
+          - Snowflake
+          - Azure
+          - Security
+          - Dynamics 365
+          - Power Apps
+          - Power Platform
       - { label: Draft, name: draft, widget: boolean, default: false }
       - { label: Body, name: body, widget: richtext }
+
+  # ------------------------------------------------------------- Careers ----
+  # Openings appear in the accordion on /careers under their region. CMS roles
+  # are listed above the legacy Blogger feed until that migration is finished.
+  - name: careers
+    label: Job openings
+    label_singular: Job opening
+    description: Roles published in the careers accordion at /careers.
+    folder: /content/careers
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    slug: "{{fields.slug}}"
+    path: "{{slug}}"
+    preview_path: careers
+    summary: "{{title}} — {{region}}"
+    sortable_fields:
+      fields: [date, title]
+      default:
+        field: date
+        direction: descending
+    view_groups:
+      - label: Region
+        field: region
+    fields:
+      - { label: Job title, name: title, widget: string }
+      - label: URL slug
+        name: slug
+        widget: string
+        hint: Lowercase words separated by hyphens. Used as the file name.
+        pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers and hyphens only"]
+      - label: Region
+        name: region
+        widget: select
+        default: us
+        hint: Which tab on /careers this role is listed under.
+        options:
+          - { label: United States, value: us }
+          - { label: India, value: india }
+      - label: Location
+        name: location
+        widget: string
+        required: false
+        hint: "Shown after the job title, e.g. Redmond, WA or Hyderabad."
+      - { label: Posted date, name: date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+      - label: Apply link
+        name: applyUrl
+        widget: string
+        required: false
+        hint: JobScore URL. Without it the "Apply on JobScore" button is hidden.
+      - label: Summary
+        name: excerpt
+        widget: text
+        required: false
+        hint: Plain-text preview. Falls back to the start of the description.
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+        hint: Drafts stay in the repository but are never rendered on the site.
+      - { label: Job description, name: body, widget: richtext }
