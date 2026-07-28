@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   hero: {
     backgroundColor: "var(--colorNeutralBackground3)",
     // Consistent About-page hero padding; height scales with the content.
-    padding: "40px 32px",
+    padding: "40px var(--section-pad-x)",
   },
   heroInner: {
     maxWidth: "var(--maq-container-wide)",
@@ -47,11 +47,11 @@ const useStyles = makeStyles({
   },
   // ── Shared section shell ──────────────────────────────────────────────────
   sectionWhite: {
-    padding: "48px 32px",
+    padding: "48px var(--section-pad-x)",
     backgroundColor: "#fff",
   },
   sectionGray: {
-    padding: "48px 32px",
+    padding: "48px var(--section-pad-x)",
     backgroundColor: "var(--colorNeutralBackground3)",
   },
   inner: {
@@ -71,10 +71,6 @@ const useStyles = makeStyles({
     display: "block",
     margin: "0 0 32px",
     textAlign: "left",
-    "@media (max-width: 560px)": {
-      fontSize: "24px",
-      lineHeight: 1.2,
-    },
   },
 
   // ── Why MAQ ───────────────────────────────────────────────────────────────

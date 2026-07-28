@@ -1,7 +1,7 @@
 import { makeStyles, tokens } from "@fluentui/react-components";
 
 export const useProductPageStyles = makeStyles({
-  hero: { backgroundColor: "var(--colorNeutralBackground3)", padding: "48px 32px 56px" },
+  hero: { backgroundColor: "var(--colorNeutralBackground3)", padding: "48px var(--section-pad-x) 56px" },
   heroGrid: {
     maxWidth: "var(--maq-container-wide)",
     margin: "0 auto",
@@ -11,15 +11,17 @@ export const useProductPageStyles = makeStyles({
     alignItems: "center",
     "@media (max-width: 960px)": { gridTemplateColumns: "1fr" },
   },
-  eyebrow: { fontSize: "12px", fontWeight: 700, color: "var(--maq-red)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "12px", display: "block" },
+  eyebrow: { fontSize: "var(--fs-eyebrow)", fontWeight: 700, color: "var(--maq-red)", letterSpacing: "0.08em", marginBottom: "12px", display: "block" },
   h1: { display: "block", margin: "0 0 16px" },
-  heroSub: { display: "block", fontSize: "15px", lineHeight: 1.6, color: "var(--maq-gray-600)", marginBottom: "24px", maxWidth: "640px" },
+  heroSub: { display: "block", fontSize: "var(--fs-lead)", lineHeight: 1.55, fontWeight: 400, color: "var(--maq-gray-600)", marginBottom: "24px", maxWidth: "640px" },
   btns: { display: "flex", gap: "12px", flexWrap: "wrap" },
-  heroImageWrap: { display: "flex", alignItems: "center", justifyContent: "center", padding: "8px" },
+  // Side-by-side: media centered in its column. Once the hero stacks (≤960), the
+  // media left-aligns to the same margin as the text above (left padding zeroed).
+  heroImageWrap: { display: "flex", alignItems: "center", justifyContent: "center", padding: "8px", "@media (max-width: 960px)": { justifyContent: "flex-start", padding: "8px 8px 8px 0" } },
   heroImage: { width: "100%", maxWidth: "520px", height: "auto", display: "block", borderRadius: "8px" },
 
-  section: { padding: "48px 32px", backgroundColor: "#fff" },
-  sectionAlt: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
+  sectionAlt: { padding: "48px var(--section-pad-x)", backgroundColor: "var(--colorNeutralBackground3)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "28px" },
   headLeft: { marginBottom: "20px", textAlign: "center" },

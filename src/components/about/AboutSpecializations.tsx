@@ -90,19 +90,18 @@ const SPECIALIZATION_COLUMNS = [
 ];
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "#fff" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
 
   head: { marginBottom: "24px" },
   title: {
-    fontSize: "36px",
+    fontSize: "clamp(1.5rem, 1.18rem + 1.39vw, 2.25rem)", // 24 → 36px, fluid
     lineHeight: 1.15,
     fontWeight: 700,
     color: "var(--maq-navy)",
     letterSpacing: "-0.02em",
     textAlign: "left",
     margin: "0 0 12px",
-    "@media (max-width: 560px)": { fontSize: "24px", lineHeight: 1.2 },
   },
   sub: {
     fontSize: "15px",

@@ -7,7 +7,7 @@ import { PrimaryButton } from "../buttons";
 const useStyles = makeStyles({
   hero: {
     backgroundColor: "var(--colorNeutralBackground3)",
-    padding: "48px 32px 32px",
+    padding: "48px var(--section-pad-x) 32px",
   },
   heroInner: { maxWidth: "960px", margin: "0 auto" },
   crumbs: {
@@ -51,7 +51,7 @@ const useStyles = makeStyles({
     textTransform: "uppercase",
     letterSpacing: "0.06em",
   },
-  body: { padding: "32px 32px 56px", backgroundColor: "#fff" },
+  body: { padding: "32px var(--section-pad-x) 56px", backgroundColor: "#fff" },
   bodyInner: { maxWidth: "960px", margin: "0 auto" },
   section: {
     border: `1px solid ${tokens.colorNeutralStroke2}`,

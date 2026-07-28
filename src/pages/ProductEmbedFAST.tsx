@@ -47,7 +47,7 @@ export function ProductEmbedFAST() {
       <section className={s.hero}>
         <div className={s.heroGrid}>
           <div>
-            {/* <span className={s.eyebrow}>Automated Power BI embedding accelerator</span> */}
+            <span className={s.eyebrow}>Products</span>
             <h1 className={`maq-h1 ${s.h1}`}>EmbedFAST</h1>
             <p className={s.heroSub}>
               Embed Power BI in your applications without the usual integration work, per-user licensing, and heavy development. EmbedFAST adds role-based access, unlimited tenant and workspace onboarding, and configurable features, so your team ships analytics with minimal development effort.
@@ -94,7 +94,7 @@ export function ProductEmbedFAST() {
         </div>
       </section>
 
-      <section className={s.sectionAlt}><ProductCaseStudies heading="Embedding in production" studies={[
+      <section className={s.section}><ProductCaseStudies heading="Embedding in production" studies={[
         { tag: "Power BI Embedded", title: "Delivering embedded Power BI reporting with EmbedFAST", teaser: "An ISV embeds Power BI into its SaaS product using the EmbedFAST accelerator — shipping multi-tenant analytics months faster.", href: "https://blog.maqsoftware.com/2025/07/delivering-embedded-power-bi-reporting.html" },
         { tag: "Self-service BI", title: "Empowering self-service using Custom Copilot agent with Power BI Embedded", teaser: "A custom Copilot agent over Power BI Embedded letting users ask data questions in plain English — reducing report request backlog.", href: "https://blog.maqsoftware.com/2025/03/empowering-self-service-using-custom.html" },
         { tag: "Integration", title: "Simplifying Power BI integration for enterprise applications", teaser: "Learn how EmbedFAST streamlines integration with secure embedding, governance controls, and faster implementation timelines.", href: "https://blog.maqsoftware.com/2024/10/simplifying-power-bi-integration-for.html" },
@@ -122,7 +122,7 @@ export function ProductEmbedFAST() {
         </div>
       </section>
 
-      <section className={s.sectionAlt}>
+      <section className={s.section}>
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Support plans</span> */}

@@ -24,8 +24,8 @@ const useStyles = makeStyles({
   },
   footer: {
     color: "var(--maq-body-color)",
-    padding: "56px 32px 32px",
-    "@media (max-width: 720px)": { padding: "48px 22px 28px" },
+    padding: "56px var(--section-pad-x) 32px",
+    "@media (max-width: 720px)": { padding: "48px var(--section-pad-x) 28px" },
   },
   // Match the home page's wide container (1440px) so the footer aligns with the
   // landing-page content width.

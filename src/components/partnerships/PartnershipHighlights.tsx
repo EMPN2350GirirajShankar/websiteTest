@@ -2,7 +2,7 @@ import { makeStyles, tokens } from "@fluentui/react-components";
 import { StatCard } from "../cards/StatCard";
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "#fff" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "28px" },
   eyebrow: {

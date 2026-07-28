@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { CaseStudyCard } from "../cards/CaseStudyCard";
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "var(--colorNeutralBackground3)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "24px" },
   eyebrow: {

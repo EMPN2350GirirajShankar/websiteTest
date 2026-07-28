@@ -4,6 +4,7 @@ import { FluentProvider } from "@fluentui/react-components";
 import { BrowserRouter, useLocation } from "react-router-dom";
 import { maqLightTheme } from "./theme";
 import { App } from "./App";
+import { resolvePageTitle } from "./lib/pageTitles";
 import "./styles.css";
 
 declare global {
@@ -16,6 +17,16 @@ const redirectOnlyPaths = new Set(["/insights", "/news", "/techcon", "/fabcon", 
 
 let lastTrackedPage: string | undefined;
 let previousPageLocation: string | undefined;
+
+function DocumentTitle() {
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    document.title = resolvePageTitle(pathname);
+  }, [pathname]);
+
+  return null;
+}
 
 function AnalyticsPageView() {
   const location = useLocation();
@@ -46,6 +57,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <FluentProvider theme={maqLightTheme}>
       <BrowserRouter>
+        <DocumentTitle />
         <AnalyticsPageView />
         <App />
       </BrowserRouter>

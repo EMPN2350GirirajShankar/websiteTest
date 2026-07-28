@@ -16,7 +16,7 @@ export interface ServiceHeroProps {
 }
 
 const useStyles = makeStyles({
-  wrap: { backgroundColor: "var(--colorNeutralBackground3)", padding: "0 32px", height: "360px", "@media (max-width: 960px)": { height: "auto", padding: "40px 22px" } },
+  wrap: { backgroundColor: "var(--colorNeutralBackground3)", padding: "0 var(--section-pad-x)", height: "360px", "@media (max-width: 960px)": { height: "auto", padding: "40px var(--section-pad-x)" } },
   grid: {
     maxWidth: "var(--maq-container-wide)",
     margin: "0 auto",

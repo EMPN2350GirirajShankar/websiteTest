@@ -31,7 +31,7 @@ import {
 
 const useStyles = makeStyles({
     // Hero
-    hero: { backgroundColor: "var(--colorNeutralBackground3)", padding: "48px 32px" },
+    hero: { backgroundColor: "var(--colorNeutralBackground3)", padding: "48px var(--section-pad-x)" },
     heroGrid: {
         maxWidth: "var(--maq-container-wide)",
         margin: "0 auto",
@@ -121,8 +121,8 @@ const useStyles = makeStyles({
     },
 
     // Section commons
-    section: { padding: "48px 32px", backgroundColor: "#fff" },
-    sectionAlt: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
+    section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
+    sectionAlt: { padding: "48px var(--section-pad-x)", backgroundColor: "var(--colorNeutralBackground3)" },
     inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
     head: { marginBottom: "20px", textAlign: "center" },
     secEyebrow: {

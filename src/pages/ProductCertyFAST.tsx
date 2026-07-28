@@ -35,7 +35,7 @@ export function ProductCertyFAST() {
       <section className={s.hero}>
         <div className={s.heroGrid}>
           <div>
-            {/* <span className={s.eyebrow}>Power BI quality control</span> */}
+            <span className={s.eyebrow}>Products</span>
             <h1 className={`maq-h1 ${s.h1}`}>CertyFAST</h1>
             <p className={s.heroSub}>
               Build and maintain high-quality Power BI semantic models with less manual work. CertyFAST automates error detection, DAX standardization, and documentation, keeping models consistent and aligned to your modeling standards.
@@ -79,7 +79,7 @@ export function ProductCertyFAST() {
         </div>
       </section>
 
-      <section className={s.sectionAlt}>
+      <section className={s.section}>
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>How it works</span> */}
@@ -103,7 +103,7 @@ export function ProductCertyFAST() {
         { tag: "Data governance", title: "Unifying data management with a centralized framework", teaser: "Centralized governance and access controls across distributed systems — a model CertyFAST helps certify on an ongoing basis.", href: "https://blog.maqsoftware.com/2024/08/unifying-data-management-with.html" },
       ]} /></section>
 
-      <section className={s.sectionAlt}>
+      <section className={s.section}>
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Insights</span> */}

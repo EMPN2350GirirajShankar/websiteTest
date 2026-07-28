@@ -42,7 +42,7 @@ export function ProductLoadFAST() {
       <section className={s.hero}>
         <div className={s.heroGrid}>
           <div>
-            {/* <span className={s.eyebrow}>Automated Power BI load testing accelerator</span> */}
+            <span className={s.eyebrow}>Products</span>
             <h1 className={`maq-h1 ${s.h1}`}>LoadFAST</h1>
             <p className={s.heroSub}>
               Automate Power BI load testing, simulating concurrent users, measuring page load time, and flagging slow reports and visuals, so you validate performance and plan Fabric capacity before users feel it.
@@ -89,7 +89,7 @@ export function ProductLoadFAST() {
         </div>
       </section>
 
-      <section className={s.sectionAlt}>
+      <section className={s.section}>
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>How it works</span> */}
@@ -111,7 +111,7 @@ export function ProductLoadFAST() {
         { tag: "Blog", title: "Optimize your Power BI Reports and Usage with LoadFAST", teaser: "See how LoadFAST helps identify bottlenecks and right-size Fabric capacity for reporting workloads.", href: "https://blog.maqsoftware.com/2024/03/transform-your-power-bi.html" },
       ]} /></section>
 
-      <section className={s.sectionAlt}>
+      <section className={s.section}>
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Pricing</span> */}
@@ -133,7 +133,7 @@ export function ProductLoadFAST() {
         </div>
       </section>
 
-      <section className={s.sectionAlt}>
+      <section className={s.section}>
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Insights</span> */}

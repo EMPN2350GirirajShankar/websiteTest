@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   hero: {
     backgroundColor: "var(--colorNeutralBackground3)",
     // Consistent About-page hero padding (see AboutWhoWeAre for the pattern).
-    padding: "40px 32px",
+    padding: "40px var(--section-pad-x)",
   },
   heroInner: {
     maxWidth: "var(--maq-container-wide)",
@@ -55,7 +55,7 @@ const useStyles = makeStyles({
 
   // ── Stats ─────────────────────────────────────────────────────────────────
   statsSection: {
-    padding: "56px 32px",
+    padding: "56px var(--section-pad-x)",
     backgroundColor: "#fff",
   },
   statsInner: {
@@ -103,7 +103,7 @@ const useStyles = makeStyles({
 
   // ── Achievements ──────────────────────────────────────────────────────────
   achievementsSection: {
-    padding: "64px 32px",
+    padding: "64px var(--section-pad-x)",
     backgroundColor: "var(--colorNeutralBackground3)",
   },
   achievementsInner: {
@@ -153,7 +153,7 @@ const useStyles = makeStyles({
 
   // ── Leadership + Leading by Example (combined) ───────────────────────────
   leadershipSection: {
-    padding: "72px 32px",
+    padding: "72px var(--section-pad-x)",
     backgroundColor: "#fff",
   },
   leadershipInner: {

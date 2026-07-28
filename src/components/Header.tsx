@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     boxShadow: "0 1px 2px rgba(15, 23, 42, 0.04)",
     display: "flex",
     alignItems: "center",
-    padding: "0 32px",
+    padding: "0 var(--section-pad-x)",
     height: "64px",
     gap: "32px",
     color: "var(--maq-ink)",

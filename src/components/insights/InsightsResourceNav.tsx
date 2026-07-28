@@ -3,7 +3,7 @@ import { insightsResourceLinks, type InsightsResourceLink } from "../../data/ins
 import { ResourceMarketplaceCard } from "../cards/ResourceMarketplaceCard";
 
 const useStyles = makeStyles({
-  section: { padding: "32px", backgroundColor: "#fff" },
+  section: { padding: "32px var(--section-pad-x)", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "16px" },
   eyebrow: {

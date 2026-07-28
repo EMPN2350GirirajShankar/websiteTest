@@ -33,7 +33,7 @@ export interface CaseStudyTab {
 }
 
 const useStyles = makeStyles({
-  section: { padding: "72px 32px", backgroundColor: "#fff" },
+  section: { padding: "72px var(--section-pad-x)", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
 
   heading: { margin: "0 0 28px" },

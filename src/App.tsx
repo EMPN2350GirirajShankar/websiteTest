@@ -159,7 +159,7 @@ export function App() {
   // or media-query-dependent layout; keeping a body class in sync with matchMedia
   // ensures styles tied to `.is-mobile` or generic reflow happen immediately.
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 940px)");
+    const mq = window.matchMedia("(max-width: 1124px)");
     const update = (e?: MediaQueryListEvent | MediaQueryList) => {
       try {
         const matches = mq.matches;

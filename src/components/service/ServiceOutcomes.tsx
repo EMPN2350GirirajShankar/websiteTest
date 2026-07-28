@@ -44,7 +44,7 @@ export interface ServiceOutcomesProps {
 }
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "#fff" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   // Typography comes from the canonical `.maq-h2` class; only layout here.
   title: {

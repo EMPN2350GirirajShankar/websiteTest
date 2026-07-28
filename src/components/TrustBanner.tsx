@@ -5,7 +5,7 @@ const useStyles = makeStyles({
     backgroundColor: tokens.colorNeutralBackground1,
     borderTop: `1px solid ${tokens.colorNeutralStroke2}`,
     borderBottom: `1px solid ${tokens.colorNeutralStroke2}`,
-    padding: "12px 32px",
+    padding: "12px var(--section-pad-x)",
   },
   inner: {
     maxWidth: "var(--maq-container-wide)",

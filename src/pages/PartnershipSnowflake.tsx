@@ -23,8 +23,8 @@ import { PartnershipMarketplace } from "../components/partnerships/PartnershipMa
 // ---------------------------------------------------------------------------
 const useStyles = makeStyles({
   marketSection: {
-    padding: "48px 32px",
-    backgroundColor: "var(--colorNeutralBackground3)",
+    padding: "48px var(--section-pad-x)",
+    backgroundColor: "#fff",
   },
   marketInner: {
     maxWidth: "var(--maq-container-wide)",
@@ -205,8 +205,6 @@ export function PartnershipSnowflake() {
         subhead="Unify siloed data, scale analytics, and make smarter decisions on Snowflake. MAQ Software mobilizes data, enables secure collaboration, and delivers real-time insights across clouds and regions."
         ctaLabel="Contact us"
         ctaHref="mailto:CustomerSuccess@MAQSoftware.com?subject=Contact%20Us&body=Hello,%20I%20would%20like%20to%20get%20in%20touch%20with%20you."
-        imageUrl="/logos/Snowflake-hero.png"
-        imageAlt="MAQ Software and Snowflake"
       />
 
       {/* <PartnershipValueProps

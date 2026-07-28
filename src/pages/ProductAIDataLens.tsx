@@ -37,7 +37,7 @@ export function ProductAIDataLens() {
       <section className={s.hero}>
         <div className={s.heroGrid}>
           <div>
-            {/* <span className={s.eyebrow}>Intelligent data interaction</span> */}
+            <span className={s.eyebrow}>Products</span>
             <h1 className={`maq-h1 ${s.h1}`}>AI-DataLens</h1>
             <p className={s.heroSub}>
              Ask questions of enterprise datasets in plain language and get instant answers, no technical skills required. AI-DataLens keeps row-level security, governance, and audit compliance intact on every query.
@@ -82,7 +82,7 @@ export function ProductAIDataLens() {
         </div>
       </section>
 
-      <section className={s.sectionAlt} id="ai-datalens-features">
+      <section className={s.section} id="ai-datalens-features">
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Capabilities</span> */}
@@ -108,7 +108,7 @@ export function ProductAIDataLens() {
         { tag: "Information retrieval", title: "Streamlining information retrieval with AI Copilots", teaser: "Enterprise AI Copilots that ground answers in organizational content — dramatically improving knowledge worker productivity.", href: "https://blog.maqsoftware.com/2024/07/streamlining-information-retrieval-with.html" },
       ]} /></section>
 
-      <section className={s.sectionAlt}>
+      <section className={s.section}>
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Insights</span> */}

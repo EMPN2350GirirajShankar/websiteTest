@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   section: {
     minHeight: "60vh",
-    padding: "96px 32px",
+    padding: "96px var(--section-pad-x)",
     backgroundColor: "var(--colorNeutralBackground3)",
     display: "flex",
     alignItems: "center",

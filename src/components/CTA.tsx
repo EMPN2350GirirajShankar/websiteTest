@@ -5,7 +5,7 @@ import { useContactAction } from "../lib/contact";
 import { PrimaryButton } from "./buttons";
 
 const useStyles = makeStyles({
-  section: { padding: "32px 32px", backgroundColor: "var(--maq-surface-cream)" },
+  section: { padding: "32px var(--section-pad-x)", backgroundColor: "var(--maq-surface-cream)" },
   inner: {
     maxWidth: "1100px",
     margin: "0 auto",
