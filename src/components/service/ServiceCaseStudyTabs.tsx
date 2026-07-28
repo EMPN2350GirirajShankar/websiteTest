@@ -83,7 +83,6 @@ const useStyles = makeStyles({
     position: "relative",
     overflow: "hidden",
     backgroundColor: "var(--maq-surface-cream)",
-    "@media (max-width: 520px)": { aspectRatio: "16 / 9" },
   },
   img: {
     position: "absolute",
@@ -93,6 +92,15 @@ const useStyles = makeStyles({
     objectFit: "cover",
     objectPosition: "left center",
     transition: "transform .35s ease",
+    // Once the card stacks (image on top, ≤520px), switch the image to normal
+    // flow with its own aspect ratio. The desktop absolute-fill + wrapper
+    // aspect-ratio can collapse to ~0 height on iOS Safari (fine on desktop
+    // engines), which made the thumbnail render tiny on real phones.
+    "@media (max-width: 520px)": {
+      position: "static",
+      height: "auto",
+      aspectRatio: "16 / 9",
+    },
   },
   cardText: {
     display: "flex",
