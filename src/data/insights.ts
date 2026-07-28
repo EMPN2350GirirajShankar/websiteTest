@@ -86,6 +86,24 @@ export const caseStudyIndustryFilters = [
   "Public sector",
 ];
 
+// Technology chip labels. Only CMS-authored studies carry one of these (the
+// `tag` field, a dropdown in public/admin/config.yml); the hand-maintained
+// studies below use `tag` as a free-text card label, so they never match a
+// technology and the page only offers the technologies actually present.
+export const caseStudyTechnologyFilters = [
+  "All",
+  "Microsoft Fabric",
+  "Power BI",
+  "Copilot",
+  "Databricks",
+  "Snowflake",
+  "Azure",
+  "Security",
+  "Dynamics 365",
+  "Power Apps",
+  "Power Platform",
+];
+
 // Hand-maintained studies that still point at blog.maqsoftware.com. New studies
 // are authored in the CMS instead; `caseStudyItems` below merges both sources.
 const staticCaseStudyItems: CaseStudyItem[] = [

@@ -57,23 +57,6 @@ const useStyles = makeStyles({
     color: "var(--maq-ink)",
   },
   cta: { marginTop: "36px" },
-  chipRow: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "8px",
-    marginTop: "32px",
-    paddingTop: "20px",
-    borderTop: "1px solid var(--maq-border)",
-  },
-  chip: {
-    fontSize: "12px",
-    fontWeight: 600,
-    color: "var(--maq-gray-700)",
-    background: "var(--maq-gray-50)",
-    border: "1px solid var(--maq-border)",
-    borderRadius: "999px",
-    padding: "4px 12px",
-  },
 });
 
 export function EventDetail() {
@@ -86,7 +69,7 @@ export function EventDetail() {
   return (
     <article className={s.article}>
       <div className={s.inner}>
-        <Link className={s.breadcrumb} to="/events/all">
+        <Link className={s.breadcrumb} to="/events">
           ← All events
         </Link>
         <div>
@@ -119,16 +102,6 @@ export function EventDetail() {
             >
               Register
             </PrimaryButton>
-          </div>
-        ) : null}
-
-        {event.tags.length > 0 ? (
-          <div className={s.chipRow}>
-            {event.tags.map((tag) => (
-              <span key={tag} className={s.chip}>
-                {tag}
-              </span>
-            ))}
           </div>
         ) : null}
       </div>

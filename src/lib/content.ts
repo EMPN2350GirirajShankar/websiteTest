@@ -59,7 +59,6 @@ export interface SiteEvent {
   summary: string;
   image?: string;
   imageAlt?: string;
-  tags: string[];
   html: string;
 }
 
@@ -145,7 +144,6 @@ const siteEvents: SiteEvent[] = rawEvents
     summary: str(entry, "summary") || textExcerpt(entry.html),
     image: optionalStr(entry, "image"),
     imageAlt: optionalStr(entry, "imageAlt"),
-    tags: entry.tags,
     html: entry.html,
   }))
   .sort((a, b) => b.startDate.localeCompare(a.startDate));

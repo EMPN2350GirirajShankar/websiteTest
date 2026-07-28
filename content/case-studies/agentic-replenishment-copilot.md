@@ -2,7 +2,7 @@
 title: Cutting warehouse stockouts with an agentic replenishment copilot
 slug: agentic-replenishment-copilot
 date: 2026-07-20
-tag: Smarter replenishment
+tag: Copilot
 service: AI solutions & agents
 industry: Retail & consumer goods
 excerpt: A national retailer replaced nightly batch reordering with an agent that reads live demand signals, cutting stockouts by 34%.

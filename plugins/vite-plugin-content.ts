@@ -33,19 +33,6 @@ function toDateString(value: unknown): string {
   return "";
 }
 
-function toStringList(value: unknown): string[] {
-  if (Array.isArray(value)) {
-    return value.map((item) => String(item).trim()).filter(Boolean);
-  }
-  if (typeof value === "string" && value.trim()) {
-    return value
-      .split(",")
-      .map((item) => item.trim())
-      .filter(Boolean);
-  }
-  return [];
-}
-
 function readingTime(markdown: string): number {
   const words = markdown.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / 220));
@@ -73,7 +60,6 @@ function readCollection(dir: string) {
         date: toDateString(data.date),
         startDate: toDateString(data.startDate),
         endDate: toDateString(data.endDate),
-        tags: toStringList(data.tags),
         draft: data.draft === true,
         featured: data.featured === true,
         readingTimeMinutes: readingTime(content),

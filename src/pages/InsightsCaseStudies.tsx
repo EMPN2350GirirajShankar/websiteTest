@@ -8,6 +8,7 @@ import { CaseStudyCard } from "../components/cards/CaseStudyCard";
 import {
   caseStudyFilters,
   caseStudyIndustryFilters,
+  caseStudyTechnologyFilters,
   caseStudyItems,
 } from "../data/insights";
 
@@ -73,6 +74,7 @@ const useStyles = makeStyles({
 
 const ALL_INDUSTRY_LABEL = "All industries";
 const ALL_SERVICE_LABEL = "All services";
+const ALL_TECHNOLOGY_LABEL = "All technologies";
 
 // Older service names that still live in bookmarks and outbound links; map them
 // onto the current chip labels (which mirror the service nav) so those URLs don't
@@ -98,9 +100,11 @@ export function InsightsCaseStudies() {
   const rawServiceParam = searchParams.get("service") || searchParams.get("filter") || "All";
   const serviceParam = serviceAliases[rawServiceParam] || rawServiceParam;
   const industryParam = searchParams.get("industry") || "All";
+  const technologyParam = searchParams.get("technology") || "All";
 
   const [activeService, setActiveService] = useState(serviceParam);
   const [activeIndustry, setActiveIndustry] = useState(industryParam);
+  const [activeTechnology, setActiveTechnology] = useState(technologyParam);
 
   useEffect(() => {
     setActiveService(serviceParam);
@@ -108,6 +112,9 @@ export function InsightsCaseStudies() {
   useEffect(() => {
     setActiveIndustry(industryParam);
   }, [industryParam]);
+  useEffect(() => {
+    setActiveTechnology(technologyParam);
+  }, [technologyParam]);
 
   const didScroll = useRef(false);
   useEffect(() => {
@@ -129,46 +136,59 @@ export function InsightsCaseStudies() {
     return caseStudyIndustryFilters.filter((f) => f === "All" || present.has(f));
   }, []);
 
-  // Per-option counts are computed against the OTHER axis's current selection, so a
+  // Same idea for technologies. Only CMS-authored studies carry one, so this list
+  // stays short until the hand-maintained studies are migrated.
+  const availableTechnologies = useMemo(() => {
+    const present = new Set(caseStudyItems.map((item) => item.tag).filter(Boolean));
+    return caseStudyTechnologyFilters.filter((f) => f === "All" || present.has(f));
+  }, []);
+
+  // Per-option counts are computed against the OTHER axes' current selections, so a
   // dropdown shows how many studies you'd get if you picked that option. Zero-count
   // options are disabled so you can't select into an empty grid.
-  const industryCounts = useMemo(() => {
-    const base =
-      activeService === "All"
-        ? caseStudyItems
-        : caseStudyItems.filter((item) => item.service === activeService);
+  const countsFor = (options: string[], field: "service" | "industry" | "tag") => {
+    const base = caseStudyItems.filter(
+      (item) =>
+        (field === "service" || activeService === "All" || item.service === activeService) &&
+        (field === "industry" || activeIndustry === "All" || item.industry === activeIndustry) &&
+        (field === "tag" || activeTechnology === "All" || item.tag === activeTechnology)
+    );
     const counts: Record<string, number> = {};
-    for (const f of availableIndustries) {
-      counts[f] = f === "All" ? base.length : base.filter((item) => item.industry === f).length;
+    for (const f of options) {
+      counts[f] = f === "All" ? base.length : base.filter((item) => item[field] === f).length;
     }
     return counts;
-  }, [activeService, availableIndustries]);
+  };
 
-  const serviceCounts = useMemo(() => {
-    const base =
-      activeIndustry === "All"
-        ? caseStudyItems
-        : caseStudyItems.filter((item) => item.industry === activeIndustry);
-    const counts: Record<string, number> = {};
-    for (const f of caseStudyFilters) {
-      counts[f] = f === "All" ? base.length : base.filter((item) => item.service === f).length;
-    }
-    return counts;
-  }, [activeIndustry]);
+  const serviceCounts = useMemo(
+    () => countsFor(caseStudyFilters, "service"),
+    [activeIndustry, activeTechnology]
+  );
+
+  const industryCounts = useMemo(
+    () => countsFor(availableIndustries, "industry"),
+    [activeService, activeTechnology, availableIndustries]
+  );
+
+  const technologyCounts = useMemo(
+    () => countsFor(availableTechnologies, "tag"),
+    [activeService, activeIndustry, availableTechnologies]
+  );
 
   const filtered = useMemo(() => {
     return caseStudyItems.filter(
       (item) =>
         (activeService === "All" || item.service === activeService) &&
-        (activeIndustry === "All" || item.industry === activeIndustry)
+        (activeIndustry === "All" || item.industry === activeIndustry) &&
+        (activeTechnology === "All" || item.tag === activeTechnology)
     );
-  }, [activeService, activeIndustry]);
+  }, [activeService, activeIndustry, activeTechnology]);
 
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
 
   useEffect(() => {
     setVisibleCount(INITIAL_VISIBLE);
-  }, [activeService, activeIndustry]);
+  }, [activeService, activeIndustry, activeTechnology]);
 
   const total = filtered.length;
   const halfCount = Math.max(INITIAL_VISIBLE + 1, Math.ceil(total / 2));
@@ -203,14 +223,17 @@ export function InsightsCaseStudies() {
   };
   const handleShowLess = () => setVisibleCount(INITIAL_VISIBLE);
 
-  const filtersActive = activeService !== "All" || activeIndustry !== "All";
+  const filtersActive =
+    activeService !== "All" || activeIndustry !== "All" || activeTechnology !== "All";
   const handleClearFilters = () => {
     setActiveService("All");
     setActiveIndustry("All");
+    setActiveTechnology("All");
   };
 
   const industryLabel = (f: string) => (f === "All" ? ALL_INDUSTRY_LABEL : f);
   const serviceLabel = (f: string) => (f === "All" ? ALL_SERVICE_LABEL : f);
+  const technologyLabel = (f: string) => (f === "All" ? ALL_TECHNOLOGY_LABEL : f);
 
   return (
     <>
@@ -270,6 +293,36 @@ export function InsightsCaseStudies() {
                   ))}
                 </Dropdown>
               </div>
+
+              {/* Hidden until at least one study carries a technology, so the
+                  control never appears with nothing but "All technologies". */}
+              {availableTechnologies.length > 1 && (
+                <div className={s.filterGroup}>
+                  <label id="cs-technology-label" className={s.filterLabel}>
+                    Technology
+                  </label>
+                  <Dropdown
+                    aria-labelledby="cs-technology-label"
+                    className={s.dropdown}
+                    value={technologyLabel(activeTechnology)}
+                    selectedOptions={[activeTechnology]}
+                    onOptionSelect={(_e, data) => {
+                      if (data.optionValue) setActiveTechnology(data.optionValue);
+                    }}
+                  >
+                    {availableTechnologies.map((f) => (
+                      <Option
+                        key={f}
+                        value={f}
+                        text={technologyLabel(f)}
+                        disabled={f !== "All" && (technologyCounts[f] ?? 0) === 0}
+                      >
+                        {`${technologyLabel(f)} (${technologyCounts[f] ?? 0})`}
+                      </Option>
+                    ))}
+                  </Dropdown>
+                </div>
+              )}
 
               {filtersActive && (
                 <div className={s.clearGroup}>

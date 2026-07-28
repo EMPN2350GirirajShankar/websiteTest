@@ -9,9 +9,6 @@ registrationUrl: ""
 summary: A one-hour open session where our Fabric and Power BI architects answer questions on capacity planning, semantic models, and report performance.
 image: ""
 imageAlt: ""
-tags:
-  - Microsoft Fabric
-  - Power BI
 draft: false
 ---
 

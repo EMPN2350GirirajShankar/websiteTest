@@ -9,7 +9,6 @@ declare module "virtual:site-content" {
     date: string;
     startDate: string;
     endDate: string;
-    tags: string[];
     draft: boolean;
     featured: boolean;
     readingTimeMinutes: number;

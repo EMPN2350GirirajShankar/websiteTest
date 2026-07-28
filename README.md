@@ -75,10 +75,12 @@ the existing section next to the hand-maintained entries — no code change need
 
 Use the **Draft** toggle to keep an entry in the repository without publishing it.
 
-The **Service**, **Industry**, and **Topic** dropdowns decide which filter chip an
-entry appears under. Their options are kept in step with `caseStudyFilters`,
-`caseStudyIndustryFilters`, and `bestPracticeFilters` in
-[src/data/insights.ts](src/data/insights.ts) — change one and you must change the other.
+The **Technology**, **Service**, **Industry**, and **Topic** dropdowns decide which
+filter an entry appears under. Their options are kept in step with
+`caseStudyTechnologyFilters`, `caseStudyFilters`, `caseStudyIndustryFilters`, and
+`bestPracticeFilters` in [src/data/insights.ts](src/data/insights.ts) — change one and
+you must change the other. A dropdown on the site only lists values that at least one
+study actually uses, so a new technology stays hidden until something is tagged with it.
 
 ### For developers
 

@@ -43,9 +43,10 @@ slug:
 collections:
   # -------------------------------------------------------- Case studies ----
   # Cards appear on /insights/case-studies alongside the older studies that
-  # still live in src/data/insights.ts. The Service and Industry values below
-  # MUST match `caseStudyFilters` / `caseStudyIndustryFilters` in that file,
-  # otherwise the study is only reachable under the "All" chips.
+  # still live in src/data/insights.ts. The Technology, Service and Industry
+  # values below MUST match `caseStudyTechnologyFilters` / `caseStudyFilters` /
+  # `caseStudyIndustryFilters` in that file, otherwise the study is only
+  # reachable under the "All" options.
   - name: caseStudies
     label: Case studies
     label_singular: Case study
@@ -77,11 +78,22 @@ collections:
         hint: Lowercase words separated by hyphens. Becomes /insights/case-studies/<slug> and the file name.
         pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers and hyphens only"]
       - { label: Publish date, name: date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
-      - label: Card label
+      - label: Technology
         name: tag
-        widget: string
-        default: Case study
-        hint: Short phrase shown on the card chip, e.g. "Reshaping retail".
+        widget: select
+        default: Microsoft Fabric
+        hint: Drives the Technology filter on /insights/case-studies and the chip on the study page.
+        options:
+          - Microsoft Fabric
+          - Power BI
+          - Copilot
+          - Databricks
+          - Snowflake
+          - Azure
+          - Security
+          - Dynamics 365
+          - Power Apps
+          - Power Platform
       - label: Service
         name: service
         widget: select
@@ -220,24 +232,6 @@ collections:
       - { label: Summary, name: summary, widget: text }
       - { label: Hero image, name: image, widget: image, required: false }
       - { label: Hero image alt text, name: imageAlt, widget: string, required: false }
-      - label: Tags
-        name: tags
-        widget: select
-        multiple: true
-        required: false
-        default: []
-        hint: Technologies covered. Shown as chips on the event page; pick as many as apply.
-        options:
-          - Microsoft Fabric
-          - Power BI
-          - Copilot
-          - Databricks
-          - Snowflake
-          - Azure
-          - Security
-          - Dynamics 365
-          - Power Apps
-          - Power Platform
       - { label: Draft, name: draft, widget: boolean, default: false }
       - { label: Body, name: body, widget: richtext }
 

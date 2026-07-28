@@ -9,8 +9,6 @@ registrationUrl: Google.com
 summary: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit
 image: https://picsum.photos/id/5/1920/1280.webp
 imageAlt: Lorem ipsum
-tags:
-  - Microsoft Fabric
 draft: false
 ---
 
