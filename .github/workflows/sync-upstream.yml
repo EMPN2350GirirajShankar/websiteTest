@@ -1,0 +1,54 @@
+name: Sync Upstream Repository
+
+on:
+  schedule:
+    # Runs daily at 09:00 AM IST (03:30 UTC)
+    - cron: '30 3 * * *'
+  workflow_dispatch: # Allows manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/maqsoftware/MAQSoftwareWebsite-New.git || true
+
+      - name: Fetch upstream
+        run: git fetch upstream main
+
+      - name: Stash local changes
+        run: |
+          git stash push -m "Auto-stash before sync" || true
+
+      - name: Reset to upstream/main
+        run: git reset --hard upstream/main
+
+      - name: Push to origin
+        run: git push origin main --force-with-lease
+
+      - name: Create success notification
+        if: success()
+        run: |
+          echo "✅ Successfully synced main branch with upstream at $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+
+      - name: Handle failure notification
+        if: failure()
+        run: |
+          echo "❌ Sync failed at $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          exit 1
