@@ -23,8 +23,8 @@ import { PartnershipMarketplace } from "../components/partnerships/PartnershipMa
 // ---------------------------------------------------------------------------
 const useStyles = makeStyles({
   marketSection: {
-    padding: "48px 32px",
-    backgroundColor: "var(--colorNeutralBackground3)",
+    padding: "48px var(--section-pad-x)",
+    backgroundColor: "#fff",
   },
   marketInner: {
     maxWidth: "var(--maq-container-wide)",
@@ -206,8 +206,6 @@ export function PartnershipDatabricks() {
         subhead="Turn data into decisions on Databricks. MAQ Software builds analytics, integration, and AI accelerators on the Databricks Lakehouse, so your teams get reliable data, faster models, and governed access at scale."
         ctaLabel="Contact us"
         ctaHref="mailto:CustomerSuccess@MAQSoftware.com?subject=Contact%20Us&body=Hello,%20I%20would%20like%20to%20get%20in%20touch%20with%20you."
-        imageUrl="/logos/databricks.png"
-        imageAlt="MAQ Software and Databricks"
       />
 
 

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   makeStyles,
   tokens,
@@ -15,8 +15,10 @@ import {
   Window24Regular,
   Pulse24Regular,
   CheckmarkCircle24Regular,
+  ChevronLeft20Regular,
+  ChevronRight20Regular,
 } from "@fluentui/react-icons";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PrimaryButton, SecondaryButton } from "../components/buttonsV2";
 import { Section, SectionHeading, CardGrid } from "../components/layout";
 import { IconCard, SplitCard, PosterCard } from "../components/cardsV2";
@@ -24,6 +26,8 @@ import { INDUSTRIES } from "../data/homeIndustries";
 import { caseStudyItems } from "../data/insights";
 import { motion, AnimatePresence } from "framer-motion";
 import { useContactAction } from "../lib/contact";
+import { bp, mq } from "../lib/breakpoints";
+import { useMediaQuery } from "../lib/useMediaQuery";
 
 /* ==================================================================
    HomeV3 — duplicate of HomeV2 (Bento home) for design exploration
@@ -82,36 +86,36 @@ const BUILD: BuildArea[] = [
   },
 ];
 
-interface ProductItem { icon: ReactNode; name: string; impact: string; desc: string; to: string; img?: string }
+interface ProductItem { icon: ReactNode; name: string; impact: string; desc: string; short: string; to: string; img?: string }
 const PRODUCTS: ProductItem[] = [
   {
     icon: <ArrowSwap24Regular />, name: "MigrateFAST", impact: "Migrate in weeks, not quarters",
-    desc: "Move to Microsoft Fabric faster and more accurately from Tableau, Cognos, Qlik, MicroStrategy, SAP BusinessObjects, Crystal Reports, Alteryx, or Informatica, with automated conversion, DAX generation, and validated cutover at every stage.", to: "/products/migratefast",
+    desc: "Move to Microsoft Fabric faster and more accurately from Tableau, Cognos, Qlik, MicroStrategy, SAP BusinessObjects, Crystal Reports, Alteryx, or Informatica, with automated conversion, DAX generation, and validated cutover at every stage.", short: "Move to Microsoft Fabric faster and more accurately, with automated conversion, DAX generation, and validated cutover.", to: "/products/migratefast",
     img: "/images/Product%20cards/MigrateFAST.png"
   },
   {
     icon: <TopSpeed24Regular />, name: "Fabric Admin Agent", impact: "Lower Fabric capacity cost",
-    desc: "Manage Fabric at enterprise scale without expanding your platform team. Continuous monitoring, anomaly detection, and demand forecasting run in the background so your team can act before throttling hits users.", to: "/products/fabric-admin-agent",
+    desc: "Manage Fabric at enterprise scale without expanding your platform team. Continuous monitoring, anomaly detection, and demand forecasting run in the background so your team can act before throttling hits users.", short: "Manage Fabric at enterprise scale with continuous monitoring, anomaly detection, and demand forecasting.", to: "/products/fabric-admin-agent",
     img: "/images/Product%20cards/Fabric-Admin-Agent.png"
   },
   {
     icon: <Chat24Regular />, name: "AI-DataLens", impact: "Answers in plain language, instantly",
-    desc: "Give business users answers from your enterprise data in natural language, with row-level security and audit logging preserved through RAG-grounded queries against your semantic layer.", to: "/products/ai-datalens",
+    desc: "Give business users answers from your enterprise data in natural language, with row-level security and audit logging preserved through RAG-grounded queries against your semantic layer.", short: "Answer business questions from your enterprise data in natural language, with security and audit logging preserved.", to: "/products/ai-datalens",
     img: "/images/Product%20cards/AI-datalens.png"
   },
   {
     icon: <Window24Regular />, name: "EmbedFAST", impact: "Embed analytics at any scale",
-    desc: "Ship embedded analytics to your customers without months of custom integration, with tenant isolation, RBAC, unlimited workspace onboarding, and white-label theming handled at enterprise scale.", to: "/products/embedfast",
+    desc: "Ship embedded analytics to your customers without months of custom integration, with tenant isolation, RBAC, unlimited workspace onboarding, and white-label theming handled at enterprise scale.", short: "Ship embedded analytics to your customers with tenant isolation, RBAC, and white-label theming.", to: "/products/embedfast",
     img: "/images/Product%20cards/EmbedFAST.png"
   },
   {
     icon: <Pulse24Regular />, name: "LoadFAST", impact: "Launch with zero surprises",
-    desc: "Validate Power BI and Microsoft Fabric performance before your users find the bottlenecks, with concurrent user simulation, load time measurement, and capacity sizing recommendations.", to: "/products/loadfast",
+    desc: "Validate Power BI and Microsoft Fabric performance before your users find the bottlenecks, with concurrent user simulation, load time measurement, and capacity sizing recommendations.", short: "Validate Power BI and Fabric performance before users hit bottlenecks, with load simulation and capacity sizing.", to: "/products/loadfast",
     img: "/images/Product%20cards/LoadFAST.png"
   },
   {
     icon: <CheckmarkCircle24Regular />, name: "CertyFAST", impact: "Ship error-free models",
-    desc: "Deliver Power BI semantic models that pass review the first time and stay maintainable across team turnover, with automated error detection, DAX standardization, and documentation.", to: "/products/certyfast",
+    desc: "Deliver Power BI semantic models that pass review the first time and stay maintainable across team turnover, with automated error detection, DAX standardization, and documentation.", short: "Deliver Power BI models that pass review the first time, with automated error detection and DAX standardization.", to: "/products/certyfast",
     img: "/images/Product%20cards/CertyFAST.png"
   },
 ];
@@ -137,6 +141,7 @@ const HOME_MAXW = "var(--maq-container-wide)";
    fadeUp: scroll-reveal applied to each section (animates once on enter).
    hero*: staggered mount animation for the hero on first paint. */
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const MotionLink = motion.create(Link);
 const fadeUp = {
   initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
@@ -212,9 +217,12 @@ const useStyles = makeStyles({
     display: "flex", flexDirection: "column", justifyContent: "center",
     // Left and right edges both align to the centered container gutter.
     paddingTop: "8px", paddingBottom: "8px",
-    paddingLeft: "max(32px, calc((100vw - var(--maq-container-wide)) / 2))",
-    paddingRight: "max(32px, calc((100vw - var(--maq-container-wide)) / 2))",
-    "@media (max-width: 1024px)": { paddingTop: "5px", paddingBottom: "5px", paddingLeft: "32px", paddingRight: "32px" }, "@media (max-width: 720px)": { paddingTop: "4px", paddingBottom: "4px", paddingLeft: "22px", paddingRight: "22px" },
+    // Horizontal gutter tracks --section-pad-x (32px → 22px at ≤720px) so the
+    // hero's left/right margins match every other section at every width; the
+    // max() keeps content aligned to the centered container on wide screens.
+    paddingLeft: "max(var(--section-pad-x), calc((100vw - var(--maq-container-wide)) / 2))",
+    paddingRight: "max(var(--section-pad-x), calc((100vw - var(--maq-container-wide)) / 2))",
+    [bp.lg]: { minHeight: "0", paddingTop: "48px", paddingBottom: "48px" }, [bp.md]: { paddingTop: "40px", paddingBottom: "40px" }, [bp.sm]: { paddingTop: "32px", paddingBottom: "32px" },
   },
   heroArt: {
     display: "block", width: "100%", height: "auto", objectFit: "contain",
@@ -223,52 +231,36 @@ const useStyles = makeStyles({
   },
   heroTop: {
     display: "grid", gridTemplateColumns: "minmax(0, 1.5fr) minmax(0, 1fr)", gap: "24px", alignItems: "center", position: "relative", zIndex: 1,
-    "@media (max-width: 1024px)": { gridTemplateColumns: "1fr", gap: "16px", alignItems: "start" },
+    [bp.lg]: { gridTemplateColumns: "1fr", gap: "28px", alignItems: "start" },
   },
   heroText: {
     minWidth: 0,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    "@media (max-width: 1024px)": {
-      order: 1,
+    [bp.lg]: {
+      order: 2,
     },
   },
   heroImageCol: {
     minWidth: 0,
-    "@media (max-width: 1024px)": {
-      order: 2,
-      width: "100%",
-      maxWidth: "560px",
-      margin: "0 auto",
-    },
-    "@media (max-width: 768px)": {
-      maxWidth: "460px",
-    },
-    "@media (max-width: 425px)": {
-      maxWidth: "100%",
-    },
+    // Hidden once the hero stacks (≤960px) — mobile leads with the text alone.
+    [bp.lg]: { display: "none" },
   },
   heroArtMobile: {
-    "@media (max-width: 1024px)": {
+    [bp.lg]: {
       maxHeight: "320px",
     },
-    "@media (max-width: 768px)": {
+    [bp.md]: {
       maxHeight: "260px",
     },
-    "@media (max-width: 425px)": {
-      maxHeight: "220px",
-    },
-    "@media (max-width: 375px)": {
+    [bp.sm]: {
       maxHeight: "200px",
-    },
-    "@media (max-width: 320px)": {
-      maxHeight: "180px",
     },
   },
   heroH1: { margin: "0 0 28px", fontSize: "var(--fs-h1)", fontWeight: 600, lineHeight: 1.05, letterSpacing: "-0.02em" },
   h1em: { fontStyle: "normal", color: "var(--maq-red)" },
-  hbr: { display: "none", "@media (min-width: 1120px)": { display: "inline" } },
+  hbr: { display: "none", [bp.xlUp]: { display: "inline" } },
   sub: { margin: 0, fontSize: "var(--fs-lead)", lineHeight: 1.6, color: "var(--maq-muted-color)", maxWidth: "52ch" },
   heroCta: { marginTop: "40px", display: "flex", gap: "12px", flexWrap: "wrap" }, capHead: { marginBottom: "56px" },
   // Dark capabilities band — token flips come from <DarkSection>; this only sets the
@@ -324,7 +316,7 @@ const useStyles = makeStyles({
   ctaArt: {
     position: "absolute", top: "50%", right: 0, transform: "translateY(-50%)",
     width: "400px", height: "400px", pointerEvents: "none", zIndex: 0,
-    "@media (max-width: 880px)": { display: "none" },
+    [bp.lg]: { display: "none" },
   },
   bandSub: { marginTop: "10px", fontSize: "var(--fs-body-lg)", lineHeight: 1.5, color: "var(--maq-muted-color)", maxWidth: "34em", margin: "10px 0 0" },
 
@@ -332,7 +324,7 @@ const useStyles = makeStyles({
   prodHead: { marginBottom: "40px", "& p": { fontSize: "var(--fs-body-lg)" } },
   // Products tab list — full-width hairline under the tabs; the selected Tab
   // draws the brand-red underline indicator.
-  prodTabs: { marginBottom: "32px", borderBottom: "1px solid var(--maq-border)" },
+  prodTabs: { marginBottom: "32px", borderBottom: "1px solid var(--maq-border)", overflowX: "auto" },
   // Consistent card gaps across the Resources / What-we-deliver grids.
   cardGap: { gap: "24px" },
   prodGrid: { gridAutoRows: "1fr", gap: "24px" },
@@ -340,22 +332,22 @@ const useStyles = makeStyles({
     display: "grid",
     gap: "24px",
     gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-    "@media (max-width: 1080px)": { gridTemplateColumns: "repeat(2, minmax(0, 1fr))" },
-    "@media (max-width: 700px)": { gridTemplateColumns: "1fr" },
+    [bp.lg]: { gridTemplateColumns: "repeat(2, minmax(0, 1fr))" },
+    [bp.md]: { gridTemplateColumns: "1fr" },
   },
   industriesGrid: {
     display: "grid",
     gap: "24px",
     gridAutoRows: "minmax(172px, auto)",
     gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-    "@media (max-width: 1080px)": { gridTemplateColumns: "repeat(2, minmax(0, 1fr))" },
-    "@media (max-width: 700px)": { gridTemplateColumns: "1fr" },
+    [bp.lg]: { gridTemplateColumns: "repeat(2, minmax(0, 1fr))" },
+    [bp.md]: { gridTemplateColumns: "1fr" },
   },
 
   /* Featured case study — large image left, text right. */
   featRow: {
     display: "grid", gridTemplateColumns: "1.3fr 1fr", gap: "clamp(32px, 5vw, 72px)", alignItems: "center",
-    "@media (max-width: 880px)": { gridTemplateColumns: "1fr", gap: "28px" },
+    [bp.lg]: { gridTemplateColumns: "1fr", gap: "28px" },
   },
   featImg: {
     position: "relative", width: "100%", aspectRatio: "16 / 9", borderRadius: "16px", overflow: "hidden",
@@ -366,6 +358,131 @@ const useStyles = makeStyles({
   featTitle: { fontSize: "var(--fs-h3)", fontWeight: 600, lineHeight: 1.12, letterSpacing: "-.5px", color: "var(--maq-heading-color)", margin: 0 },
   featSub: { fontSize: "var(--fs-body-lg)", lineHeight: 1.6, color: "var(--maq-muted-color)", margin: "18px 0 0", maxWidth: "44ch" },
   featCta: { marginTop: "28px" },
+
+  // Compact list used for Services + Industries below the lg breakpoint —
+  // title rows with a chevron, no images/icons/descriptions.
+  compactColumns: {
+    display: "flex",
+    gap: "40px",
+    [bp.md]: { flexDirection: "column", gap: 0 },
+  },
+  compactColumn: {
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column",
+    // Two-column layout (tablet and up within the compact range): equal columns,
+    // each with its own top divider. Stacks to one column below md.
+    [bp.mdUp]: {
+      flex: "1 1 0",
+      borderTop: "1px solid var(--maq-border)",
+    },
+  },
+  compactColumnFirst: {
+    borderTop: "1px solid var(--maq-border)",
+  },
+  compactRow: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "16px",
+    padding: "18px 4px",
+    borderBottom: "1px solid var(--maq-border)",
+    color: "var(--maq-heading-color)",
+    textDecoration: "none",
+    fontSize: "var(--fs-h5)",
+    fontWeight: 600,
+    lineHeight: 1.25,
+    transitionProperty: "color",
+    transitionDuration: "0.15s",
+    ":hover": { color: "var(--maq-red)" },
+  },
+  compactArrow: { color: "var(--maq-text-soft)", flexShrink: 0 },
+  compactRowMain: { display: "flex", alignItems: "center", gap: "14px", minWidth: 0 },
+  compactIcon: { color: "var(--maq-red)", display: "flex", flexShrink: 0, "& svg": { width: "22px", height: "22px" } },
+
+  // Horizontal product shelf (tablet and below): a scroll-snapping row that peeks
+  // ~1.5 cards so users see there's more to swipe through.
+  productShelf: {
+    display: "flex",
+    gap: "16px",
+    // Equal-height cards: the shelf has no fixed height, so PosterCard's
+    // height:100% can't resolve — force the card links to auto height (this
+    // child selector outranks the card's atomic class) and let stretch equalize.
+    alignItems: "stretch",
+    "& > a": { height: "auto" },
+    overflowX: "auto",
+    scrollSnapType: "x mandatory",
+    // Full-bleed: break out of the section gutter so cards scroll edge-to-edge
+    // instead of being clipped at the margin...
+    marginLeft: "calc(-1 * var(--section-pad-x))",
+    marginRight: "calc(-1 * var(--section-pad-x))",
+    // ...while the padding keeps the first/last card aligned to the gutter and
+    // scroll-snap lands cards on that gutter, not the screen edge.
+    paddingLeft: "var(--section-pad-x)",
+    paddingRight: "var(--section-pad-x)",
+    scrollPaddingLeft: "var(--section-pad-x)",
+    scrollPaddingRight: "var(--section-pad-x)",
+    paddingBottom: "4px",
+    scrollbarWidth: "none",
+    "::-webkit-scrollbar": { display: "none" },
+  },
+  productShelfCard: {
+    flex: "0 0 min(62vw, 330px)",
+    scrollSnapAlign: "start",
+  },
+  shelfNav: {
+    display: "flex",
+    gap: "8px",
+    justifyContent: "flex-start",
+    marginTop: "16px",
+  },
+  shelfNavBtn: {
+    width: "40px",
+    height: "40px",
+    borderRadius: "50%",
+    border: "1px solid var(--maq-border)",
+    backgroundColor: tokens.colorNeutralBackground1,
+    color: tokens.colorNeutralForeground1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    transition: "border-color .15s ease, color .15s ease, opacity .15s ease",
+    ":not(:disabled):hover": { border: "1px solid var(--maq-card-hover-border)", color: "var(--maq-red)" },
+    ":disabled": { opacity: 0.35, cursor: "default" },
+  },
+
+  // Horizontal "Our insights" cards (phones): text left, taller image right.
+  insightStack: { display: "flex", flexDirection: "column", gap: "16px" },
+  insightRow: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    alignItems: "stretch",
+    minHeight: "180px",
+    backgroundColor: tokens.colorNeutralBackground1,
+    border: "1px solid var(--maq-border)",
+    borderRadius: "12px",
+    overflow: "hidden",
+    textDecoration: "none",
+    color: "inherit",
+    transition: "border-color .2s ease, box-shadow .2s ease, transform .2s ease",
+    ":hover": { border: "1px solid var(--maq-card-hover-border)", boxShadow: "var(--maq-shadow-lift)", transform: "translateY(-2px)" },
+    ":hover .zoom-img": { transform: "scale(1.06)" },
+  },
+  insightText: { display: "flex", flexDirection: "column", justifyContent: "center", gap: "8px", padding: "20px", minWidth: 0 },
+  insightTitle: { fontSize: "var(--fs-h5)", fontWeight: 600, letterSpacing: "-.5px", lineHeight: 1.2, color: "var(--maq-heading-color)", margin: 0 },
+  insightDesc: {
+    fontSize: "var(--fs-small)",
+    lineHeight: 1.5,
+    color: "var(--maq-muted-color)",
+    margin: 0,
+    display: "-webkit-box",
+    WebkitLineClamp: 3,
+    WebkitBoxOrient: "vertical",
+    overflow: "hidden",
+  },
+  insightImgWrap: { position: "relative", overflow: "hidden", backgroundColor: "#F7F7F7" },
+  insightImg: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", transition: "transform .35s ease" },
 });
 
 
@@ -379,6 +496,66 @@ export function HomeV3() {
   // Products tab-list — active product changes on tab select.
   const [activeProd, setActiveProd] = useState(0);
   const prod = PRODUCTS[activeProd];
+  // Below the lg breakpoint the image/description card grids get overwhelming,
+  // so Services + Industries collapse to a compact, tappable title list.
+  const isCompact = useMediaQuery(mq.lg);
+
+  // "Our products" shelf: arrow controls for users without touch or a horizontal
+  // wheel. Buttons scroll one card at a time and disable at each end; the nav is
+  // hidden if the shelf doesn't overflow.
+  const shelfRef = useRef<HTMLDivElement>(null);
+  const [shelfEdges, setShelfEdges] = useState({ atStart: true, atEnd: false, overflow: true });
+  const readShelfEdges = () => {
+    const el = shelfRef.current;
+    if (!el) return;
+    setShelfEdges({
+      atStart: el.scrollLeft <= 1,
+      atEnd: el.scrollLeft + el.clientWidth >= el.scrollWidth - 1,
+      overflow: el.scrollWidth > el.clientWidth + 1,
+    });
+  };
+  const scrollShelf = (dir: number) => {
+    const el = shelfRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("a");
+    const step = card ? card.offsetWidth + 16 : el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+  useEffect(() => {
+    if (!isCompact) return;
+    readShelfEdges();
+    window.addEventListener("resize", readShelfEdges);
+    return () => window.removeEventListener("resize", readShelfEdges);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCompact]);
+
+  const compactList = (items: { title: string; to: string; icon?: ReactNode }[]) => {
+    // Split down-then-across (col 1 = first half) so DOM/reading order stays 1..n
+    // and each column carries its own top divider. Two columns where it fits,
+    // stacking to one on phones.
+    const half = Math.ceil(items.length / 2);
+    const columns = [items.slice(0, half), items.slice(half)];
+    return (
+      <div className={s.compactColumns}>
+        {columns.map((group, gi) => (
+          <div
+            key={gi}
+            className={`${s.compactColumn}${gi === 0 ? ` ${s.compactColumnFirst}` : ""}`}
+          >
+            {group.map((it, li) => (
+              <MotionLink key={it.to} to={it.to} className={s.compactRow} {...onScroll(gi === 0 ? li : half + li)}>
+                <span className={s.compactRowMain}>
+                  {it.icon ? <span className={s.compactIcon} aria-hidden>{it.icon}</span> : null}
+                  <span>{it.title}</span>
+                </span>
+                <ChevronRight20Regular className={s.compactArrow} />
+              </MotionLink>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className={s.page}>
@@ -427,20 +604,24 @@ export function HomeV3() {
             className={s.prodHead}
           />
         </motion.div>
-        <div className={s.deliverGrid}>
-          {BUILD.map((b, i) => (
-            <PosterCard
-              key={b.title}
-              to={b.to}
-              img={b.img}
-              imgFit="contain"
-              aspectRatio="16 / 9"
-              title={b.title}
-              desc={b.desc}
-              motionProps={onScroll(i)}
-            />
-          ))}
-        </div>
+        {isCompact ? (
+          compactList(BUILD.map((b) => ({ title: b.title, to: b.to })))
+        ) : (
+          <div className={s.deliverGrid}>
+            {BUILD.map((b, i) => (
+              <PosterCard
+                key={b.title}
+                to={b.to}
+                img={b.img}
+                imgFit="contain"
+                aspectRatio="16 / 9"
+                title={b.title}
+                desc={b.desc}
+                motionProps={onScroll(i)}
+              />
+            ))}
+          </div>
+        )}
       </Section>
 
       {/* FEATURED CASE STUDY — image left, text right (first case study) */}
@@ -472,35 +653,76 @@ export function HomeV3() {
             className={s.prodHead}
           />
         </motion.div>
-        <motion.div {...fadeUp}>
-          <TabList
-            className={s.prodTabs}
-            size="large"
-            selectedValue={activeProd}
-            onTabSelect={(_: SelectTabEvent, data: SelectTabData) =>
-              setActiveProd(data.value as number)
-            }
-            aria-label="Products"
-          >
-            {PRODUCTS.map((p, i) => (
-              <Tab key={p.name} value={i}>
-                {p.name}
-              </Tab>
-            ))}
-          </TabList>
-          <AnimatePresence mode="wait">
-            <motion.div key={activeProd} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.32, ease: EASE }}>
-              <SplitCard
-                eyebrow={prod.impact}
-                title={prod.name}
-                desc={prod.desc}
-                img={prod.img}
-                to={prod.to}
-                cta="Learn more"
-              />
-            </motion.div>
-          </AnimatePresence>
-        </motion.div>
+        {isCompact ? (
+          <motion.div {...fadeUp}>
+            <div className={s.productShelf} ref={shelfRef} onScroll={readShelfEdges}>
+              {PRODUCTS.map((p) => (
+                <PosterCard
+                  key={p.name}
+                  className={s.productShelfCard}
+                  to={p.to}
+                  img={p.img}
+                  imgFit="cover"
+                  aspectRatio="16 / 9"
+                  title={p.name}
+                  desc={p.short}
+                />
+              ))}
+            </div>
+            {shelfEdges.overflow ? (
+              <div className={s.shelfNav}>
+                <button
+                  type="button"
+                  className={s.shelfNavBtn}
+                  aria-label="Previous products"
+                  onClick={() => scrollShelf(-1)}
+                  disabled={shelfEdges.atStart}
+                >
+                  <ChevronLeft20Regular />
+                </button>
+                <button
+                  type="button"
+                  className={s.shelfNavBtn}
+                  aria-label="Next products"
+                  onClick={() => scrollShelf(1)}
+                  disabled={shelfEdges.atEnd}
+                >
+                  <ChevronRight20Regular />
+                </button>
+              </div>
+            ) : null}
+          </motion.div>
+        ) : (
+          <motion.div {...fadeUp}>
+            <TabList
+              className={s.prodTabs}
+              size="large"
+              selectedValue={activeProd}
+              onTabSelect={(_: SelectTabEvent, data: SelectTabData) =>
+                setActiveProd(data.value as number)
+              }
+              aria-label="Products"
+            >
+              {PRODUCTS.map((p, i) => (
+                <Tab key={p.name} value={i}>
+                  {p.name}
+                </Tab>
+              ))}
+            </TabList>
+            <AnimatePresence mode="wait">
+              <motion.div key={activeProd} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.32, ease: EASE }}>
+                <SplitCard
+                  eyebrow={prod.impact}
+                  title={prod.name}
+                  desc={prod.desc}
+                  img={prod.img}
+                  to={prod.to}
+                  cta="Learn more"
+                />
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+        )}
       </Section>
 
       {/* INDUSTRIES */}
@@ -508,11 +730,15 @@ export function HomeV3() {
         <motion.div {...fadeUp}>
           <SectionHeading title="Industries we serve" align="left" className={s.indHead} />
         </motion.div>
-        <div className={s.industriesGrid}>
-          {INDUSTRIES.map((ind, i) => (
-            <IconCard key={ind.label} label={ind.label} desc={ind.desc} to={ind.to} icon={ind.icon} stacked motionProps={onScroll(i)} />
-          ))}
-        </div>
+        {isCompact ? (
+          compactList(INDUSTRIES.map((ind) => ({ title: ind.label, to: ind.to, icon: ind.icon })))
+        ) : (
+          <div className={s.industriesGrid}>
+            {INDUSTRIES.map((ind, i) => (
+              <IconCard key={ind.label} label={ind.label} desc={ind.desc} to={ind.to} icon={ind.icon} stacked motionProps={onScroll(i)} />
+            ))}
+          </div>
+        )}
       </Section>
 
       {/* RESOURCES — title above, 3 cards (image top, text below) */}
@@ -523,20 +749,36 @@ export function HomeV3() {
             className={s.prodHead}
           />
         </motion.div>
-        <CardGrid className={s.cardGap}>
-          {RESOURCES.map((r, i) => (
-            <PosterCard
-              key={r.title}
-              to={r.to}
-              img={r.img}
-              imgFit="cover"
-              aspectRatio="16 / 10"
-              title={r.title}
-              desc={r.desc}
-              motionProps={onScroll(i)}
-            />
-          ))}
-        </CardGrid>
+        {isCompact ? (
+          <div className={s.insightStack}>
+            {RESOURCES.map((r, i) => (
+              <MotionLink key={r.to} to={r.to} className={s.insightRow} {...onScroll(i)}>
+                <div className={s.insightText}>
+                  <h3 className={s.insightTitle}>{r.title}</h3>
+                  <p className={s.insightDesc}>{r.desc}</p>
+                </div>
+                <div className={s.insightImgWrap} aria-hidden>
+                  <img src={r.img} alt="" className={`${s.insightImg} zoom-img`} loading="lazy" decoding="async" />
+                </div>
+              </MotionLink>
+            ))}
+          </div>
+        ) : (
+          <CardGrid className={s.cardGap} columns={3}>
+            {RESOURCES.map((r, i) => (
+              <PosterCard
+                key={r.title}
+                to={r.to}
+                img={r.img}
+                imgFit="cover"
+                aspectRatio="16 / 10"
+                title={r.title}
+                desc={r.desc}
+                motionProps={onScroll(i)}
+              />
+            ))}
+          </CardGrid>
+        )}
       </Section>
 
     </div>

@@ -8,7 +8,7 @@ import { PrimaryButton, SecondaryButton } from "./buttons";
 const useStyles = makeStyles({
   wrap: {
     backgroundColor: "var(--colorNeutralBackground3)",
-    padding: "72px 32px",
+    padding: "72px var(--section-pad-x)",
     position: "relative",
     overflow: "hidden",
   },

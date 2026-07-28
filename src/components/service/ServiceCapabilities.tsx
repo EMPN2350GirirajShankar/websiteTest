@@ -77,7 +77,7 @@ export interface ServiceCapabilitiesProps {
 }
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "#fff" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
 
   head: { marginBottom: "28px" },
@@ -178,6 +178,13 @@ const useStyles = makeStyles({
       alignItems: "flex-start",
       gap: "16px",
     },
+  },
+  // The footer sits inside the carousel root, which is pulled left by -16px so
+  // card 1 lands on the container edge (each slide re-adds the 16px). The footer
+  // has no slides to compensate, so it inherits the shift and drifts 16px into
+  // the gutter — re-add the 16px here so the nav + link align to the container.
+  carouselFooter: {
+    marginLeft: "16px",
   },
   // Play/pause + dots travel together on the left of the footer row.
   navGroup: {
@@ -354,7 +361,7 @@ export function ServiceCapabilities({
             </CarouselSlider>
           </CarouselViewport>
 
-          <div className={s.footerRow}>
+          <div className={`${s.footerRow} ${s.carouselFooter}`}>
             <div className={s.navGroup}>
               <CarouselNavContainer
                 className={s.nav}

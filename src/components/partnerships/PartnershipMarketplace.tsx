@@ -5,8 +5,8 @@ import { SecondaryButton } from "../buttons";
 
 const useStyles = makeStyles({
   section: {
-    padding: "64px 32px",
-    backgroundColor: "var(--colorNeutralBackground3)",
+    padding: "64px var(--section-pad-x)",
+    backgroundColor: "#fff",
   },
   inner: {
     maxWidth: "var(--maq-container-wide)",

@@ -8,7 +8,7 @@ import { makeStyles } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
   section: {
-    padding: "48px 32px",
+    padding: "48px var(--section-pad-x)",
     backgroundColor: "#fff",
     "@media (max-width: 720px)": { display: "none" },
   },

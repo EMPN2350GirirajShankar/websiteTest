@@ -2,7 +2,7 @@ import { makeStyles } from "@fluentui/react-components";
 import { ResourceMarketplaceCard } from "../cards/ResourceMarketplaceCard";
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "var(--colorNeutralBackground3)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "20px" },
   title: {
@@ -36,16 +36,22 @@ interface MarketplaceOffersProps {
   title?: string;
   sub: string;
   offers: MarketplaceOffer[];
+  /** Override the section background (defaults to the gray band). */
+  background?: string;
 }
 
 export function MarketplaceOffers({
   title = "Our Marketplace Offers",
   sub,
   offers,
+  background,
 }: MarketplaceOffersProps) {
   const s = useStyles();
   return (
-    <section className={s.section}>
+    <section
+      className={s.section}
+      style={background ? { backgroundColor: background } : undefined}
+    >
       <div className={s.inner}>
         <div className={s.head}>
           <h2 className={`maq-h2 ${s.title}`}>{title}</h2>

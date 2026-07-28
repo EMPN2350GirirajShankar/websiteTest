@@ -15,7 +15,7 @@ export interface OutcomeGridItem {
 }
 
 const useStyles = makeStyles({
-  section: { padding: "48px 32px", backgroundColor: "#fff" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   title: { margin: "0 0 40px" },
   grid: {

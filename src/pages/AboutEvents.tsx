@@ -16,11 +16,11 @@ const INITIAL_NEWS_FETCH = 12;
 
 const useStyles = makeStyles({
   section: {
-    padding: "56px 32px",
+    padding: "56px var(--section-pad-x)",
     backgroundColor: "#fff",
   },
   sectionAlt: {
-    padding: "56px 32px",
+    padding: "56px var(--section-pad-x)",
     backgroundColor: "var(--colorNeutralBackground3)",
   },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },

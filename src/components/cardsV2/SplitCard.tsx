@@ -2,6 +2,7 @@ import { makeStyles, tokens } from "@fluentui/react-components";
 import { ArrowUpRight16Regular } from "@fluentui/react-icons";
 import { Link } from "react-router-dom";
 import type { ReactNode } from "react";
+import { bp } from "../../lib/breakpoints";
 
 /* ==================================================================
    SplitCard (V2) — horizontal card: padded text on the left, image
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
     ":hover .zoom-img": { transform: "scale(1.06)" },
     ":hover .sc-foot": { color: "var(--maq-red-dark)" },
     ":hover .sc-foot-arrow": { transform: "translateX(4px)" },
-    "@media (max-width: 760px)": { gridTemplateColumns: "1fr" },
+    [bp.md]: { gridTemplateColumns: "1fr" },
   },
   clickable: { cursor: "pointer" },
   text: {
@@ -41,7 +42,7 @@ const useStyles = makeStyles({
   cta: { marginTop: "4px" },
   imgWrap: {
     position: "relative", overflow: "hidden", width: "100%", aspectRatio: "16 / 9", backgroundColor: "#F7F7F7",
-    "@media (max-width: 760px)": { order: 2 },
+    [bp.md]: { order: 2 },
   },
   img: { display: "block", width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", transition: "transform .35s ease" },
 });

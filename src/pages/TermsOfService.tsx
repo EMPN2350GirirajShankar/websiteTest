@@ -5,7 +5,7 @@ const useStyles = makeStyles({
   // ── Hero ──────────────────────────────────────────────────────────────────
   hero: {
     backgroundColor: "var(--colorNeutralBackground3)",
-    padding: "64px 32px 56px",
+    padding: "64px var(--section-pad-x) 56px",
     backgroundImage: "url('/logos/wave_dots.svg')",
     backgroundPosition: "bottom left",
     backgroundRepeat: "no-repeat",
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
 
   // ── Body ──────────────────────────────────────────────────────────────────
   section: {
-    padding: "56px 32px 80px",
+    padding: "56px var(--section-pad-x) 80px",
     backgroundColor: "#fff",
   },
   inner: {

@@ -10,10 +10,10 @@ import {
 } from "@fluentui/react-icons";
 // import { TrustBanner } from "../components/TrustBanner";
 
-import { IndustryHero } from "../components/industry/IndustryHero";
-import { ImpactStats } from "../components/industry/ImpactStats";
-import { SolutionShowcase } from "../components/industry/SolutionShowcase";
-import { IndustryCaseStudies } from "../components/industry/IndustryCaseStudies";
+import { IndustryHeroV2 } from "../components/industry/IndustryHeroV2";
+import { IndustryImpactCards } from "../components/industry/IndustryImpactCards";
+import type { ImpactCaseStudy } from "../components/industry/IndustryImpactCards";
+import { AccordionShowcase } from "../components/industry/AccordionShowcase";
 import { MarketplaceOffers } from "../components/industry/MarketplaceOffers";
 
 // --- Retail hero visual ---
@@ -91,30 +91,30 @@ function RetailHeroVisual() {
 }
 
 // --- Retail content data ---
-const retailStats = [
+const retailImpactCards: ImpactCaseStudy[] = [
   {
-    metric: "8×",
-    label: "Faster Power BI refresh for a top-3 US retailer",
-    sourceLabel: "Microsoft Fabric BI modernization",
-    sourceHref: "https://blog.maqsoftware.com/2025/12/modernizing-retail-business.html",
+    title: "Modernizing retail business intelligence with Microsoft Fabric and Power BI",
+    teaser: "How a top-3 US retailer rebuilt BI on Microsoft Fabric for 8× faster refresh.",
+    imageUrl: "/images/case-studies/external/retail-report-stock-image.webp",
+    href: "https://blog.maqsoftware.com/2025/12/modernizing-retail-business.html",
   },
   {
-    metric: "Real-time",
-    label: "Direct Store Delivery visibility on Microsoft Fabric",
-    sourceLabel: "Real-time DSD case study",
-    sourceHref: "https://blog.maqsoftware.com/2024/05/enabling-real-time-visibility-how.html",
+    title: "Enabling real-time visibility: Direct Store Delivery with Microsoft Fabric",
+    teaser: "Live DSD visibility on Fabric so field operations act on real-time route and stock data.",
+    imageUrl: "/images/case-studies/external/CS076-banner.webp",
+    href: "https://blog.maqsoftware.com/2024/05/enabling-real-time-visibility-how.html",
   },
   {
-    metric: "< 1 min",
-    label: "Live KPIs replacing nightly batches at an organic supermarket chain",
-    sourceLabel: "Organic supermarket case study",
-    sourceHref: "https://blog.maqsoftware.com/2022/06/real-time-reporting-for-organic.html",
+    title: "Real-time reporting for an organic supermarket chain",
+    teaser: "Nightly batches replaced with live dashboards for minute-by-minute store KPIs.",
+    imageUrl: "/images/case-studies/external/shopper2.webp",
+    href: "https://blog.maqsoftware.com/2022/06/real-time-reporting-for-organic.html",
   },
   {
-    metric: "Personalized",
-    label: "Loyalty program lift across millions of members",
-    sourceLabel: "Loyalty program case study",
-    sourceHref: "https://blog.maqsoftware.com/2024/02/empowering-retail-growth-with-optimized.html",
+    title: "Empowering retail growth with an optimized loyalty program",
+    teaser: "Personalized loyalty across millions of members, driven by data.",
+    imageUrl: "/images/case-studies/external/CS074-banner.webp",
+    href: "https://blog.maqsoftware.com/2024/02/empowering-retail-growth-with-optimized.html",
   },
 ];
 
@@ -124,14 +124,14 @@ const retailAgents = [
     tagline: "Automated BI briefings",
     icon: <Clock24Regular />,
     description:
-      "Delivers weekly metric reports and real-time insights straight to inboxes. Executives and teams subscribe to custom business questions, get scheduled reports (daily, weekly, monthly), and query metrics on demand in plain English. Works across Microsoft 365 Copilot, Teams, and Outlook, with no manual report prep.",
+      "Delivers scheduled metric briefings and answers plain-English questions across Microsoft 365 Copilot, Teams, and Outlook.",
   },
   {
     name: "Smart Store Agent",
     tagline: "Supply chain intelligence",
     icon: <BuildingShop24Regular />,
     description:
-      "Runs supply chain operations end to end: shipment tracking, driver location, route optimization, and supplier performance. Built on a graph architecture that combines classification, data retrieval, and conversational responses. Monitors logistics in real time, predicts delivery risks, and improves fleet efficiency.",
+      "Runs supply chain operations end to end: shipment tracking, route optimization, and supplier performance in real time.",
   },
   {
     name: "Automated Customer Service",
@@ -227,37 +227,32 @@ const retailOffers = [
 export function IndustryRetail() {
   return (
     <>
-      <IndustryHero
-        eyebrow="Retail & Consumer Goods"
-        h1="Run retail on AI, from real-time decisions to autonomous operations"
-        subhead="Embed AI across retail and CPG operations, from real-time decisions to autonomous stores. MAQ Software builds it on Microsoft data platforms: better customer experiences, resilient supply chains, and connected stores."
-        mailSubject="Retail - MAQ Software"
-        visual={<RetailHeroVisual />}
+      <IndustryHeroV2
+        eyebrow="Industries"
+        h1="Retail & consumer goods"
+        subhead="Use AI to create better customer experiences, build resilient supply chains, and connect operations across stores, channels, and teams."
       />
 
-      <ImpactStats
-        eyebrow="Proven outcomes"
-        title="Real impact for retail leaders"
-        sub="Numbers from MAQ Software engagements with global retailers and CPG brands."
-        stats={retailStats}
-      />
-      <SolutionShowcase
+      <AccordionShowcase
         sectionId="retail-solutions"
-        eyebrow="Agentic AI"
         title="Retail agents for your operations"
-        agents={retailAgents}
+        items={retailAgents.map((a) => ({
+          icon: a.icon,
+          title: a.name,
+          desc: a.description,
+        }))}
+        image="/images/case-studies/external/man-checking-stock-inventory.webp"
+        imageAlt="Automating retail store operations"
       />
-      <IndustryCaseStudies
-        eyebrow="Retail case studies"
-        title="How retailers move faster with MAQ Software"
-        cases={retailCases}
-        seeAllLabel="See all retail case studies"
-        seeAllHref="/insights/case-studies?industry=Retail%20%26%20consumer%20goods#insights-content"
+      <IndustryImpactCards
+        title="Real impact for retail leaders"
+        cards={retailImpactCards}
       />
       <MarketplaceOffers
         title="Marketplace offers"
         sub="Accelerate retail outcomes with ready-to-deploy Microsoft Azure Marketplace offerings — spanning demand planning, customer experience, and real-time intelligence."
         offers={retailOffers}
+        background="#fff"
       />
       {/* <Testimonials quotes={retailTestimonials} /> */}
     </>

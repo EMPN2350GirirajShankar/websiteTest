@@ -19,7 +19,7 @@ import {
 // ---------------------------------------------------------------------------
 const useStyles = makeStyles({
   // Hero --------------------------------------------------------------------
-  hero: { backgroundColor: "var(--colorNeutralBackground3)", padding: "48px 32px 56px" },
+  hero: { backgroundColor: "var(--colorNeutralBackground3)", padding: "48px var(--section-pad-x) 56px" },
   heroGrid: {
     maxWidth: "var(--maq-container-wide)",
     margin: "0 auto",
@@ -29,27 +29,12 @@ const useStyles = makeStyles({
     alignItems: "center",
     "@media (max-width: 960px)": { gridTemplateColumns: "1fr" },
   },
-  eyebrow: {
-    fontSize: "12px",
-    fontWeight: 700,
-    color: "var(--maq-red)",
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-    marginBottom: "12px",
-    display: "block",
-  },
+  eyebrow: { fontSize: "var(--fs-eyebrow)", fontWeight: 700, color: "var(--maq-red)", letterSpacing: "0.08em", marginBottom: "12px", display: "block" },
   h1: {
     display: "block",
     margin: "0 0 16px",
   },
-  heroSub: {
-    display: "block",
-    fontSize: "15px",
-    lineHeight: 1.6,
-    color: "var(--maq-gray-600)",
-    marginBottom: "24px",
-    maxWidth: "640px",
-  },
+  heroSub: { display: "block", fontSize: "var(--fs-lead)", lineHeight: 1.55, fontWeight: 400, color: "var(--maq-gray-600)", marginBottom: "24px", maxWidth: "640px" },
   btns: { display: "flex", gap: "12px", flexWrap: "wrap" },
 
   heroImageWrap: {
@@ -57,6 +42,11 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     padding: "8px",
+    // Once the hero stacks (≤960), left-align the media to the text margin above.
+    "@media (max-width: 960px)": {
+      justifyContent: "flex-start",
+      padding: "8px 8px 8px 0",
+    },
   },
   heroImage: {
     width: "100%",
@@ -66,8 +56,8 @@ const useStyles = makeStyles({
   },
 
   // Section commons --------------------------------------------------------
-  section: { padding: "48px 32px", backgroundColor: "#fff" },
-  sectionAlt: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
+  sectionAlt: { padding: "48px var(--section-pad-x)", backgroundColor: "var(--colorNeutralBackground3)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   head: { textAlign: "center", marginBottom: "28px" },
   headLeft: { marginBottom: "20px", textAlign: "center" },
@@ -467,7 +457,7 @@ export function ProductFabricAdminAgent() {
       <section className={s.hero}>
         <div className={s.heroGrid}>
           <div>
-            {/* <span className={s.eyebrow}>Fabric Workload</span> */}
+            <span className={s.eyebrow}>Products</span>
             <h1 className={`maq-h1 ${s.h1}`}>
               Fabric Admin Agent
             </h1>
@@ -528,7 +518,7 @@ export function ProductFabricAdminAgent() {
 
 
       {/* ---------------------- Impact ---------------------- */}
-      <section className={s.sectionAlt}>
+      <section className={s.section}>
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Proven outcomes</span> */}
@@ -585,7 +575,7 @@ export function ProductFabricAdminAgent() {
       </section>
 
       {/* ---------------------- Insights ---------------------- */}
-      <section className={s.sectionAlt}>
+      <section className={s.section}>
         <div className={s.inner}>
           <div className={s.headLeft}>
             {/* <span className={s.secEyebrow}>Insights</span> */}
@@ -654,7 +644,7 @@ export function ProductFabricAdminAgent() {
       </section>
 
       {/* Testimonials section commented out
-      <section className={s.sectionAlt}>
+      <section className={s.section}>
         <div className={s.inner}>
           <div className={s.headLeft}>
             <span className={s.secEyebrow}>Testimonials</span>

@@ -18,7 +18,7 @@ import {
 const useStyles = makeStyles({
   hero: {
     backgroundColor: "var(--colorNeutralBackground3)",
-    padding: "48px 32px",
+    padding: "48px var(--section-pad-x)",
     borderBottom: `1px solid ${tokens.colorNeutralStroke2}`,
   },
   heroInner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
@@ -90,7 +90,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
   },
   image: { width: "100%", maxWidth: "420px", height: "auto", display: "block" },
-  section: { padding: "48px 32px", backgroundColor: "#fff" },
+  section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   sectionTitle: {
     margin: "0 0 16px",
@@ -116,7 +116,7 @@ const useStyles = makeStyles({
     marginBottom: "6px",
   },
   factValue: { fontSize: "15px", color: "var(--maq-black)", fontWeight: 600 },
-  related: { padding: "48px 32px", backgroundColor: "var(--colorNeutralBackground3)" },
+  related: { padding: "48px var(--section-pad-x)", backgroundColor: "var(--colorNeutralBackground3)" },
   relatedGrid: {
     marginTop: "18px",
     display: "grid",
@@ -149,7 +149,7 @@ const useStyles = makeStyles({
     textDecoration: "none",
     },
   notFound: {
-    padding: "80px 32px",
+    padding: "80px var(--section-pad-x)",
     textAlign: "center",
     color: "var(--maq-gray-600)",
   },

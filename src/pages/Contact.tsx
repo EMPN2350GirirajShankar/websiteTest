@@ -19,11 +19,11 @@ const useStyles = makeStyles({
     maxWidth: "1504px",
     margin: "0 auto",
     // Match the other About heroes' 40px top/bottom padding.
-    padding: "40px 32px",
+    padding: "40px var(--section-pad-x)",
     position: "relative",
     zIndex: 1,
     "@media (max-width: 960px)": {
-      padding: "40px 20px",
+      padding: "40px var(--section-pad-x)",
     },
   },
   heroContent: {
@@ -60,10 +60,10 @@ const useStyles = makeStyles({
   // Full-bleed section band (matches the rest of the site); content is capped
   // by the inner container below.
   officesSection: {
-    padding: "56px 32px",
+    padding: "56px var(--section-pad-x)",
     backgroundColor: "#fff",
     "@media (max-width: 960px)": {
-      padding: "40px 20px",
+      padding: "40px var(--section-pad-x)",
     },
   },
   officesInner: {
@@ -72,10 +72,6 @@ const useStyles = makeStyles({
   },
   officesTitle: {
     margin: "0 0 10px",
-    "@media (max-width: 960px)": {
-      fontSize: "28px",
-      marginBottom: "12px",
-    },
   },
   contactLine: {
     margin: "28px 0 0",
@@ -115,6 +111,11 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     minHeight: "238px",
+    // Below 480px: horizontal card — image on the left, text on the right.
+    "@media (max-width: 480px)": {
+      flexDirection: "row",
+      minHeight: "auto",
+    },
     transition: "border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease",
     ":hover": {
       border: "1px solid var(--maq-card-hover-border)",
@@ -132,6 +133,13 @@ const useStyles = makeStyles({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     position: "relative",
+    // Horizontal card (≤480): the media becomes the left column, filling the
+    // card height instead of a 2:1 banner.
+    "@media (max-width: 480px)": {
+      aspectRatio: "auto",
+      width: "40%",
+      flexShrink: 0,
+    },
   },
   locationPin: {
     position: "absolute",
@@ -266,6 +274,13 @@ export function Contact() {
               <br />
               <span className={s.titleAccent}>together.</span>
             </h1>
+            <p className={s.contactLine}>
+              Have a question or ready to start a project? Contact us at{" "}
+              <a className={s.contactLink} href="mailto:CustomerSuccess@MAQSoftware.com">
+                CustomerSuccess@MAQSoftware.com
+              </a>
+              .
+            </p>
           </div>
         </div>
       </section>
@@ -304,13 +319,6 @@ export function Contact() {
               </a>
             ))}
           </div>
-          <p className={s.contactLine}>
-            Have a question or ready to start a project? Contact us at{" "}
-            <a className={s.contactLink} href="mailto:CustomerSuccess@MAQSoftware.com">
-              CustomerSuccess@MAQSoftware.com
-            </a>
-            .
-          </p>
         </div>
       </section>
     </main>

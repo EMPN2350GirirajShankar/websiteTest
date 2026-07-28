@@ -9,7 +9,7 @@ import { visualGuideFilters, visualGuideItems, visualGuideSlug } from "../data/i
 const INITIAL_VISIBLE = 9;
 
 const useStyles = makeStyles({
-  section: { padding: "56px 32px", backgroundColor: "var(--colorNeutralBackground1)" },
+  section: { padding: "56px var(--section-pad-x)", backgroundColor: "var(--colorNeutralBackground1)" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   title: { margin: "0 0 40px" },
   filterRow: {

@@ -50,6 +50,7 @@ export function PosterCard({
   title,
   desc,
   cta,
+  className,
   deriveFormats = true,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   motionProps,
@@ -63,9 +64,11 @@ export function PosterCard({
   aspectRatio?: string;
   eyebrow?: string;
   title: string;
-  desc: string;
+  desc?: string;
   /** Optional "Learn more"-style foot label. */
   cta?: string;
+  /** Extra class on the card root (e.g. a flex-basis for a scroll shelf). */
+  className?: string;
   /** When true, tries sibling .avif/.webp for .png paths. Disable if those files do not exist. */
   deriveFormats?: boolean;
   /** Framer-motion props (e.g. a scroll-reveal) spread onto the card. */
@@ -92,7 +95,7 @@ export function PosterCard({
       <div className={s.text}>
         {/* eyebrow hidden intentionally */}
         <h3 className={s.title}>{title}</h3>
-        <p className={s.desc}>{desc}</p>
+        {desc ? <p className={s.desc}>{desc}</p> : null}
         {cta ? (
           <span className={`${s.foot} sc-foot`}>
             {cta} <span className={`${s.footArrow} sc-foot-arrow`}><ArrowUpRight16Regular /></span>
@@ -105,14 +108,14 @@ export function PosterCard({
   const isExternal = /^https?:\/\//i.test(to);
   if (isExternal) {
     return (
-      <MotionA href={to} target="_blank" rel="noopener noreferrer" className={s.card} {...(motionProps ?? {})}>
+      <MotionA href={to} target="_blank" rel="noopener noreferrer" className={`${s.card}${className ? ` ${className}` : ""}`} {...(motionProps ?? {})}>
         {content}
       </MotionA>
     );
   }
 
   return (
-    <MotionLink to={to} className={s.card} {...(motionProps ?? {})}>
+    <MotionLink to={to} className={`${s.card}${className ? ` ${className}` : ""}`} {...(motionProps ?? {})}>
       {content}
     </MotionLink>
   );
