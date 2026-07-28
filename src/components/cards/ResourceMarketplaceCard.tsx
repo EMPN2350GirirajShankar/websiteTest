@@ -1,5 +1,6 @@
 import { makeStyles } from "@fluentui/react-components";
 import { Link } from "react-router-dom";
+import { assetUrl } from "../../lib/assetUrl";
 
 const useStyles = makeStyles({
   card: {
@@ -100,7 +101,7 @@ export function ResourceMarketplaceCard({
   const content = (
     <>
       {imageUrl ? (
-        <img className={s.image} src={imageUrl} alt={imageAlt ?? title} loading="lazy" width={1200} height={675} />
+        <img className={s.image} src={assetUrl(imageUrl)} alt={imageAlt ?? title} loading="lazy" width={1200} height={675} />
       ) : null}
       {/* eyebrow hidden intentionally */}
       <h3 className={s.title}>{title}</h3>

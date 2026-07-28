@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { makeStyles, tokens } from "@fluentui/react-components";
+import { assetUrl } from "../lib/assetUrl";
 import { CaseStudyCard } from "../components/cards/CaseStudyCard";
 import { ServiceCapabilities } from "../components/service/ServiceCapabilities";
 import { ServiceOutcomes } from "../components/service/ServiceOutcomes";
@@ -429,7 +430,7 @@ export function ServiceBusinessApps() {
                     <div className={s.visual}>
                         <img
                             className={s.heroImage}
-                            src="/images/Service%20cards/Apps.png"
+                            src={assetUrl("/images/Service%20cards/Apps.png")}
                             alt="Business Applications and Automation"
                         />
                     </div>

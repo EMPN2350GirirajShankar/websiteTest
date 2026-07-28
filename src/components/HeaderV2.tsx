@@ -19,6 +19,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { products } from "../data/products";
 import { PrimaryButton } from "./buttons";
 import { useContactAction } from "../lib/contact";
+import { assetUrl } from "../lib/assetUrl";
 
 /* ==================================================================
    HeaderV2 — top-nav variant for the bento homepage exploration.
@@ -569,7 +570,7 @@ export function HeaderV2() {
     <nav className={`${s.nav} site-header`}>
       <div className={s.navInner}>
         <Link to="/" className={s.brand} aria-label="MAQ Software homepage">
-          <img src="/logos/MAQ-Software-Logo.svg" alt="MAQ Software" className={s.brandLogo} />
+          <img src={assetUrl("/logos/MAQ-Software-Logo.svg")} alt="MAQ Software" className={s.brandLogo} />
         </Link>
 
         <button
@@ -617,7 +618,7 @@ export function HeaderV2() {
               </button>
               <div className={s.mobileBrand}>
                 <Link to="/" onClick={closeMenu} className={s.brand} aria-label="MAQ Software homepage">
-                  <img src="/logos/MAQ-Software-Logo.svg" alt="MAQ Software" className={s.brandLogo} />
+                  <img src={assetUrl("/logos/MAQ-Software-Logo.svg")} alt="MAQ Software" className={s.brandLogo} />
                 </Link>
               </div>
 

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { makeStyles } from "@fluentui/react-components";
+import { assetUrl } from "../../lib/assetUrl";
 
 export interface PartnershipHeroProps {
   eyebrow?: string;
@@ -86,7 +87,7 @@ export function PartnershipHero({
           <div className={s.imageWrap}>
             <img
               className={s.image}
-              src={imageUrl}
+              src={assetUrl(imageUrl)}
               alt={imageAlt ?? ""}
               loading="eager"
               decoding="async"

@@ -2,6 +2,7 @@ import { makeStyles } from "@fluentui/react-components";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { isInternalPath } from "../../lib/links";
+import { assetUrl } from "../../lib/assetUrl";
 
 const useStyles = makeStyles({
   card: {
@@ -135,7 +136,7 @@ export function CaseStudyCard({
       {imageUrl && !imgFailed ? (
         <img
           className={s.image}
-          src={imageUrl}
+          src={assetUrl(imageUrl)}
           alt={imageAlt ?? title}
           loading={eager ? "eager" : "lazy"}
           fetchPriority={eager ? "high" : "low"}

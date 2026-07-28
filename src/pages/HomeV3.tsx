@@ -28,6 +28,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useContactAction } from "../lib/contact";
 import { bp, mq } from "../lib/breakpoints";
 import { useMediaQuery } from "../lib/useMediaQuery";
+import { assetUrl } from "../lib/assetUrl";
 
 /* ==================================================================
    HomeV3 — duplicate of HomeV2 (Bento home) for design exploration
@@ -580,11 +581,11 @@ export function HomeV3() {
           </motion.div>
           <motion.div className={s.heroImageCol} initial={{ opacity: 0, x: 44, scale: 0.96 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ duration: 0.8, ease: EASE, delay: 0.35 }}>
             <picture>
-              <source srcSet="/images/home-banner.avif" type="image/avif" />
-              <source srcSet="/images/home-banner.webp" type="image/webp" />
+              <source srcSet={assetUrl("/images/home-banner.avif")} type="image/avif" />
+              <source srcSet={assetUrl("/images/home-banner.webp")} type="image/webp" />
               <img
                 className={`${s.heroArt} ${s.heroArtMobile}`}
-                src="/images/home-banner.png"
+                src={assetUrl("/images/home-banner.png")}
                 alt=""
                 aria-hidden
                 loading="eager"
@@ -628,7 +629,7 @@ export function HomeV3() {
       <Section tone="gray">
         <motion.div className={s.featRow} {...fadeUp}>
           <ZoomImage
-            src="/images/case-study.png"
+            src={assetUrl("/images/case-study.png")}
             frameClass={s.featImg}
             imgClass={s.featImgEl}
             onClick={() => window.open(CASES[0].href, "_blank", "noopener,noreferrer")}

@@ -2,6 +2,7 @@ import { makeStyles, tokens } from "@fluentui/react-components";
 import { Link } from "react-router-dom";
 import { PrimaryButton } from "./buttons";
 import { useContactAction } from "../lib/contact";
+import { assetUrl } from "../lib/assetUrl";
 
 /* ==================================================================
    FooterV2 — light footer (design exploration)
@@ -186,7 +187,7 @@ export function FooterV2() {
           <div className={s.top}>
             <div>
               <Link to="/" aria-label="MAQ Software homepage" className={s.logoMark}>
-                <img src="/logos/MAQ-Software-Logo.svg" alt="MAQ Software" className={s.logoImage} />
+                <img src={assetUrl("/logos/MAQ-Software-Logo.svg")} alt="MAQ Software" className={s.logoImage} />
               </Link>
               <p className={s.about}>
                 Turn data into decisions faster with AI-powered analytics.

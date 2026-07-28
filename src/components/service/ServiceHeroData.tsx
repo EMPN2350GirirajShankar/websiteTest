@@ -1,4 +1,5 @@
 import { makeStyles } from "@fluentui/react-components";
+import { assetUrl } from "../../lib/assetUrl";
 import { useContactAction } from "../../lib/contact";
 import { PrimaryButton } from "../buttons";
 
@@ -107,7 +108,7 @@ export function ServiceHeroData() {
         <div className={s.visual}>
           <img
             className={s.heroImage}
-            src="/images/Service%20cards/Platforms.png"
+            src={assetUrl("/images/Service%20cards/Platforms.png")}
             alt="Data and AI Platforms"
             loading="eager"
             decoding="async"

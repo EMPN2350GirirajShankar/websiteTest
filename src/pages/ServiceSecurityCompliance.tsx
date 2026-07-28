@@ -1,4 +1,5 @@
 import { makeStyles } from "@fluentui/react-components";
+import { assetUrl } from "../lib/assetUrl";
 import {
   Shield24Regular,
   Globe24Regular,
@@ -46,7 +47,7 @@ function SecurityVisual() {
     <div className={s.visual}>
       <img
         className={s.heroImage}
-        src="/images/Service%20cards/Security.png"
+        src={assetUrl("/images/Service%20cards/Security.png")}
         alt="Security and Governance"
       />
     </div>

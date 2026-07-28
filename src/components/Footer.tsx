@@ -2,6 +2,7 @@ import { makeStyles } from "@fluentui/react-components";
 import { Link } from "react-router-dom";
 import { PrimaryButton } from "./buttons";
 import { useContactAction } from "../lib/contact";
+import { assetUrl } from "../lib/assetUrl";
 
 type FooterItem = {
   label: string;
@@ -193,7 +194,7 @@ export function Footer() {
             <div className={s.brand}>
               <Link to="/" aria-label="MAQ Software homepage" className={s.socialLink}>
                 <div className={s.logoMark}>
-                  <img src="/logos/MAQ-Software-Logo.svg" alt="MAQ Software" className={s.logoImage} width={196} height={48} />
+                  <img src={assetUrl("/logos/MAQ-Software-Logo.svg")} alt="MAQ Software" className={s.logoImage} width={196} height={48} />
                 </div>
               </Link>
             </div>

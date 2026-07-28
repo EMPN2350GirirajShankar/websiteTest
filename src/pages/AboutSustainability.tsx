@@ -1,4 +1,5 @@
 import { makeStyles } from "@fluentui/react-components";
+import { assetUrl } from "../lib/assetUrl";
 import {
   PlantGrass24Regular,
   Globe24Regular,
@@ -253,7 +254,7 @@ export function AboutSustainability() {
           </div>
           <img
             className={s.heroImage}
-            src="/images/external/sustainability/sustainability-hero-image.svg"
+            src={assetUrl("/images/external/sustainability/sustainability-hero-image.svg")}
             alt="Sustainability hero illustration"
           />
         </div>
@@ -313,7 +314,7 @@ export function AboutSustainability() {
           <div className={s.leadershipImageWrap}>
             <img
               className={s.leadershipImage}
-              src="/images/external/sustainability/sustainability-footer-image.svg"
+              src={assetUrl("/images/external/sustainability/sustainability-footer-image.svg")}
               alt="Leading by example — sustainable future"
             />
           </div>

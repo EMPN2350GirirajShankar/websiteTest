@@ -3,6 +3,7 @@ import {
   Mail20Regular,
 } from "@fluentui/react-icons";
 import { useNavigate } from "react-router-dom";
+import { assetUrl } from "../lib/assetUrl";
 import { useContactAction } from "../lib/contact";
 import { PrimaryButton, SecondaryButton } from "./buttons";
 const useStyles = makeStyles({
@@ -133,7 +134,7 @@ export function Hero() {
   return (
     <section className={s.wrap}>
       <picture>
-        <source media="(max-width: 768px)" srcSet="/images/home_mobile.png" />
+        <source media="(max-width: 768px)" srcSet={assetUrl("/images/home_mobile.png")} />
         <img
           alt="Team collaborating in a modern office"
           className={s.bgImage}
@@ -141,7 +142,7 @@ export function Hero() {
           fetchPriority="high"
           height={911}
           loading="eager"
-          src="/images/home-hero.webp"
+          src={assetUrl("/images/home-hero.webp")}
           width={1726}
         />
       </picture>

@@ -5,6 +5,7 @@ import { ServiceCapabilities } from "../components/service/ServiceCapabilities";
 import { ServiceOutcomes } from "../components/service/ServiceOutcomes";
 import { ServiceCaseStudies } from "../components/service/ServiceCaseStudies";
 import { ServiceInsights } from "../components/service/ServiceInsights";
+import { assetUrl } from "../lib/assetUrl";
 // import { ServiceTestimonials } from "../components/service/ServiceTestimonials";
 
 const SERVICE_CASE_STUDIES_CONFIG = {
@@ -28,7 +29,7 @@ export function ServiceAgenticAI() {
             }}
           >
             <img
-              src="/images/Service%20cards/Conversational AI.png"
+              src={assetUrl("/images/Service%20cards/Conversational AI.png")}
               alt="AI Solutions and Agents"
               style={{
                 width: "100%",

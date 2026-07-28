@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { assetUrl } from "../../lib/assetUrl";
 import {
   makeStyles,
   Carousel,
@@ -309,7 +310,7 @@ export function ServiceCapabilities({
                 bareCards ? (
                   <div key={c.name} className={s.bareItem}>
                     {c.logo ? (
-                      <img className={s.bareLogo} src={c.logo} alt="" aria-hidden />
+                      <img className={s.bareLogo} src={assetUrl(c.logo)} alt="" aria-hidden />
                     ) : null}
                     <h3 className={s.bareName}>{c.name}</h3>
                     <p className={s.bareDesc}>{c.description}</p>

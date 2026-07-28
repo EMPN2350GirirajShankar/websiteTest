@@ -1,4 +1,5 @@
 import { makeStyles } from "@fluentui/react-components";
+import { assetUrl } from "../../lib/assetUrl";
 
 const useStyles = makeStyles({
   wrap: { backgroundColor: "var(--colorNeutralBackground3)", padding: "0 var(--section-pad-x)", height: "360px", "@media (max-width: 960px)": { height: "auto", padding: "40px var(--section-pad-x)" } },
@@ -91,7 +92,7 @@ export function ReportingBIHero() {
         <div className={s.visual}>
           <img
             className={s.heroImage}
-            src="/images/Service%20cards/Visualization.png"
+            src={assetUrl("/images/Service%20cards/Visualization.png")}
             alt="Insights and Analytics"
             loading="eager"
             decoding="async"

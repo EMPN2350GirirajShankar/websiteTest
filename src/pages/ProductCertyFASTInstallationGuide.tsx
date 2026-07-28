@@ -1,4 +1,5 @@
 import { makeStyles } from "@fluentui/react-components";
+import { assetUrl } from "../lib/assetUrl";
 
 const useStyles = makeStyles({
   hero: {
@@ -85,7 +86,7 @@ export function ProductCertyFASTInstallationGuide() {
           <h1 className={`maq-h1 ${s.h1}`}>Easy Step-by-Step Installation and Usage Guide</h1>
           <h2 className={`maq-h2 ${s.h2}`}>CertyFAST by MAQ Software</h2>
           <div className={s.meta}>5 minutes to read | Posted: 27th May 2024</div>
-          <img className={s.media} src="/images/external/certyfast/CertyFastBlogHeadingImage.png" alt="" loading="lazy" />
+          <img className={s.media} src={assetUrl("/images/external/certyfast/CertyFastBlogHeadingImage.png")} alt="" loading="lazy" />
         </div>
       </section>
 
@@ -100,12 +101,12 @@ export function ProductCertyFASTInstallationGuide() {
             <li className={s.listItem}>Step 3: Select Yes when a pop-up appears to allow the app to be downloaded and start the installation.</li>
             <li className={s.listItem}>Step 4: Ensure the Run CertyFAST check box is ticked and select Finish.</li>
           </ol>
-          <img className={s.media} src="/images/external/certyfast/CertyFASTSetup.png" alt="" loading="lazy" />
+          <img className={s.media} src={assetUrl("/images/external/certyfast/CertyFASTSetup.png")} alt="" loading="lazy" />
 
           <h2 className={`maq-h2 ${s.sectionTitle}`}>Exploring the capabilities of CertyFAST</h2>
           <ol className={s.list}>
             <li className={s.listItem}>Home Page: Select your semantic model and report.</li>
-            <img className={s.media} src="/images/external/certyfast/CertifyHomePage.png" alt="" loading="lazy" />
+            <img className={s.media} src={assetUrl("/images/external/certyfast/CertifyHomePage.png")} alt="" loading="lazy" />
             <li className={s.listItem}>
               Insights Page: Identify all the gaps against organizational standards and best practices from a single view.
               <ol className={s.nestedList}>
@@ -115,7 +116,7 @@ export function ProductCertyFASTInstallationGuide() {
                 <li className={s.listItem}>Visualize lineage: Select the lineage icon to understand the impact and connections of the selected object.</li>
               </ol>
             </li>
-            <img className={s.media} src="/images/external/certyfast/gif/Insights.gif" alt="" loading="lazy" />
+            <img className={s.media} src={assetUrl("/images/external/certyfast/gif/Insights.gif")} alt="" loading="lazy" />
             <li className={s.listItem}>
               Lineage Page: Perform impact analysis for any field.
               <ol className={s.nestedList}>
@@ -124,7 +125,7 @@ export function ProductCertyFASTInstallationGuide() {
                 <li className={s.listItem}>Impact analysis: Select any measure or field from the dropdowns to understand the specific impact of that field.</li>
               </ol>
             </li>
-            <img className={s.media} src="/images/external/certyfast/gif/Lineage.gif" alt="" loading="lazy" />
+            <img className={s.media} src={assetUrl("/images/external/certyfast/gif/Lineage.gif")} alt="" loading="lazy" />
             <li className={s.listItem}>
               Alignment Page: Understand visual alignment issues in your report.
               <ol className={s.nestedList}>
@@ -133,7 +134,7 @@ export function ProductCertyFASTInstallationGuide() {
                 <li className={s.listItem}>Red borders indicate misalignment: Visuals with red borders are not aligned and detailed information regarding them can be viewed on the grid in the right pane.</li>
               </ol>
             </li>
-            <img className={s.media} src="/images/external/certyfast/gif/Alignment.gif" alt="" loading="lazy" />
+            <img className={s.media} src={assetUrl("/images/external/certyfast/gif/Alignment.gif")} alt="" loading="lazy" />
             <li className={s.listItem}>
               Documentation Page: Auto-generated knowledge base.
               <ol className={s.nestedList}>
@@ -143,7 +144,7 @@ export function ProductCertyFASTInstallationGuide() {
                 <li className={s.listItem}>Export options: Select Export to Excel to export the documentation in Excel or PDF format, along with the required details.</li>
               </ol>
             </li>
-            <img className={s.media} src="/images/external/certyfast/gif/Documentation.gif" alt="" loading="lazy" />
+            <img className={s.media} src={assetUrl("/images/external/certyfast/gif/Documentation.gif")} alt="" loading="lazy" />
           </ol>
 
           <p className={s.paragraph}>
