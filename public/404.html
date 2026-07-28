@@ -11,8 +11,11 @@
       // string into just a query string, and then redirects the browser
       // to the new url with only a query string and hash fragment.
       //
-      // Custom domain (maqsoftware.com) served from the root, so keep 0
-      // path segments.
+      // Number of leading path segments that belong to the deploy base URL.
+      // 0 is correct for a root deploy (maqsoftware.com). The build rewrites
+      // this value in dist/404.html to match `base` in vite.config.ts, so a
+      // sub-path deploy (e.g. /websiteTest/) keeps working - see
+      // plugins/vite-plugin-hosting.ts.
       var pathSegmentsToKeep = 0;
 
       var l = window.location;

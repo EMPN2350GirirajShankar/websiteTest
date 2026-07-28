@@ -56,7 +56,9 @@ function AnalyticsPageView() {
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <FluentProvider theme={maqLightTheme}>
-      <BrowserRouter>
+      {/* basename matches Vite's `base`, so routes work when the site is
+          deployed under a sub-path (e.g. /websiteTest/) as well as at the root. */}
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <DocumentTitle />
         <AnalyticsPageView />
         <App />

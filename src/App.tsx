@@ -63,6 +63,10 @@ import { TechCon365 } from "./pages/TechCon365";
 import { TechCon365Dallas } from "./pages/TechCon365Dallas";
 import { TechCon365Seattle } from "./pages/TechCon365Seattle";
 import { FabCon2027 } from "./pages/FabCon2027";
+import { Blog } from "./pages/Blog";
+import { BlogPost } from "./pages/BlogPost";
+import { EventsIndex } from "./pages/EventsIndex";
+import { EventDetail } from "./pages/EventDetail";
 import { NotFound } from "./pages/NotFound";
 
 const useStyles = makeStyles({
@@ -402,6 +406,11 @@ export function App() {
         <Route path="/events/techcon365/seattle" element={<TechCon365Seattle />} />
         <Route path="/events/fabcon2027" element={<FabCon2027 />} />
         <Route path="/events/fabcon-2027" element={<FabCon2027 />} />
+        {/* Git-based CMS content (Sveltia) — Markdown files under /content */}
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/events/all" element={<EventsIndex />} />
+        <Route path="/events/:slug" element={<EventDetail />} />
         <Route path="/techcon" element={<Navigate to="/techcon365" replace />} />
         <Route path="/fabcon" element={<Navigate to="/fabcon-2027" replace />} />
         <Route path="/fabcon2027" element={<Navigate to="/fabcon-2027" replace />} />

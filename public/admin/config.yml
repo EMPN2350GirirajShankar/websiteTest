@@ -1,0 +1,137 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+#
+# Sveltia CMS configuration
+# -------------------------
+# This file is the entire CMS. There is no server: the admin app runs in the
+# editor's browser and commits directly to GitHub via the GitHub API. A commit
+# triggers the existing GitHub Actions deploy workflow, which rebuilds the site.
+#
+# Sign-in: open /admin/ and choose "Sign In with Token", then paste a GitHub
+# personal access token with `repo` scope. (Swap to OAuth later by adding a
+# `base_url` pointing at a deployed sveltia-cms-auth worker.)
+
+backend:
+  name: github
+  repo: EMPN2350GirirajShankar/websiteTest
+  branch: main
+  commit_messages:
+    create: "content: create {{collection}} \"{{slug}}\""
+    update: "content: update {{collection}} \"{{slug}}\""
+    delete: "content: delete {{collection}} \"{{slug}}\""
+    uploadMedia: "content: upload {{path}}"
+    deleteMedia: "content: delete {{path}}"
+
+# Uploaded images live in the public folder so Vite copies them verbatim.
+# `public_folder` is the URL path the site uses; `assetUrl()` prepends the
+# Vite base ("/websiteTest/") at render time, so keep this root-relative.
+media_folder: /public/images/uploads
+public_folder: /images/uploads
+
+site_url: https://www.maqsoftware.com
+# Root-relative, so it must include the Vite `base` from vite.config.ts.
+logo_url: /websiteTest/favicon.png
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  # ---------------------------------------------------------------- Blog ----
+  - name: blog
+    label: Blog posts
+    label_singular: Blog post
+    description: Articles published at /blog. Saving commits a Markdown file; deleting removes it.
+    folder: /content/blog
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    slug: "{{fields.slug}}"
+    path: "{{slug}}"
+    preview_path: blog/{{fields.slug}}
+    summary: "{{title}} — {{date | date('yyyy-MM-dd')}}"
+    sortable_fields:
+      fields: [date, title]
+      default:
+        field: date
+        direction: descending
+    view_groups:
+      - label: Category
+        field: category
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: URL slug
+        name: slug
+        widget: string
+        hint: Lowercase words separated by hyphens. Becomes /blog/<slug> and the file name.
+        pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers and hyphens only"]
+      - { label: Publish date, name: date, widget: datetime, format: "yyyy-MM-dd", time_format: false }
+      - { label: Author, name: author, widget: string, default: MAQ Software }
+      - label: Category
+        name: category
+        widget: select
+        default: Insights
+        options:
+          - Insights
+          - Case study
+          - Best practices
+          - Product
+          - Company news
+          - Partnerships
+      - { label: Tags, name: tags, widget: list, required: false, default: [] }
+      - label: Summary
+        name: excerpt
+        widget: text
+        hint: One or two sentences shown on cards and in search results.
+      - { label: Cover image, name: image, widget: image, required: false }
+      - { label: Cover image alt text, name: imageAlt, widget: string, required: false }
+      - { label: Feature on the blog landing page, name: featured, widget: boolean, default: false }
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+        hint: Drafts stay in the repository but are never rendered on the site.
+      - { label: Body, name: body, widget: richtext }
+
+  # -------------------------------------------------------------- Events ----
+  - name: events
+    label: Events
+    label_singular: Event
+    description: Conference talks, webinars and workshops published at /events.
+    folder: /content/events
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    slug: "{{fields.slug}}"
+    path: "{{slug}}"
+    preview_path: events/{{fields.slug}}
+    summary: "{{title}} — {{startDate | date('yyyy-MM-dd')}}"
+    sortable_fields:
+      fields: [startDate, title]
+      default:
+        field: startDate
+        direction: descending
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: URL slug
+        name: slug
+        widget: string
+        hint: Lowercase words separated by hyphens. Becomes /events/<slug> and the file name.
+        pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers and hyphens only"]
+      - { label: Start date, name: startDate, widget: datetime, format: "yyyy-MM-dd", time_format: false }
+      - { label: End date, name: endDate, widget: datetime, format: "yyyy-MM-dd", time_format: false, required: false }
+      - label: Event type
+        name: eventType
+        widget: select
+        default: Conference
+        options: [Conference, Webinar, Workshop, Meetup, Roundtable]
+      - { label: Location, name: location, widget: string, hint: "e.g. Seattle, WA or Online" }
+      - { label: Registration link, name: registrationUrl, widget: string, required: false }
+      - { label: Summary, name: summary, widget: text }
+      - { label: Hero image, name: image, widget: image, required: false }
+      - { label: Hero image alt text, name: imageAlt, widget: string, required: false }
+      - { label: Tags, name: tags, widget: list, required: false, default: [] }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: richtext }
