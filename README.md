@@ -67,7 +67,7 @@ the existing section next to the hand-maintained entries — no code change need
 
 ### For editors
 
-1. Go to `/admin/` on the deployed site.
+1. Go to `/admin/` on the deployed site .
 2. Choose **Sign In Using Access Token** and paste a GitHub personal access token
    with `repo` scope (the dialog links to the token page with the right scopes selected).
 3. Create, edit, or delete an entry, then press **Save**. Each save is a commit; the
