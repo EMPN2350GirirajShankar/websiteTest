@@ -67,11 +67,19 @@ the existing section next to the hand-maintained entries — no code change need
 
 ### For editors
 
-1. Go to `/admin/` on the deployed site .
-2. Choose **Sign In Using Access Token** and paste a GitHub personal access token
-   with `repo` scope (the dialog links to the token page with the right scopes selected).
+1. Go to `/admin/` on the deployed site.
+2. Click **Sign In with GitHub** and authorise the app in the popup. No token needed.
 3. Create, edit, or delete an entry, then press **Save**. Each save is a commit; the
    site redeploys automatically.
+
+You must be a repository collaborator with **Write** access and have accepted the
+invite — a pending invite grants read only. Signing in proves who you are; it does not
+grant permission to save.
+
+If you ever fall back to **Sign In Using Access Token**, the token must be a
+**classic** one with the `repo` scope. Fine-grained tokens do not work: GitHub does not
+allow them to write to a repository you are only a collaborator on, so the CMS reports
+"You don't have access to the ... repository" even though `git push` succeeds.
 
 Use the **Draft** toggle to keep an entry in the repository without publishing it.
 
@@ -105,10 +113,45 @@ Date fields use **Day.js** tokens, so the format is `YYYY-MM-DD` — lowercase
 `yyyy-MM-dd` silently writes a broken value such as `yyyy-08-Th`.
 
 To point the CMS at a different repository or branch, update `backend.repo`,
-`backend.branch`, and `site_url` in `public/admin/config.yml`. To replace token
-sign-in with a GitHub OAuth flow, deploy
-[sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth) and add `base_url`
-under `backend`.
+`backend.branch`, and `site_url` in `public/admin/config.yml`.
+
+### GitHub OAuth sign-in
+
+Editors sign in with a **Sign In with GitHub** button rather than a personal access
+token. GitHub's OAuth flow needs a client secret, which cannot live in a static site, so
+a small relay holds it — [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth)
+running as a Cloudflare Worker. It is the only server-side piece of this site.
+
+| Piece | Where |
+| --- | --- |
+| Worker | <https://sveltia-cms-auth.mylabiiit.workers.dev> |
+| Worker source | [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth), deployed with `wrangler deploy` |
+| Client ID / secret | GitHub OAuth app, <https://github.com/settings/developers> |
+| Worker variables | Cloudflare dashboard → Workers & Pages → Settings → Variables |
+| Wired into the CMS by | `backend.base_url` in [public/admin/config.yml](public/admin/config.yml) |
+
+The worker reads three variables: `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`
+(encrypted), and `ALLOWED_DOMAINS`. `ALLOWED_DOMAINS` lists the hostnames permitted to
+use the worker; without it, anyone could point their own CMS at it and authenticate
+through this OAuth app. Add new hostnames there when the site moves — comma-separated,
+hostname only, no scheme or trailing slash.
+
+The OAuth app's **Authorization callback URL** must be the worker URL plus `/callback`.
+A mismatch produces `redirect_uri mismatch` at sign-in and nothing else explains it.
+
+To verify the worker without a browser, request its auth endpoint and check that an
+allowed domain gets a `302` to `github.com/login/oauth/authorize` while an unknown one
+is refused with `UNSUPPORTED_DOMAIN`:
+
+```
+https://sveltia-cms-auth.mylabiiit.workers.dev/auth?provider=github&site_id=<HOSTNAME>
+```
+
+Deleting `base_url` from `config.yml` reverts the CMS to access-token sign-in, which is
+a useful fallback if the worker is ever unavailable.
+
+GitHub is adding client-side PKCE authorisation, after which this worker becomes
+unnecessary and Sveltia intends to deprecate the authenticator. Treat it as a bridge.
 
 ## Useful commands
 

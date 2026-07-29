@@ -6,14 +6,25 @@
 # editor's browser and commits directly to GitHub via the GitHub API. A commit
 # triggers the existing GitHub Actions deploy workflow, which rebuilds the site.
 #
-# Sign-in: open /admin/ and choose "Sign In with Token", then paste a GitHub
-# personal access token with `repo` scope. (Swap to OAuth later by adding a
-# `base_url` pointing at a deployed sveltia-cms-auth worker.)
+# Sign-in: open /admin/ and click "Sign In with GitHub". The OAuth handshake goes
+# through the worker named in `base_url` below; editors never handle a token.
+# Write access still comes from being a repo collaborator, not from signing in.
+#
+# Fallback: "Sign In Using Access Token" also works, but ONLY with a CLASSIC
+# token carrying the `repo` scope. Fine-grained tokens cannot write to a repo you
+# are merely a collaborator on, so the CMS reports "You don't have access to the
+# ... repository" even though `git push` works fine.
 
 backend:
   name: github
   repo: EMPN2350GirirajShankar/websiteTest
   branch: main
+  # Deployed sveltia-cms-auth Cloudflare Worker. It holds the GitHub OAuth client
+  # secret, which cannot live in a static site. Its GITHUB_CLIENT_ID /
+  # GITHUB_CLIENT_SECRET / ALLOWED_DOMAINS vars are set in the Cloudflare
+  # dashboard, and the OAuth app's callback URL must be this URL + /callback.
+  # Removing this line reverts the CMS to access-token sign-in.
+  base_url: https://sveltia-cms-auth.mylabiiit.workers.dev
   commit_messages:
     create: "content: create {{collection}} \"{{slug}}\""
     update: "content: update {{collection}} \"{{slug}}\""
