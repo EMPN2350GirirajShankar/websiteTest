@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { makeStyles } from "@fluentui/react-components";
 
 /* ==================================================================
@@ -18,9 +18,11 @@ const useStyles = makeStyles({
   section: { padding: "48px var(--section-pad-x)", backgroundColor: "#fff" },
   inner: { maxWidth: "var(--maq-container-wide)", margin: "0 auto" },
   title: { margin: "0 0 40px" },
+  // Desktop column count follows the item count (via --soc-cols) so any number
+  // of outcomes fills the row; the breakpoints below still collapse to 2/1.
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+    gridTemplateColumns: "repeat(var(--soc-cols, 4), minmax(0, 1fr))",
     gap: "40px",
     "@media (max-width: 1080px)": {
       gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
@@ -61,7 +63,7 @@ export function ServiceOutcomesGrid({
     <section className={s.section}>
       <div className={s.inner}>
         <h2 className={`maq-h2 ${s.title}`}>{title}</h2>
-        <div className={s.grid}>
+        <div className={s.grid} style={{ "--soc-cols": Math.min(outcomes.length, 4) } as CSSProperties}>
           {outcomes.map((o) => (
             <div className={s.item} key={o.title}>
               <span className={s.icon} aria-hidden="true">
