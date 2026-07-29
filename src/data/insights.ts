@@ -127,16 +127,6 @@ const staticCaseStudyItems: CaseStudyItem[] = [
     "imageUrl": "/images/case-studies/external/retail-report-stock-image.webp"
   },
   {
-    "title": "Building scalable e-commerce product recommendations with Microsoft Fabric SQL",
-    "href": "https://blog.maqsoftware.com/2025/09/building-scalable-e-commerce-product.html",
-    "tag": "Building scalable",
-    "service": "Data & AI platforms",
-    "industry": "Retail & consumer goods",
-    "date": "2025-09",
-    "teaser": "Case study: Building scalable e-commerce product recommendations with Microsoft Fabric SQL.",
-    "imageUrl": "/images/case-studies/external/product_recommendations_cover.webp"
-  },
-  {
     "title": "Transforming grocery retail analytics with Microsoft Fabric",
     "href": "https://blog.maqsoftware.com/2025/07/transforming-analytics-with-microsoft.html",
     "tag": "Transforming grocery",

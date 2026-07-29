@@ -28,7 +28,7 @@ Use the linked pages as the source of truth for MAQ Software's current services,
 
 - [Case studies index](https://www.maqsoftware.com/insights/case-studies): Complete filterable collection of client outcomes across AI, data, analytics, applications, cloud, and security.
 - [Reshaping retail with Agentic AI solutions](https://blog.maqsoftware.com/2026/02/reshaping-retail-with-agentic-ai.html): Agentic AI and machine learning case study.
-- [Building scalable e-commerce product recommendations with Microsoft Fabric SQL](https://blog.maqsoftware.com/2025/09/building-scalable-e-commerce-product.html): Data and AI platforms case study.
+- [Building scalable e-commerce product recommendations with Microsoft Fabric SQL](https://www.maqsoftware.com/insights/case-studies/building-scalable-e-commerce-product-recommendations): Data and AI platforms case study.
 - [Modernizing retail business intelligence with Microsoft Fabric and Power BI](https://blog.maqsoftware.com/2025/12/modernizing-retail-business.html): Insights and analytics case study.
 - [Ease event management with Power Apps](https://blog.maqsoftware.com/2020/04/optical-character-recognition-event.html): Application modernization case study.
 - [Modernize data systems by migrating to the cloud](https://blog.maqsoftware.com/2020/09/modernize-data-cloud-migration.html): Cloud modernization case study.
