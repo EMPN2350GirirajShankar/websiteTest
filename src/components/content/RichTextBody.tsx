@@ -59,6 +59,111 @@ const useStyles = makeStyles({
       color: "var(--maq-ink)",
       fontStyle: "italic",
     },
+
+    /* Inline highlight: <mark>text</mark> */
+    "& mark": {
+      background: "var(--maq-red-50)",
+      color: "var(--maq-ink)",
+      padding: "0 4px",
+      borderRadius: "3px",
+      boxShadow: "inset 0 -2px 0 var(--maq-red-pale)",
+    },
+
+    /* Pull quote with attribution:
+       <figure class="maq-pullquote">
+         <blockquote>“…”</blockquote>
+         <figcaption><strong>Name</strong>Role, Company</figcaption>
+       </figure> */
+    "& .maq-pullquote": {
+      margin: "36px 0",
+      padding: "28px 32px",
+      background: "var(--maq-surface-cream)",
+      borderTop: "1px solid var(--maq-border)",
+      borderRight: "1px solid var(--maq-border)",
+      borderBottom: "1px solid var(--maq-border)",
+      borderLeft: "4px solid var(--maq-red)",
+      borderRadius: "12px",
+    },
+    "& .maq-pullquote blockquote": {
+      margin: 0,
+      padding: 0,
+      background: "none",
+      borderLeft: "none",
+      fontStyle: "normal",
+      fontSize: "clamp(1.125rem, 1.02rem + 0.45vw, 1.375rem)",
+      fontWeight: 600,
+      lineHeight: 1.45,
+      color: "var(--maq-heading-color)",
+    },
+    "& .maq-pullquote figcaption": {
+      marginTop: "16px",
+      fontSize: "0.9375rem",
+      lineHeight: 1.5,
+      color: "var(--maq-muted-color)",
+    },
+    "& .maq-pullquote figcaption strong": {
+      display: "block",
+      color: "var(--maq-ink)",
+      fontWeight: 700,
+    },
+
+    /* Highlighted stat band:
+       <div class="maq-stats">
+         <div class="maq-stat">
+           <span class="maq-stat-value">2,000</span>
+           <span class="maq-stat-label">Employees connected</span>
+         </div>
+       </div> */
+    "& .maq-stats": {
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+      gap: "16px",
+      margin: "32px 0",
+    },
+    "& .maq-stat": {
+      padding: "22px 20px",
+      background: "var(--maq-red-50)",
+      border: "1px solid var(--maq-red-pale)",
+      borderRadius: "12px",
+    },
+    "& .maq-stat-value": {
+      display: "block",
+      fontSize: "clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem)",
+      fontWeight: 800,
+      lineHeight: 1.1,
+      color: "var(--maq-red)",
+    },
+    "& .maq-stat-label": {
+      display: "block",
+      marginTop: "8px",
+      fontSize: "0.9375rem",
+      lineHeight: 1.45,
+      color: "var(--maq-ink)",
+    },
+
+    /* Highlighted callout box:
+       <div class="maq-highlight"> …markdown-free HTML… </div> */
+    "& .maq-highlight": {
+      margin: "32px 0",
+      padding: "22px 26px",
+      background: "var(--maq-gray-50)",
+      border: "1px solid var(--maq-border)",
+      borderRadius: "12px",
+    },
+    "& .maq-highlight > *:first-child": { marginTop: 0 },
+    "& .maq-highlight > *:last-child": { marginBottom: 0 },
+
+    /* Small uppercase eyebrow label above a section heading. */
+    "& .maq-eyebrow": {
+      display: "block",
+      margin: "36px 0 -4px",
+      fontSize: "0.75rem",
+      fontWeight: 700,
+      letterSpacing: "0.08em",
+      textTransform: "uppercase",
+      color: "var(--maq-red)",
+    },
+
     "& code": {
       fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
       fontSize: "0.9em",
