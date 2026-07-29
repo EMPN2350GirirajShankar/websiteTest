@@ -6,6 +6,8 @@ tag: Copilot
 service: Business apps & automation
 industry: Manufacturing
 excerpt: Facing 24 races across 21 countries, the Mercedes-AMG PETRONAS F1 Team uses Microsoft 365 Copilot, Power Platform, and GitHub Copilot to streamline maintenance workflows, surface knowledge instantly, and ship engineering work faster.
+image: /images/case-studies/demo-mercedes/pit-garage-maintenance.jpg
+imageAlt: Mercedes-AMG PETRONAS F1 Team mechanics servicing the car inside the pit garage
 draft: false
 ---
 
@@ -37,6 +39,8 @@ That creates three constant pressures:
 - **Routine work crowds out engineering.** Approvals, notifications, part checks, and status chasing consume hours that should go into making the car faster.
 - **Systems have to be available, always.** A race weekend has no maintenance window. <mark>If a system is down during a session, the decision it supports simply does not get made.</mark>
 
+![Formula 1 car on track in front of a crowd-filled grandstand](/images/case-studies/demo-mercedes/car-on-track.jpg)
+
 ## The approach
 
 Rather than building bespoke tooling for every problem, the team standardized on the Microsoft platform it already ran on and layered AI and low-code automation on top.
@@ -48,6 +52,8 @@ Microsoft 365 Copilot sits across the apps people already use, handling knowledg
 ### Digitize the workflows around the car
 
 Power Apps replaced paper-and-spreadsheet processes with low-code applications that standardize maintenance and operational workflows for frontline and engineering teams. Power Automate handles the connective tissue: approvals, notifications, and the routine handoffs that used to depend on someone remembering to send an email.
+
+![Overhead view of a pit crew working a pit stop](/images/case-studies/demo-mercedes/pit-stop-overhead.jpg)
 
 <div class="maq-highlight">
   <h3>Reliable systems, race-day decisions</h3>
