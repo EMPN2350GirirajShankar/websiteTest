@@ -37,6 +37,24 @@ export type ArticleSection =
       bodyHtml?: string;
       buttonLabel?: string;
       buttonUrl?: string;
+    }
+  | {
+      /**
+       * Two-column feature card: image on one side, eyebrow + heading + body +
+       * optional quote and citation on the other. Every part is optional, so the
+       * same block covers an image-only aside or a text-only quote card.
+       */
+      type: "feature_split";
+      eyebrow?: string;
+      heading?: string;
+      bodyHtml?: string;
+      image?: string;
+      imageAlt?: string;
+      imagePosition: "left" | "right";
+      quote?: string;
+      attribution?: string;
+      role?: string;
+      animate: boolean;
     };
 
 export type ArticleSectionType = ArticleSection["type"];
@@ -178,6 +196,32 @@ export function normalizeSections(value: unknown): ArticleSection[] {
             bodyHtml,
             buttonLabel,
             buttonUrl: optional(raw, "buttonUrl"),
+          });
+        }
+        break;
+      }
+
+      case "feature_split": {
+        const eyebrow = optional(raw, "eyebrow");
+        const heading = optional(raw, "heading");
+        const bodyHtml = optional(raw, "bodyHtml");
+        const image = optional(raw, "image");
+        const quote = optional(raw, "quote");
+
+        // Every field is optional, so render only if the block says something.
+        if (eyebrow || heading || bodyHtml || image || quote) {
+          sections.push({
+            type: "feature_split",
+            eyebrow,
+            heading,
+            bodyHtml,
+            image,
+            imageAlt: optional(raw, "imageAlt"),
+            imagePosition: str(raw, "imagePosition") === "right" ? "right" : "left",
+            quote,
+            attribution: optional(raw, "attribution"),
+            role: optional(raw, "role"),
+            animate: raw.animate !== false,
           });
         }
         break;

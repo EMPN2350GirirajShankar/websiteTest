@@ -243,6 +243,32 @@ collections:
                 label_singular: Takeaway
                 field: { label: Takeaway, name: text, widget: string }
 
+          - label: Feature split
+            name: feature_split
+            summary: "Feature split — {{fields.heading}}"
+            thumbnail: image
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string, required: false, default: Overview }
+              - { label: Heading, name: heading, widget: string, required: false }
+              - { label: Body, name: body, widget: richtext, required: false }
+              - { label: Image, name: image, widget: image, required: false }
+              - { label: Image alt text, name: imageAlt, widget: string, required: false }
+              - label: Image side
+                name: imagePosition
+                widget: select
+                default: left
+                options:
+                  - { label: Left, value: left }
+                  - { label: Right, value: right }
+              - { label: Quote, name: quote, widget: text, required: false, hint: Optional highlighted quote under the body. }
+              - { label: Citation name, name: attribution, widget: string, required: false }
+              - { label: Citation role and company, name: role, widget: string, required: false }
+              - label: Slide up on scroll
+                name: animate
+                widget: boolean
+                default: true
+                hint: Ignored for visitors who prefer reduced motion.
+
           - label: Call to action
             name: cta
             summary: "CTA — {{fields.heading}}"

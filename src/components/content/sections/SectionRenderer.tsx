@@ -1,7 +1,8 @@
-import { makeStyles } from "@fluentui/react-components";
+import { makeStyles, mergeClasses } from "@fluentui/react-components";
 import { Link } from "react-router-dom";
 import { RichTextBody } from "../RichTextBody";
 import { assetUrl } from "../../../lib/assetUrl";
+import { useRevealOnScroll } from "../../../lib/useRevealOnScroll";
 import type { ArticleSection } from "../../../lib/sections";
 
 const useStyles = makeStyles({
@@ -179,6 +180,106 @@ const useStyles = makeStyles({
     textDecoration: "none",
     ":hover": { background: "var(--maq-red-dark)" },
   },
+
+  /* ---------------------------------------------- Feature split card ---- */
+  featureCard: {
+    margin: "0 0 36px",
+    padding: "28px",
+    background: "var(--maq-white)",
+    border: "1px solid var(--maq-border)",
+    borderRadius: "24px",
+    boxShadow: "0 18px 40px -28px rgba(0, 0, 0, 0.45)",
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 0.85fr) minmax(0, 1.15fr)",
+    gap: "28px",
+    alignItems: "stretch",
+    "@media (max-width: 680px)": {
+      gridTemplateColumns: "minmax(0, 1fr)",
+      padding: "20px",
+      gap: "20px",
+    },
+  },
+  /* Image on the right: flip the visual order without moving it in the DOM,
+     so the reading order stays heading-then-image for screen readers. */
+  featureMediaRight: { order: 2, "@media (max-width: 680px)": { order: 0 } },
+  featureMedia: {
+    display: "block",
+    width: "100%",
+    height: "100%",
+    minHeight: "240px",
+    objectFit: "cover",
+    borderRadius: "16px",
+    background: "var(--maq-gray-50)",
+  },
+  featureBody: { display: "flex", flexDirection: "column", justifyContent: "center" },
+  featureEyebrow: {
+    display: "block",
+    marginBottom: "10px",
+    fontSize: "0.75rem",
+    fontWeight: 700,
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+    color: "var(--maq-red)",
+  },
+  featureHeading: {
+    margin: "0 0 14px",
+    fontSize: "clamp(1.5rem, 1.3rem + 0.9vw, 2rem)",
+    fontWeight: 700,
+    lineHeight: 1.2,
+    color: "var(--maq-heading-color)",
+  },
+  featureQuote: {
+    position: "relative",
+    margin: "20px 0 0",
+    padding: "18px 22px 18px 46px",
+    background: "var(--maq-gray-50)",
+    borderTop: "none",
+    borderRight: "none",
+    borderBottom: "none",
+    borderLeft: "3px solid var(--maq-red)",
+    borderRadius: "0 10px 10px 0",
+    fontStyle: "italic",
+    fontSize: "0.9375rem",
+    lineHeight: 1.6,
+    color: "var(--maq-ink)",
+    "::before": {
+      content: '"\\201C"',
+      position: "absolute",
+      left: "16px",
+      top: "10px",
+      fontSize: "2.25rem",
+      lineHeight: 1,
+      fontStyle: "normal",
+      color: "var(--maq-red)",
+    },
+  },
+  featureCitation: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "12px",
+    marginTop: "18px",
+    fontSize: "0.9375rem",
+    lineHeight: 1.5,
+    color: "var(--maq-muted-color)",
+  },
+  featureCitationRule: {
+    flex: "0 0 auto",
+    width: "22px",
+    height: "2px",
+    marginTop: "10px",
+    background: "var(--maq-red)",
+    borderRadius: "2px",
+  },
+  featureCitationName: { display: "block", color: "var(--maq-ink)", fontWeight: 700 },
+
+  /* Slide-up reveal. Starts hidden only once the observer is known to run;
+     useRevealOnScroll reveals immediately under reduced motion. */
+  reveal: {
+    opacity: 0,
+    transform: "translateY(26px)",
+    transition: "opacity 560ms ease, transform 560ms cubic-bezier(0.2, 0.7, 0.3, 1)",
+  },
+  revealVisible: { opacity: 1, transform: "none" },
 });
 
 type Styles = ReturnType<typeof useStyles>;
@@ -202,9 +303,66 @@ function SectionLink({ url, label, className }: { url: string; label: string; cl
   );
 }
 
+/**
+ * Two-column feature card with an on-scroll slide-up.
+ *
+ * Its own component because the reveal hook cannot be called from inside the
+ * `renderSection` switch.
+ */
+function FeatureSplitSection({
+  section,
+  s,
+}: {
+  section: Extract<ArticleSection, { type: "feature_split" }>;
+  s: Styles;
+}) {
+  const { ref, revealed } = useRevealOnScroll<HTMLDivElement>(section.animate);
+  const hasCitation = Boolean(section.attribution || section.role);
+
+  return (
+    <div
+      ref={ref}
+      className={mergeClasses(
+        s.featureCard,
+        section.animate && s.reveal,
+        section.animate && revealed && s.revealVisible
+      )}
+    >
+      {section.image ? (
+        <img
+          className={mergeClasses(
+            s.featureMedia,
+            section.imagePosition === "right" && s.featureMediaRight
+          )}
+          src={assetUrl(section.image)}
+          alt={section.imageAlt ?? ""}
+          loading="lazy"
+        />
+      ) : null}
+
+      <div className={s.featureBody}>
+        {section.eyebrow ? <span className={s.featureEyebrow}>{section.eyebrow}</span> : null}
+        {section.heading ? <h2 className={s.featureHeading}>{section.heading}</h2> : null}
+        {section.bodyHtml ? <RichTextBody html={section.bodyHtml} /> : null}
+        {section.quote ? <blockquote className={s.featureQuote}>{section.quote}</blockquote> : null}
+        {hasCitation ? (
+          <div className={s.featureCitation}>
+            <span className={s.featureCitationRule} aria-hidden="true" />
+            <span>
+              {section.attribution ? (
+                <strong className={s.featureCitationName}>{section.attribution}</strong>
+              ) : null}
+              {section.role}
+            </span>
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
 function renderSection(section: ArticleSection, s: Styles) {
-  switch (section.type) {
-    case "rich_text":
+  switch (section.type) {    case "rich_text":
       return (
         <div className={s.section}>
           {section.heading ? <h2 className={s.heading}>{section.heading}</h2> : null}
@@ -308,6 +466,9 @@ function renderSection(section: ArticleSection, s: Styles) {
           ) : null}
         </div>
       );
+
+    case "feature_split":
+      return <FeatureSplitSection section={section} s={s} />;
 
     default:
       return null;

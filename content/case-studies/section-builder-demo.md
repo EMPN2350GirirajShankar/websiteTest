@@ -51,6 +51,31 @@ sections:
     body: >-
       Callout boxes are for asides that support the main argument without
       interrupting it — a constraint worth knowing, a caveat, or a definition.
+  - type: feature_split
+    eyebrow: Overview
+    heading: A feature block with an image, a quote and a citation
+    body: >-
+      Every part of this block is optional. Drop the image for a text-only
+      panel, drop the quote for a plain feature, or keep only the image and
+      caption. The card slides up the first time it scrolls into view.
+    image: /images/case-studies/external/ai-chatbox.webp
+    imageAlt: Conversational AI interface on a laptop screen
+    imagePosition: left
+    quote: >-
+      The block builder changed how we work — we can shape a page the way the
+      story needs, instead of forcing every case study into one template.
+    attribution: Joey McMillan
+    role: Lead Race Strategist, Mercedes-AMG PETRONAS F1 Team
+    animate: true
+  - type: feature_split
+    heading: The same block with the image on the right and no quote
+    body: >-
+      Leave the eyebrow, quote and citation empty and the block collapses to a
+      simple two-column feature. Nothing renders an empty box.
+    image: /images/case-studies/external/analyzing-market-situation.webp
+    imageAlt: Analyst reviewing market data on a monitor
+    imagePosition: right
+    animate: true
   - type: rich_text
     heading: The approach
     body: >-
