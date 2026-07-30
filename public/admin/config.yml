@@ -247,9 +247,12 @@ collections:
             name: feature_split
             summary: "Feature split — {{fields.heading}}"
             thumbnail: image
+            # Heading is deliberately first: when Sveltia falls back to an
+            # auto-generated summary it uses the first textual subfield, and
+            # leading with Eyebrow would label every block "Overview".
             fields:
-              - { label: Eyebrow, name: eyebrow, widget: string, required: false, default: Overview }
               - { label: Heading, name: heading, widget: string, required: false }
+              - { label: Eyebrow, name: eyebrow, widget: string, required: false, default: Overview }
               - { label: Body, name: body, widget: richtext, required: false }
               - { label: Image, name: image, widget: image, required: false }
               - { label: Image alt text, name: imageAlt, widget: string, required: false }
