@@ -42,6 +42,52 @@ function renderMarkdown(markdown: string): string {
   return marked.parse(markdown, { async: false, gfm: true, breaks: false }) as string;
 }
 
+/** Section fields authored as Markdown. Each gets a rendered `<field>Html` twin. */
+const SECTION_MARKDOWN_FIELDS = ["body"];
+/** Plain-text section fields that still count toward reading time. */
+const SECTION_TEXT_FIELDS = ["heading", "quote", "caption", "label", "purpose", "product"];
+
+function collectText(value: unknown, into: string[]): void {
+  if (typeof value === "string") {
+    into.push(value);
+  } else if (Array.isArray(value)) {
+    for (const item of value) collectText(item, into);
+  } else if (value && typeof value === "object") {
+    for (const [key, nested] of Object.entries(value as Record<string, unknown>)) {
+      if (SECTION_TEXT_FIELDS.includes(key)) collectText(nested, into);
+      else if (Array.isArray(nested)) collectText(nested, into);
+    }
+  }
+}
+
+/**
+ * Walks the `sections` list written by the CMS section builder and renders any
+ * Markdown field to HTML at build time, so no Markdown parser ships to the
+ * browser. Returns the section list plus its plain text, for reading time.
+ */
+function renderSections(value: unknown): { sections: unknown[]; text: string } {
+  if (!Array.isArray(value)) return { sections: [], text: "" };
+
+  const words: string[] = [];
+  const sections = value.map((raw) => {
+    if (!raw || typeof raw !== "object" || Array.isArray(raw)) return raw;
+    const section = { ...(raw as Record<string, unknown>) };
+
+    for (const field of SECTION_MARKDOWN_FIELDS) {
+      const markdown = section[field];
+      if (typeof markdown === "string" && markdown.trim()) {
+        section[`${field}Html`] = renderMarkdown(markdown);
+        words.push(markdown);
+      }
+    }
+
+    collectText(section, words);
+    return section;
+  });
+
+  return { sections, text: words.join(" ") };
+}
+
 function readCollection(dir: string) {
   if (!fs.existsSync(dir)) return [];
 
@@ -52,6 +98,7 @@ function readCollection(dir: string) {
       const raw = fs.readFileSync(path.join(dir, file), "utf8");
       const { data, content } = matter(raw);
       const fileSlug = file.replace(/\.(md|markdown)$/, "");
+      const { sections, text: sectionText } = renderSections(data.sections);
 
       return {
         ...data,
@@ -62,8 +109,9 @@ function readCollection(dir: string) {
         endDate: toDateString(data.endDate),
         draft: data.draft === true,
         featured: data.featured === true,
-        readingTimeMinutes: readingTime(content),
+        readingTimeMinutes: readingTime(`${content} ${sectionText}`),
         html: renderMarkdown(content),
+        sections,
       };
     });
 }

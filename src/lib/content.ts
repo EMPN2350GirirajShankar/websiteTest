@@ -5,6 +5,13 @@ import {
   jobs as rawJobs,
   type RawContentEntry,
 } from "virtual:site-content";
+import {
+  normalizeSections,
+  normalizeTemplate,
+  sectionsExcerptSource,
+  type ArticleSection,
+  type ArticleTemplate,
+} from "./sections";
 
 /**
  * Read model for the Git-based CMS (Sveltia). Markdown files under /content are
@@ -32,6 +39,10 @@ export interface CaseStudy {
   image?: string;
   imageAlt?: string;
   readingTimeMinutes: number;
+  /** Page shell; see ARTICLE_TEMPLATES in components/content/ContentArticle. */
+  template: ArticleTemplate;
+  /** Section builder output. Takes precedence over `html` when non-empty. */
+  sections: ArticleSection[];
   html: string;
 }
 
@@ -99,21 +110,28 @@ const published = (entry: RawContentEntry) => !entry.draft;
 
 const caseStudyList: CaseStudy[] = rawCaseStudies
   .filter(published)
-  .map((entry) => ({
-    slug: entry.slug,
-    title: entry.title,
-    // The hand-written entries use YYYY-MM and the card prints the raw string,
-    // so trim the day to keep the two sources visually consistent.
-    date: entry.date.slice(0, 7),
-    tag: str(entry, "tag", "Case study"),
-    service: optionalStr(entry, "service"),
-    industry: optionalStr(entry, "industry"),
-    excerpt: str(entry, "excerpt") || textExcerpt(entry.html),
-    image: optionalStr(entry, "image"),
-    imageAlt: optionalStr(entry, "imageAlt"),
-    readingTimeMinutes: entry.readingTimeMinutes,
-    html: entry.html,
-  }))
+  .map((entry) => {
+    const sections = normalizeSections(entry.sections);
+
+    return {
+      slug: entry.slug,
+      title: entry.title,
+      // The hand-written entries use YYYY-MM and the card prints the raw string,
+      // so trim the day to keep the two sources visually consistent.
+      date: entry.date.slice(0, 7),
+      tag: str(entry, "tag", "Case study"),
+      service: optionalStr(entry, "service"),
+      industry: optionalStr(entry, "industry"),
+      excerpt:
+        str(entry, "excerpt") || textExcerpt(entry.html || sectionsExcerptSource(sections)),
+      image: optionalStr(entry, "image"),
+      imageAlt: optionalStr(entry, "imageAlt"),
+      readingTimeMinutes: entry.readingTimeMinutes,
+      template: normalizeTemplate(entry.template),
+      sections,
+      html: entry.html,
+    };
+  })
   .sort((a, b) => b.date.localeCompare(a.date));
 
 const guideList: Guide[] = rawGuides

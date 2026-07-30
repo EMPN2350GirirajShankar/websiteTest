@@ -18,6 +18,8 @@ export function CaseStudyDetail() {
       meta={`${study.date} · ${study.readingTimeMinutes} min read`}
       image={study.image}
       imageAlt={study.imageAlt}
+      template={study.template}
+      sections={study.sections}
       html={study.html}
     />
   );

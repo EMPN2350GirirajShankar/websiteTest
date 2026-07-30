@@ -1,7 +1,9 @@
-import { makeStyles } from "@fluentui/react-components";
+import { makeStyles, mergeClasses } from "@fluentui/react-components";
 import { Link } from "react-router-dom";
 import { RichTextBody } from "./RichTextBody";
+import { SectionRenderer } from "./sections/SectionRenderer";
 import { assetUrl } from "../../lib/assetUrl";
+import type { ArticleSection, ArticleTemplate } from "../../lib/sections";
 
 const useStyles = makeStyles({
   article: {
@@ -43,7 +45,24 @@ const useStyles = makeStyles({
     border: "1px solid var(--maq-border)",
     marginBottom: "32px",
   },
+  /* image-first: the cover leads, so it sits flush above the title block. */
+  coverLead: { marginBottom: "28px" },
 });
+
+/**
+ * Page shells offered by the CMS `template` field. Each entry only decides the
+ * header treatment above the body; the section list renders identically under
+ * all of them.
+ *
+ * Adding a template means adding an option to the `template` select in
+ * public/admin/config.yml, a value in ARTICLE_TEMPLATE_VALUES in lib/sections.ts,
+ * and an entry here.
+ */
+const ARTICLE_TEMPLATES: Record<ArticleTemplate, { coverFirst: boolean; showCover: boolean }> = {
+  standard: { coverFirst: false, showCover: true },
+  "image-first": { coverFirst: true, showCover: true },
+  compact: { coverFirst: false, showCover: false },
+};
 
 export interface ContentArticleProps {
   backTo: string;
@@ -53,6 +72,10 @@ export interface ContentArticleProps {
   meta?: string;
   image?: string;
   imageAlt?: string;
+  /** Page shell. Defaults to the standard text-first layout. */
+  template?: ArticleTemplate;
+  /** Section builder output. Rendered instead of `html` when non-empty. */
+  sections?: ArticleSection[];
   html: string;
 }
 
@@ -65,9 +88,20 @@ export function ContentArticle({
   meta,
   image,
   imageAlt,
+  template = "standard",
+  sections,
   html,
 }: ContentArticleProps) {
   const s = useStyles();
+  const shell = ARTICLE_TEMPLATES[template] ?? ARTICLE_TEMPLATES.standard;
+  const cover =
+    shell.showCover && image ? (
+      <img
+        className={mergeClasses(s.cover, shell.coverFirst && s.coverLead)}
+        src={assetUrl(image)}
+        alt={imageAlt ?? title}
+      />
+    ) : null;
 
   return (
     <article className={s.article}>
@@ -75,6 +109,9 @@ export function ContentArticle({
         <Link className={s.breadcrumb} to={backTo}>
           ← {backLabel}
         </Link>
+
+        {shell.coverFirst ? cover : null}
+
         {tag ? (
           <div>
             <span className={s.tag}>{tag}</span>
@@ -83,11 +120,13 @@ export function ContentArticle({
         <h1 className={`maq-h1 ${s.title}`}>{title}</h1>
         {meta ? <p className={s.meta}>{meta}</p> : null}
 
-        {image ? (
-          <img className={s.cover} src={assetUrl(image)} alt={imageAlt ?? title} />
-        ) : null}
+        {shell.coverFirst ? null : cover}
 
-        <RichTextBody html={html} />
+        {sections && sections.length > 0 ? (
+          <SectionRenderer sections={sections} />
+        ) : (
+          <RichTextBody html={html} />
+        )}
       </div>
     </article>
   );

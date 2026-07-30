@@ -141,7 +141,124 @@ collections:
         widget: boolean
         default: false
         hint: Drafts stay in the repository but are never rendered on the site.
-      - { label: Body, name: body, widget: richtext }
+
+      # Page shell. Only changes the header treatment above the sections; the
+      # section list below is freely composable under every template. Adding a
+      # template means adding an option here and an entry in ARTICLE_TEMPLATES
+      # in src/components/content/ContentArticle.tsx.
+      - label: Template
+        name: template
+        widget: select
+        default: standard
+        hint: Standard = text first. Image first = cover banner above the title. Compact = no cover image.
+        options:
+          - { label: Standard, value: standard }
+          - { label: Image first, value: image-first }
+          - { label: Compact, value: compact }
+
+      # Section builder. Add, delete, duplicate and drag to reorder. Each type
+      # maps to a component in src/components/content/sections/SectionRenderer.tsx.
+      # An entry that uses Sections ignores the legacy Body field below.
+      - label: Sections
+        name: sections
+        widget: list
+        required: false
+        collapsed: true
+        minimize_collapsed: true
+        add_to_top: false
+        label_singular: Section
+        hint: Build the page section by section. Drag the handle to reorder.
+        types:
+          - label: Text
+            name: rich_text
+            summary: "Text — {{fields.heading}}"
+            fields:
+              - { label: Heading, name: heading, widget: string, required: false }
+              - { label: Body, name: body, widget: richtext }
+
+          - label: Pull quote
+            name: pull_quote
+            summary: "Quote — {{fields.attribution}}"
+            fields:
+              - { label: Quote, name: quote, widget: text }
+              - { label: Name, name: attribution, widget: string, required: false }
+              - { label: Role and company, name: role, widget: string, required: false }
+
+          - label: Stat band
+            name: stat_band
+            summary: "Stats — {{fields.items.length}} item(s)"
+            fields:
+              - label: Stats
+                name: items
+                widget: list
+                min: 1
+                max: 4
+                label_singular: Stat
+                summary: "{{fields.value}} — {{fields.label}}"
+                fields:
+                  - { label: Value, name: value, widget: string, hint: "Short. For example 40% or 2,000." }
+                  - { label: Label, name: label, widget: string }
+
+          - label: Callout box
+            name: highlight
+            summary: "Callout — {{fields.heading}}"
+            fields:
+              - { label: Heading, name: heading, widget: string, required: false }
+              - { label: Body, name: body, widget: richtext }
+
+          - label: Image
+            name: image
+            summary: "Image — {{fields.caption}}"
+            thumbnail: image
+            fields:
+              - { label: Image, name: image, widget: image }
+              - { label: Alt text, name: alt, widget: string, hint: Describe the image for screen readers. }
+              - { label: Caption, name: caption, widget: string, required: false }
+
+          - label: Technology list
+            name: tech_table
+            summary: "Technology — {{fields.rows.length}} row(s)"
+            fields:
+              - { label: Heading, name: heading, widget: string, required: false, default: Inside the tech }
+              - label: Rows
+                name: rows
+                widget: list
+                min: 1
+                label_singular: Row
+                summary: "{{fields.product}}"
+                fields:
+                  - { label: Product, name: product, widget: string }
+                  - { label: Link, name: url, widget: string, required: false }
+                  - { label: How it was used, name: purpose, widget: string }
+
+          - label: Key takeaways
+            name: key_takeaways
+            summary: "Takeaways — {{fields.items.length}} item(s)"
+            fields:
+              - { label: Heading, name: heading, widget: string, required: false, default: What to take from it }
+              - label: Takeaways
+                name: items
+                widget: list
+                min: 1
+                label_singular: Takeaway
+                field: { label: Takeaway, name: text, widget: string }
+
+          - label: Call to action
+            name: cta
+            summary: "CTA — {{fields.heading}}"
+            fields:
+              - { label: Heading, name: heading, widget: string, required: false }
+              - { label: Body, name: body, widget: richtext, required: false }
+              - { label: Button label, name: buttonLabel, widget: string, required: false }
+              - { label: Button link, name: buttonUrl, widget: string, required: false, default: /contact }
+
+      # Legacy single-body field. Kept so the existing case studies keep
+      # rendering. Used only when Sections above is empty.
+      - label: Body (legacy)
+        name: body
+        widget: richtext
+        required: false
+        hint: Only used when Sections is empty. New case studies should use Sections.
 
   # ------------------------------------------------ Best practice guides ----
   # Cards appear on /insights/best-practice-guides. Topic MUST match a label in

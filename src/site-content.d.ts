@@ -13,6 +13,8 @@ declare module "virtual:site-content" {
     featured: boolean;
     readingTimeMinutes: number;
     html: string;
+    /** Raw section list from the CMS section builder; see lib/sections.ts. */
+    sections: unknown[];
     [key: string]: unknown;
   }
 
