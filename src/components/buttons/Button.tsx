@@ -27,6 +27,11 @@ export interface ButtonProps {
   className?: string;
   style?: CSSProperties;
   ariaLabel?: string;
+  /**
+   * Native button type. Only meaningful for the plain <button> rendering (no
+   * href); Fluent defaults to "button", so a form submit button must opt in.
+   */
+  type?: "button" | "submit" | "reset";
 }
 
 const useStyles = makeStyles({
@@ -126,6 +131,7 @@ export function Button({
   className,
   style,
   ariaLabel,
+  type,
 }: ButtonProps) {
   const s = useStyles();
   const icon = iconAfter ?? iconBefore;
@@ -191,6 +197,7 @@ export function Button({
       className={resolvedClassName}
       style={style}
       aria-label={ariaLabel}
+      type={type}
     >
       {children}
     </FluentButton>

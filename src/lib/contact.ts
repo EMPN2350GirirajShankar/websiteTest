@@ -12,25 +12,20 @@ export function buildContactMailto(subject?: string, body?: string): string {
 
 /**
  * Returns a handler that gives every contact button the same behaviour:
- * navigate to the Contact page and open the mail compose window as an
- * overlay (via window.open) so the website stays visible underneath.
+ * navigate to the Contact page, where the visitor fills out the contact form.
  *
- * Accepts either a ready-made mailto: string or a subject (+ optional body).
+ * This used to also pop open a mail compose window. That was dropped when the
+ * contact form landed — routing everyone through the form is the whole point
+ * (it keeps the shared inbox off the page, where scrapers were harvesting it).
+ *
+ * The signature is unchanged so the ~20 existing call sites keep working. The
+ * subject they pass is carried through as router state, so the form can use it
+ * for attribution or to prefill once a backend exists.
  */
 export function useContactAction() {
   const navigate = useNavigate();
-  return (subjectOrMailto?: string, body?: string) => {
-    const mailto = subjectOrMailto?.startsWith("mailto:")
-      ? subjectOrMailto
-      : buildContactMailto(subjectOrMailto, body);
-    // Launch the mail compose first, synchronously within the click gesture,
-    // so it opens instantly (before React processes the route change). Opens
-    // in a new window to keep the website visible underneath; some browsers
-    // leave an empty blank tab behind, so close it once handed off.
-    const win = window.open(mailto, "_blank");
-    if (win) {
-      setTimeout(() => win.close(), 500);
-    }
-    navigate("/contact");
+  return (subjectOrMailto?: string, _body?: string) => {
+    const source = subjectOrMailto?.startsWith("mailto:") ? undefined : subjectOrMailto;
+    navigate("/contact", source ? { state: { source } } : undefined);
   };
 }

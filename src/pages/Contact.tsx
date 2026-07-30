@@ -1,17 +1,18 @@
 import { makeStyles } from "@fluentui/react-components";
-import {
-  ArrowRight16Regular,
-  Location24Regular,
-} from "@fluentui/react-icons";
+import { ArrowRight16Regular } from "@fluentui/react-icons";
+
+import { ContactForm } from "../components/contact/ContactForm";
 
 const useStyles = makeStyles({
   page: {
-    backgroundColor: "var(--colorNeutralBackground3)",
+    backgroundColor: "#fff",
   },
   hero: {
     backgroundColor: "var(--colorNeutralBackground3)",
     position: "relative",
-    overflow: "hidden",
+    // Deep bottom padding so the form card below can overlap the band edge.
+    paddingBottom: "120px",
+    "@media (max-width: 960px)": { paddingBottom: "96px" },
   },
   heroInner: {
     // 1504 = 1440 content + 32px gutter each side (border-box), so the inner
@@ -19,15 +20,35 @@ const useStyles = makeStyles({
     maxWidth: "1504px",
     margin: "0 auto",
     // Match the other About heroes' 40px top/bottom padding.
-    padding: "40px var(--section-pad-x)",
+    padding: "40px var(--section-pad-x) 0",
     position: "relative",
     zIndex: 1,
-    "@media (max-width: 960px)": {
-      padding: "40px var(--section-pad-x)",
-    },
   },
   heroContent: {
     maxWidth: "720px",
+  },
+
+  // Form band: pulled up so the card straddles the gray/white boundary, the
+  // same way the reference layout does.
+  formSection: {
+    padding: "0 var(--section-pad-x) 56px",
+    marginTop: "-100px",
+    position: "relative",
+    zIndex: 2,
+    "@media (max-width: 960px)": { marginTop: "-80px", paddingBottom: "40px" },
+  },
+  formInner: {
+    // Shares the content column with the hero copy above and the offices grid
+    // below, so everything left-aligns to the same margin.
+    maxWidth: "var(--maq-container-wide)",
+    margin: "0 auto",
+  },
+  // The card takes 75% of the content column on desktop — full width left the
+  // name fields absurdly wide. Below 1100px it goes edge to edge, since a
+  // percentage of an already-narrow column just cramps the two-up rows.
+  formCol: {
+    width: "75%",
+    "@media (max-width: 1100px)": { width: "100%" },
   },
   eyebrow: {
     margin: "0 0 10px",
@@ -72,18 +93,6 @@ const useStyles = makeStyles({
   },
   officesTitle: {
     margin: "0 0 10px",
-  },
-  contactLine: {
-    margin: "28px 0 0",
-    fontSize: "15px",
-    lineHeight: 1.6,
-    color: "var(--maq-gray-700)",
-  },
-  contactLink: {
-    color: "var(--maq-red)",
-    fontWeight: 600,
-    textDecoration: "none",
-    ":hover": { textDecoration: "underline" },
   },
   officeGrid: {
     display: "grid",
@@ -274,13 +283,20 @@ export function Contact() {
               <br />
               <span className={s.titleAccent}>together.</span>
             </h1>
-            <p className={s.contactLine}>
-              Have a question or ready to start a project? Contact us at{" "}
-              <a className={s.contactLink} href="mailto:CustomerSuccess@MAQSoftware.com">
-                CustomerSuccess@MAQSoftware.com
-              </a>
-              .
+            <p className={s.summary}>
+              Tell us what you&apos;re working on and a member of our team will get back to you.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={s.formSection} aria-labelledby="contact-form-heading">
+        <h2 id="contact-form-heading" className={s.hiddenText}>
+          Contact form
+        </h2>
+        <div className={s.formInner}>
+          <div className={s.formCol}>
+            <ContactForm />
           </div>
         </div>
       </section>
