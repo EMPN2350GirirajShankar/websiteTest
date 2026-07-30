@@ -167,7 +167,9 @@ collections:
         minimize_collapsed: true
         add_to_top: false
         label_singular: Section
-        hint: Build the page section by section. Drag the handle to reorder.
+        hint: >-
+          Build the page section by section. Drag the handle to reorder. Every
+          block is rendered and labelled at /insights/case-studies/section-builder-demo
         types:
           # Summaries below deliberately omit the block type: Sveltia already
           # renders the type label next to it, and the collapsed row truncates
@@ -187,7 +189,7 @@ collections:
               - { label: Name, name: attribution, widget: string, required: false }
               - { label: Role and company, name: role, widget: string, required: false }
 
-          - label: Stat band
+          - label: Stat band (2–4 numbers)
             # No summary: Sveltia then auto-builds one from the stat values,
             # which is more useful than any fixed template here.
             name: stat_band
@@ -210,7 +212,7 @@ collections:
               - { label: Heading, name: heading, widget: string, required: false }
               - { label: Body, name: body, widget: richtext }
 
-          - label: Image
+          - label: Image (full width)
             name: image
             summary: "{{fields.caption | default('{{fields.alt}}')}}"
             thumbnail: image
@@ -247,7 +249,7 @@ collections:
                 label_singular: Takeaway
                 field: { label: Takeaway, name: text, widget: string }
 
-          - label: Feature split
+          - label: Image + text (side by side)
             name: feature_split
             summary: "{{fields.heading | default('{{fields.eyebrow}}')}}"
             thumbnail: image
