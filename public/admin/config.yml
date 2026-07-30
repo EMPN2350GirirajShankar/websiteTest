@@ -169,24 +169,28 @@ collections:
         label_singular: Section
         hint: Build the page section by section. Drag the handle to reorder.
         types:
+          # Summaries below deliberately omit the block type: Sveltia already
+          # renders the type label next to it, and the collapsed row truncates
+          # to a single line, so repeating it hides the distinguishing text.
           - label: Text
             name: rich_text
-            summary: "Text — {{fields.heading}}"
+            summary: "{{fields.heading | default('Untitled text')}}"
             fields:
               - { label: Heading, name: heading, widget: string, required: false }
               - { label: Body, name: body, widget: richtext }
 
           - label: Pull quote
             name: pull_quote
-            summary: "Quote — {{fields.attribution}}"
+            summary: "{{fields.quote | default('Empty quote')}}"
             fields:
               - { label: Quote, name: quote, widget: text }
               - { label: Name, name: attribution, widget: string, required: false }
               - { label: Role and company, name: role, widget: string, required: false }
 
           - label: Stat band
+            # No summary: Sveltia then auto-builds one from the stat values,
+            # which is more useful than any fixed template here.
             name: stat_band
-            summary: "Stats — {{fields.items.length}} item(s)"
             fields:
               - label: Stats
                 name: items
@@ -201,14 +205,14 @@ collections:
 
           - label: Callout box
             name: highlight
-            summary: "Callout — {{fields.heading}}"
+            summary: "{{fields.heading | default('Untitled callout')}}"
             fields:
               - { label: Heading, name: heading, widget: string, required: false }
               - { label: Body, name: body, widget: richtext }
 
           - label: Image
             name: image
-            summary: "Image — {{fields.caption}}"
+            summary: "{{fields.caption | default('{{fields.alt}}')}}"
             thumbnail: image
             fields:
               - { label: Image, name: image, widget: image }
@@ -217,7 +221,7 @@ collections:
 
           - label: Technology list
             name: tech_table
-            summary: "Technology — {{fields.rows.length}} row(s)"
+            summary: "{{fields.heading}}"
             fields:
               - { label: Heading, name: heading, widget: string, required: false, default: Inside the tech }
               - label: Rows
@@ -233,7 +237,7 @@ collections:
 
           - label: Key takeaways
             name: key_takeaways
-            summary: "Takeaways — {{fields.items.length}} item(s)"
+            summary: "{{fields.heading}}"
             fields:
               - { label: Heading, name: heading, widget: string, required: false, default: What to take from it }
               - label: Takeaways
@@ -245,7 +249,7 @@ collections:
 
           - label: Feature split
             name: feature_split
-            summary: "Feature split — {{fields.heading}}"
+            summary: "{{fields.heading | default('{{fields.eyebrow}}')}}"
             thumbnail: image
             # Heading is deliberately first: when Sveltia falls back to an
             # auto-generated summary it uses the first textual subfield, and
@@ -274,7 +278,7 @@ collections:
 
           - label: Call to action
             name: cta
-            summary: "CTA — {{fields.heading}}"
+            summary: "{{fields.heading | default('{{fields.buttonLabel}}')}}"
             fields:
               - { label: Heading, name: heading, widget: string, required: false }
               - { label: Body, name: body, widget: richtext, required: false }
