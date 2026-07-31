@@ -362,7 +362,10 @@ function MegaMenu({
   return (
     <Menu
       open={open}
-      onOpenChange={(_, data) => (data.open ? openMenu() : scheduleClose())}
+      onOpenChange={(_, data) => {
+        if (!data.open && data.type === "menuTriggerClick") return;
+        data.open ? openMenu() : scheduleClose();
+      }}
       openOnHover
       hoverDelay={0}
       closeOnScroll
