@@ -5,6 +5,7 @@ import { CheckmarkCircle24Filled } from "@fluentui/react-icons";
 
 import { PrimaryButton } from "../buttons";
 import { COUNTRIES, DEFAULT_COUNTRY } from "../../lib/countries";
+import { CONTACT_EMAIL, buildContactMailto } from "../../lib/contact";
 
 // ---------------------------------------------------------------------------
 // Field model
@@ -192,6 +193,7 @@ export function ContactForm() {
   const s = useStyles();
   const baseId = useId();
   const formRef = useRef<HTMLFormElement>(null);
+  const directMailto = buildContactMailto();
 
   const [values, setValues] = useState<FormValues>(EMPTY);
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
@@ -224,11 +226,28 @@ export function ContactForm() {
       return;
     }
 
-    // ---------------------------------------------------------------------
-    // TODO(backend): POST `values` to the lead-capture endpoint here.
-    // Until that exists, the form validates and confirms locally — nothing is
-    // transmitted. Wire this up before launch or submissions are lost.
-    // ---------------------------------------------------------------------
+    const subject = `Contact form inquiry from ${values.firstName.trim()} ${values.lastName.trim()}`;
+    const countryName = COUNTRIES.find((c) => c.code === values.country)?.name ?? values.country;
+    const body = [
+      "Hello MAQ Software team,",
+      "",
+      "I submitted this via the Contact Us form:",
+      "",
+      `First name: ${values.firstName.trim()}`,
+      `Last name: ${values.lastName.trim()}`,
+      `Company: ${values.company.trim()}`,
+      `Email: ${values.email.trim()}`,
+      `Country: ${countryName}`,
+      `Phone: ${values.phone.trim() || "(not provided)"}`,
+      "",
+      "Message:",
+      values.message.trim(),
+      "",
+      "Best regards,",
+      `${values.firstName.trim()} ${values.lastName.trim()}`,
+    ].join("\n");
+
+    window.location.href = buildContactMailto(subject, body);
     setSent(true);
   }
 
@@ -237,9 +256,13 @@ export function ContactForm() {
       <div className={s.card}>
         <div className={s.success} role="status">
           <CheckmarkCircle24Filled className={s.successIcon} />
-          <h2 className={s.successTitle}>Thanks — we&apos;ve got it.</h2>
+          <h2 className={s.successTitle}>Your email draft is ready.</h2>
           <p className={s.successBody}>
-            A member of our team will review your message and reach out to you shortly.
+            Your default email app should open with a prefilled draft addressed to {" "}
+            <a className={s.consentLink} href={directMailto}>
+              {CONTACT_EMAIL}
+            </a>
+            . If it did not open, use this link to start the email manually.
           </p>
         </div>
       </div>
